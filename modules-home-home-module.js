@@ -26027,11 +26027,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../core/store/actions/form.actions */ "./src/app/core/store/actions/form.actions.ts");
 /* harmony import */ var _core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../core/store/actions/reserva.actions */ "./src/app/core/store/actions/reserva.actions.ts");
 /* harmony import */ var _core_store_selectors_caledar_selectors__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../core/store/selectors/caledar.selectors */ "./src/app/core/store/selectors/caledar.selectors.ts");
-/* harmony import */ var _core_store_selectors_error_selectors__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../core/store/selectors/error.selectors */ "./src/app/core/store/selectors/error.selectors.ts");
-/* harmony import */ var _core_store_selectors_form_selectors__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../core/store/selectors/form.selectors */ "./src/app/core/store/selectors/form.selectors.ts");
-/* harmony import */ var _core_store_selectors_reserva_selectors__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../../core/store/selectors/reserva.selectors */ "./src/app/core/store/selectors/reserva.selectors.ts");
-/* harmony import */ var _core_store_selectors_reservacion_selectors__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../../core/store/selectors/reservacion.selectors */ "./src/app/core/store/selectors/reservacion.selectors.ts");
-/* harmony import */ var _shared_models_datos_models__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../../shared/models/datos.models */ "./src/app/shared/models/datos.models.ts");
+/* harmony import */ var _core_store_selectors_contexto_selectors__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../core/store/selectors/contexto.selectors */ "./src/app/core/store/selectors/contexto.selectors.ts");
+/* harmony import */ var _core_store_selectors_error_selectors__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../core/store/selectors/error.selectors */ "./src/app/core/store/selectors/error.selectors.ts");
+/* harmony import */ var _core_store_selectors_form_selectors__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../../core/store/selectors/form.selectors */ "./src/app/core/store/selectors/form.selectors.ts");
+/* harmony import */ var _core_store_selectors_reserva_selectors__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../../core/store/selectors/reserva.selectors */ "./src/app/core/store/selectors/reserva.selectors.ts");
+/* harmony import */ var _core_store_selectors_reservacion_selectors__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../../core/store/selectors/reservacion.selectors */ "./src/app/core/store/selectors/reservacion.selectors.ts");
+/* harmony import */ var _shared_models_datos_models__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../../shared/models/datos.models */ "./src/app/shared/models/datos.models.ts");
+
 
 
 
@@ -26071,11 +26073,12 @@ var ReservaComponent = /** @class */ (function () {
             _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')]);
         this.sexo$ = ['Femenino', 'Masculino'];
         this.loading = false;
-        this.turnoSelected$ = store.select(_core_store_selectors_reserva_selectors__WEBPACK_IMPORTED_MODULE_12__["getTurnoSelected"]);
-        this.obraSocialSelected$ = store.select(_core_store_selectors_form_selectors__WEBPACK_IMPORTED_MODULE_11__["selectObraSocialSelected"]);
-        this.planSelected$ = store.select(_core_store_selectors_form_selectors__WEBPACK_IMPORTED_MODULE_11__["selectPlanSelected"]);
-        this.fechaNacimientoSelected$ = store.select(_core_store_selectors_form_selectors__WEBPACK_IMPORTED_MODULE_11__["selectFechaNacimiento"]);
-        this.errorBackend$ = store.select(_core_store_selectors_error_selectors__WEBPACK_IMPORTED_MODULE_10__["getCountError"]);
+        this.turnoSelected$ = store.select(_core_store_selectors_reserva_selectors__WEBPACK_IMPORTED_MODULE_13__["getTurnoSelected"]);
+        this.obraSocialSelected$ = store.select(_core_store_selectors_form_selectors__WEBPACK_IMPORTED_MODULE_12__["selectObraSocialSelected"]);
+        this.planSelected$ = store.select(_core_store_selectors_form_selectors__WEBPACK_IMPORTED_MODULE_12__["selectPlanSelected"]);
+        this.fechaNacimientoSelected$ = store.select(_core_store_selectors_form_selectors__WEBPACK_IMPORTED_MODULE_12__["selectFechaNacimiento"]);
+        this.errorBackend$ = store.select(_core_store_selectors_error_selectors__WEBPACK_IMPORTED_MODULE_11__["getCountError"]);
+        this.pacienteSelected$ = store.select(_core_store_selectors_contexto_selectors__WEBPACK_IMPORTED_MODULE_10__["getPacienteSelected"]);
     }
     ReservaComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -26087,6 +26090,18 @@ var ReservaComponent = /** @class */ (function () {
         });
         this.obraSocialSelected$.subscribe(function (obraSocial) { return _this.obraSocialSelected = obraSocial; });
         this.planSelected$.subscribe(function (plan) { return _this.planSelected = plan; });
+        this.pacienteSelected$.subscribe(function (pac) {
+            if (pac != undefined) {
+                console.log(pac);
+                _this.dni.setValue(pac.dni);
+                _this.sexo.setValue(pac.sexo);
+                _this.apellido.setValue(pac.nombreApellido);
+                _this.nombre.setValue(pac.nombreApellido);
+                _this.telefonoArea.setValue(pac.telefono.area);
+                _this.telefonoNumero.setValue(pac.telefono.numero);
+                _this.mail.setValue(pac.email);
+            }
+        });
         this.errorBackend$.subscribe(function () {
             _this.loading = false;
         });
@@ -26094,11 +26109,11 @@ var ReservaComponent = /** @class */ (function () {
     ReservaComponent.prototype.reservar = function () {
         var _this = this;
         this.fechaNacimientoSelected$.subscribe(function (fechaNacimiento) { return _this.fechaNacimientoSelected = fechaNacimiento; });
-        var paciente = new _shared_models_datos_models__WEBPACK_IMPORTED_MODULE_14__["Paciente"]();
+        var paciente = new _shared_models_datos_models__WEBPACK_IMPORTED_MODULE_15__["Paciente"]();
         paciente.dni = this.dni.value;
         paciente.sexo = this.sexo.value === 'Femenino' ? 'F' : 'M';
         paciente.nombreApellido = this.apellido.value.trim() + ' ' + this.nombre.value.trim();
-        var telefono = new _shared_models_datos_models__WEBPACK_IMPORTED_MODULE_14__["Telefono"]();
+        var telefono = new _shared_models_datos_models__WEBPACK_IMPORTED_MODULE_15__["Telefono"]();
         telefono.area = this.telefonoArea.value;
         telefono.numero = this.telefonoNumero.value;
         paciente.telefono = telefono;
@@ -26123,14 +26138,14 @@ var ReservaComponent = /** @class */ (function () {
         var _this = this;
         if (this.isValid) {
             this.loading = true;
-            this.store.select(_core_store_selectors_reserva_selectors__WEBPACK_IMPORTED_MODULE_12__["reservarTurno"])
+            this.store.select(_core_store_selectors_reserva_selectors__WEBPACK_IMPORTED_MODULE_13__["reservarTurno"])
                 .subscribe(function (filter) {
                 if (filter) {
                     _this.store.dispatch(_core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_8__["reservaTurno"]({ filter: filter }));
                 }
             })
                 .unsubscribe();
-            this.store.select(_core_store_selectors_reservacion_selectors__WEBPACK_IMPORTED_MODULE_13__["getReserva"]).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["filter"])(function (reserva) { return reserva != undefined && reserva.codigo != undefined; })).subscribe(function () {
+            this.store.select(_core_store_selectors_reservacion_selectors__WEBPACK_IMPORTED_MODULE_14__["getReserva"]).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["filter"])(function (reserva) { return reserva != undefined && reserva.codigo != undefined; })).subscribe(function () {
                 _this.loading = false;
             });
         }
@@ -26148,7 +26163,7 @@ var ReservaComponent = /** @class */ (function () {
         this.store.dispatch(_core_store_actions_calendar_actions__WEBPACK_IMPORTED_MODULE_6__["setTurnoSelected"]({ turnoSelected: undefined }));
         this.store.dispatch(_core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_8__["setTurnoSelected"]({ turnoSelected: undefined }));
         this.store.dispatch(_core_store_actions_calendar_actions__WEBPACK_IMPORTED_MODULE_6__["setProfesionalesDisponibles"]({ profesionalesDisponibles: [] }));
-        this.store.select(_core_store_selectors_form_selectors__WEBPACK_IMPORTED_MODULE_11__["selectBusquedaProfesionales"])
+        this.store.select(_core_store_selectors_form_selectors__WEBPACK_IMPORTED_MODULE_12__["selectBusquedaProfesionales"])
             .subscribe(function (filter) {
             _this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_7__["getBusquedaProfesionales"]({ filter: filter }));
         }).unsubscribe();
