@@ -3470,10 +3470,10 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 var environment = {
     production: false,
-    endpoint: 'http://localhost:8080',
-    mockups: true,
-    username: 'Test',
-    password: 'password',
+    endpoint: 'http://appprohe.dynu.net:4777/api',
+    mockups: false,
+    username: 'TURNOWEB',
+    password: 'TURNOWEB',
 };
 /*
  * For easier debugging in development mode, you can import the following file
