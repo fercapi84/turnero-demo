@@ -2848,7 +2848,6 @@ var LoginPageComponent = /** @class */ (function () {
             codigoPaciente: undefined,
             codigoTurno: turno.codigo
         };
-        console.log(request);
         this.store.dispatch(_core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_6__["setTurnoLiberar"]({ request: request }));
     };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
