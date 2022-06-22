@@ -1352,7 +1352,7 @@ var setHorariosDisponibles = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["cr
 /*!********************************************************!*\
   !*** ./src/app/core/store/actions/contexto.actions.ts ***!
   \********************************************************/
-/*! exports provided: CLEAN_STORE, GET_TOKEN, SET_TOKEN, GET_CREDENCIALUSUARIO, SET_CREDENCIALUSUARIO, GET_USUARIO, SET_USUARIO, GET_PACIENTESELECTED, SET_PACIENTESELECTED, GET_TURNOSPACIENTE, SET_TURNOSPACIENTE, SET_TURNOLIBERAR, cleanStore, getToken, setToken, getCredencialUsuario, setCredencialUsuario, getUsuario, setUsuario, getPacienteSelected, setPacienteSelected, getTurnosPaciente, setTurnosPaciente, setTurnoLiberar */
+/*! exports provided: CLEAN_STORE, GET_TOKEN, SET_TOKEN, GET_CREDENCIALUSUARIO, SET_CREDENCIALUSUARIO, GET_USUARIO, SET_USUARIO, GET_PACIENTESELECTED, SET_PACIENTESELECTED, GET_TURNOSPACIENTE, SET_TURNOSPACIENTE, SET_TURNOLIBERAR, GET_TURNOSPACIENTERELOAD, cleanStore, getToken, setToken, getCredencialUsuario, setCredencialUsuario, getUsuario, setUsuario, getPacienteSelected, setPacienteSelected, getTurnosPacienteReload, getTurnosPaciente, setTurnosPaciente, setTurnoLiberar */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1369,6 +1369,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_TURNOSPACIENTE", function() { return GET_TURNOSPACIENTE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_TURNOSPACIENTE", function() { return SET_TURNOSPACIENTE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_TURNOLIBERAR", function() { return SET_TURNOLIBERAR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_TURNOSPACIENTERELOAD", function() { return GET_TURNOSPACIENTERELOAD; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cleanStore", function() { return cleanStore; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getToken", function() { return getToken; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setToken", function() { return setToken; });
@@ -1378,6 +1379,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setUsuario", function() { return setUsuario; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPacienteSelected", function() { return getPacienteSelected; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setPacienteSelected", function() { return setPacienteSelected; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTurnosPacienteReload", function() { return getTurnosPacienteReload; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTurnosPaciente", function() { return getTurnosPaciente; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setTurnosPaciente", function() { return setTurnosPaciente; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setTurnoLiberar", function() { return setTurnoLiberar; });
@@ -1395,6 +1397,7 @@ var SET_PACIENTESELECTED = '[Contexto] - setPacienteSelected';
 var GET_TURNOSPACIENTE = '[Contexto] - getTurnosPaciente';
 var SET_TURNOSPACIENTE = '[Contexto] - setTurnosPacientes';
 var SET_TURNOLIBERAR = '[Contexto] - setTurnoLiberar';
+var GET_TURNOSPACIENTERELOAD = '[Contexto] - getTurnosPacienteReload';
 var cleanStore = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(CLEAN_STORE);
 var getToken = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(GET_TOKEN, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
 var setToken = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(SET_TOKEN, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
@@ -1404,6 +1407,7 @@ var getUsuario = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"]
 var setUsuario = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(SET_USUARIO, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
 var getPacienteSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(GET_PACIENTESELECTED);
 var setPacienteSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(SET_PACIENTESELECTED, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
+var getTurnosPacienteReload = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(GET_TURNOSPACIENTERELOAD);
 var getTurnosPaciente = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(GET_TURNOSPACIENTE);
 var setTurnosPaciente = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(SET_TURNOSPACIENTE, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
 var setTurnoLiberar = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(SET_TURNOLIBERAR, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
@@ -1685,12 +1689,12 @@ var ContextEffects = /** @class */ (function () {
             })); }));
         });
         this.getTurnosFuturos$ = Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["createEffect"])(function () {
-            return _this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_6__["SET_PACIENTESELECTED"]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["mergeMap"])(function (payload) { return _this.service.getTurnosPaciente(payload.req).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (turnosFuturos) { return ({ type: _actions_contexto_actions__WEBPACK_IMPORTED_MODULE_6__["SET_TURNOSPACIENTE"], turnosFuturos: turnosFuturos }); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (error) {
+            return _this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_6__["SET_PACIENTESELECTED"], _actions_contexto_actions__WEBPACK_IMPORTED_MODULE_6__["GET_TURNOSPACIENTERELOAD"]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["mergeMap"])(function (payload) { return _this.service.getTurnosPaciente(payload.req).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (turnosFuturos) { return ({ type: _actions_contexto_actions__WEBPACK_IMPORTED_MODULE_6__["SET_TURNOSPACIENTE"], turnosFuturos: turnosFuturos }); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (error) {
                 return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])({ type: _actions_error_actions__WEBPACK_IMPORTED_MODULE_7__["SHOW_ERROR"], error: error.message });
             })); }));
         });
         this.liberarTurnoFuturo$ = Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["createEffect"])(function () {
-            return _this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_6__["SET_TURNOLIBERAR"]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["mergeMap"])(function (payload) { return _this.service.liberarTurno(payload.request).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (rta) { return ({ type: _actions_error_actions__WEBPACK_IMPORTED_MODULE_7__["CLEAN_ERROR"], undefined: undefined }); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (error) {
+            return _this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_6__["SET_TURNOLIBERAR"]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["mergeMap"])(function (payload) { return _this.service.liberarTurno(payload.request).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (rta) { return ({ type: _actions_contexto_actions__WEBPACK_IMPORTED_MODULE_6__["GET_TURNOSPACIENTERELOAD"], undefined: undefined }); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (error) {
                 return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])({ type: _actions_error_actions__WEBPACK_IMPORTED_MODULE_7__["SHOW_ERROR"], error: error.message });
             })); }));
         });

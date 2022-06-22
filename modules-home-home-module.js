@@ -25378,6 +25378,16 @@ var FormularioComponent = /** @class */ (function () {
         this.obrasSocial.valueChanges.subscribe(function (value) { return _this.cambioObraSocial(value); });
         this.especialidad.valueChanges.subscribe(function (value) { return _this.cambioEspecialidad(value); });
         this.profesional.valueChanges.subscribe(function (value) { return _this.cambioProfesional(value); });
+        this.pacienteSelected$.subscribe(function (pac) {
+            if (pac != undefined) {
+                _this.fechaNacimiento.setValue(pac.fechaNacimiento);
+                _this.store.select(_core_store_selectors_form_selectors__WEBPACK_IMPORTED_MODULE_11__["selectBusqueda"])
+                    .subscribe(function (filterFecha) {
+                    _this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_8__["postEspecialidades"]({ filterFecha: filterFecha }));
+                    _this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_8__["postProfesionales"]({ filterFecha: filterFecha }));
+                }).unsubscribe();
+            }
+        });
     };
     FormularioComponent.prototype.filterProf = function (value) {
         var filterValue = value.toLowerCase();
@@ -26092,13 +26102,14 @@ var ReservaComponent = /** @class */ (function () {
         this.planSelected$.subscribe(function (plan) { return _this.planSelected = plan; });
         this.pacienteSelected$.subscribe(function (pac) {
             if (pac != undefined) {
-                console.log(pac);
                 _this.dni.setValue(pac.dni);
                 _this.sexo.setValue(pac.sexo);
                 _this.apellido.setValue(pac.nombreApellido);
                 _this.nombre.setValue(pac.nombreApellido);
-                _this.telefonoArea.setValue(pac.telefono.area);
-                _this.telefonoNumero.setValue(pac.telefono.numero);
+                if (pac.telefono != undefined) {
+                    _this.telefonoArea.setValue(pac.telefono.area);
+                    _this.telefonoNumero.setValue(pac.telefono.numero);
+                }
                 _this.mail.setValue(pac.email);
             }
         });
