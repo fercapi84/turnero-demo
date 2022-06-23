@@ -3474,7 +3474,7 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 var environment = {
     production: false,
-    endpoint: 'http://appprohe.dynu.net:4777/api',
+    endpoint: 'https://hespanolserviciosweb.com.ar:5007/api',
     mockups: false,
     username: 'TURNOWEB',
     password: 'TURNOWEB',
