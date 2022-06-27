@@ -850,10 +850,11 @@ var pacientes = [
         telefono: undefined,
         email: 'mail@mail.com',
         fechaNacimiento: new Date('2022/03/30'),
-        codigoObraSocial: 2,
+        codigoObraSocial: 123,
         codigoPlan: 1,
         codigoProfesional: 1,
-        codigoEspecialidad: 1
+        codigoEspecialidad: 1,
+        parentesco: 'TITULAR',
     },
     {
         codigo: 2,
@@ -863,15 +864,16 @@ var pacientes = [
         telefono: undefined,
         email: 'otromail@mail.com',
         fechaNacimiento: new Date('2000/01/15'),
-        codigoObraSocial: 2,
-        codigoPlan: 1,
+        codigoObraSocial: 12345,
+        codigoPlan: 4,
         codigoProfesional: 1,
-        codigoEspecialidad: 1
+        codigoEspecialidad: 1,
+        parentesco: 'HIJO/A',
     }
 ];
 var infoUsuario = {
-    usuarioPaciente: "patoMock",
-    mailUsuario: "pato@mock.com",
+    nombreApellido: "mi usuario",
+    email: "usuario@mock.com",
     pacientes: pacientes
 };
 var turnosFuturos = [
@@ -940,13 +942,14 @@ var ServiceService = /** @class */ (function () {
         this.endpoint_busquedaHorarios = this.endpointC + '/busquedaHorarios';
         this.endpoint_reservaTurno = this.endpointC + '/reservaTurno';
         this.endpoint_confirmacionTurno = this.endpointC + '/confirmacionTurno';
-        this.endpoint_infoUsuario = this.endpointL + '/infoUsuario';
-        this.endpoint_reservaTurnoP = this.endpointL + '/paciente/reservaTurno';
-        this.endpoint_turnosFuturos = this.endpointL + '/pacienteTurnosFuturos';
+        this.endpoint_infoUsuario = this.endpointC + '/InfoUsuario';
+        this.endpoint_reservaTurnoP = this.endpointC + '/reservaTurnoPaciente';
+        this.endpoint_turnosFuturos = this.endpointC + '/pacienteTurnosFuturos';
         this.endpoint_liberarTurno = this.endpointL + '/pacienteTurnosFuturosLiberar';
     }
     ServiceService.prototype.login = function (usuario) {
         if (this.useMockups) {
+            console.log("call P login: " + usuario);
             return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_4__["tokenMock"]);
         }
         else {
@@ -961,6 +964,7 @@ var ServiceService = /** @class */ (function () {
     };
     ServiceService.prototype.getObraSociales = function () {
         if (this.useMockups) {
+            console.log("call G os: ");
             return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_4__["obrasSocialesMocks"]);
         }
         else {
@@ -985,6 +989,7 @@ var ServiceService = /** @class */ (function () {
     };
     ServiceService.prototype.postEspecialidades = function (filter) {
         if (this.useMockups) {
+            console.log("call P especialidades: " + filter);
             return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_4__["especialidadesMocks"]);
         }
         else {
@@ -1006,6 +1011,7 @@ var ServiceService = /** @class */ (function () {
     };
     ServiceService.prototype.getEspecialidades = function () {
         if (this.useMockups) {
+            console.log("call G especialid: ");
             return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_4__["especialidadesMocks"]);
         }
         else {
@@ -1027,6 +1033,7 @@ var ServiceService = /** @class */ (function () {
     };
     ServiceService.prototype.postProfesionales = function (filter) {
         if (this.useMockups) {
+            console.log("call P profesional: " + filter);
             return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_4__["profesionalesMocks"]);
         }
         else {
@@ -1048,6 +1055,7 @@ var ServiceService = /** @class */ (function () {
     };
     ServiceService.prototype.getProfesionales = function () {
         if (this.useMockups) {
+            console.log("call G profesional: ");
             return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_4__["profesionalesMocks"]);
         }
         else {
@@ -1069,6 +1077,7 @@ var ServiceService = /** @class */ (function () {
     };
     ServiceService.prototype.getCentrosDeAtencion = function () {
         if (this.useMockups) {
+            console.log("call G centro at: ");
             return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_4__["centroAtencionesMocks"]);
         }
         else {
@@ -1087,6 +1096,7 @@ var ServiceService = /** @class */ (function () {
     };
     ServiceService.prototype.busquedaProfesionales = function (filter) {
         if (this.useMockups) {
+            console.log("call P disp profesional: " + filter);
             return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_4__["profesionalesDisponibilidadMocks"]);
         }
         else {
@@ -1144,6 +1154,7 @@ var ServiceService = /** @class */ (function () {
     };
     ServiceService.prototype.busquedaDiasDisponibles = function (filter) {
         if (this.useMockups) {
+            console.log("call P busq dias: " + filter);
             return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_4__["diasDisponiblesMock"]);
         }
         else {
@@ -1162,6 +1173,7 @@ var ServiceService = /** @class */ (function () {
     };
     ServiceService.prototype.busquedaHorarios = function (filter) {
         if (this.useMockups) {
+            console.log("call P busq horarios: " + filter);
             return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_4__["horariosMock2"]);
         }
         else {
@@ -1205,6 +1217,7 @@ var ServiceService = /** @class */ (function () {
     };
     ServiceService.prototype.reservaTurno = function (filter) {
         if (this.useMockups) {
+            console.log("call P reserva: " + filter);
             return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_4__["reservaTurnoMock"]);
         }
         else {
@@ -1226,6 +1239,7 @@ var ServiceService = /** @class */ (function () {
     };
     ServiceService.prototype.retrieveTurno = function (reserva) {
         if (this.useMockups) {
+            console.log("call P confirmar reserva: " + reserva);
             return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_4__["turnoMock"]);
         }
         else {
@@ -1239,6 +1253,7 @@ var ServiceService = /** @class */ (function () {
     /******************/
     ServiceService.prototype.getInfoUsuario = function (credencialUsuario) {
         if (this.useMockups) {
+            console.log("call P infoUsuario: " + credencialUsuario);
             return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_4__["infoUsuario"]);
         }
         else {
@@ -1256,6 +1271,7 @@ var ServiceService = /** @class */ (function () {
     };
     ServiceService.prototype.getTurnosPaciente = function (req) {
         if (this.useMockups) {
+            console.log("call P turnos futuros: " + req);
             return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_4__["turnosFuturos"]);
         }
         else {
@@ -1268,6 +1284,7 @@ var ServiceService = /** @class */ (function () {
     };
     ServiceService.prototype.liberarTurno = function (req) {
         if (this.useMockups) {
+            console.log("call P liberar: " + req);
             return this.http.post(this.endpoint_liberarTurno, req);
         }
         else {
@@ -1352,12 +1369,13 @@ var setHorariosDisponibles = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["cr
 /*!********************************************************!*\
   !*** ./src/app/core/store/actions/contexto.actions.ts ***!
   \********************************************************/
-/*! exports provided: CLEAN_STORE, GET_TOKEN, SET_TOKEN, GET_CREDENCIALUSUARIO, SET_CREDENCIALUSUARIO, GET_USUARIO, SET_USUARIO, GET_PACIENTESELECTED, SET_PACIENTESELECTED, GET_TURNOSPACIENTE, SET_TURNOSPACIENTE, SET_TURNOLIBERAR, GET_TURNOSPACIENTERELOAD, cleanStore, getToken, setToken, getCredencialUsuario, setCredencialUsuario, getUsuario, setUsuario, getPacienteSelected, setPacienteSelected, getTurnosPacienteReload, getTurnosPaciente, setTurnosPaciente, setTurnoLiberar */
+/*! exports provided: CLEAN_STORE, CLEAN_STORE_PARCIAL, GET_TOKEN, SET_TOKEN, GET_CREDENCIALUSUARIO, SET_CREDENCIALUSUARIO, GET_USUARIO, SET_USUARIO, GET_PACIENTESELECTED, SET_PACIENTESELECTED, GET_TURNOSPACIENTE, SET_TURNOSPACIENTE, SET_TURNOLIBERAR, GET_TURNOSPACIENTERELOAD, cleanStore, cleanStoreParcial, getToken, setToken, getCredencialUsuario, setCredencialUsuario, getUsuario, setUsuario, getPacienteSelected, setPacienteSelected, getTurnosPacienteReload, getTurnosPaciente, setTurnosPaciente, setTurnoLiberar */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAN_STORE", function() { return CLEAN_STORE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAN_STORE_PARCIAL", function() { return CLEAN_STORE_PARCIAL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_TOKEN", function() { return GET_TOKEN; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_TOKEN", function() { return SET_TOKEN; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_CREDENCIALUSUARIO", function() { return GET_CREDENCIALUSUARIO; });
@@ -1371,6 +1389,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_TURNOLIBERAR", function() { return SET_TURNOLIBERAR; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_TURNOSPACIENTERELOAD", function() { return GET_TURNOSPACIENTERELOAD; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cleanStore", function() { return cleanStore; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cleanStoreParcial", function() { return cleanStoreParcial; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getToken", function() { return getToken; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setToken", function() { return setToken; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCredencialUsuario", function() { return getCredencialUsuario; });
@@ -1386,6 +1405,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
 
 var CLEAN_STORE = '[Contexto] - cleanStore';
+var CLEAN_STORE_PARCIAL = '[Contexto] - cleanStoreParcial';
 var GET_TOKEN = '[Contexto] - getToken';
 var SET_TOKEN = '[Contexto] - setToken';
 var GET_CREDENCIALUSUARIO = '[Contexto] - getCredencialUsuario';
@@ -1399,6 +1419,7 @@ var SET_TURNOSPACIENTE = '[Contexto] - setTurnosPacientes';
 var SET_TURNOLIBERAR = '[Contexto] - setTurnoLiberar';
 var GET_TURNOSPACIENTERELOAD = '[Contexto] - getTurnosPacienteReload';
 var cleanStore = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(CLEAN_STORE);
+var cleanStoreParcial = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(CLEAN_STORE_PARCIAL);
 var getToken = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(GET_TOKEN, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
 var setToken = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(SET_TOKEN, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
 var getCredencialUsuario = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(GET_CREDENCIALUSUARIO, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
@@ -1442,11 +1463,13 @@ var cleanError = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"]
 /*!****************************************************!*\
   !*** ./src/app/core/store/actions/form.actions.ts ***!
   \****************************************************/
-/*! exports provided: GET_OBRA_SOCIALES, GET_ESPECIALIDADES, POST_ESPECIALIDADES, GET_PROFESIONALES, POST_PROFESIONALES, GET_CENTROS_DE_ATENCION, SET_OBRA_SOCIALES, SET_ESPECIALIDADES, SET_PROFESIONALES, SET_CENTROS_DE_ATENCION, SET_FECHA_NACIMIENTO, SET_OBRA_SOCIAL_SELECTED, SET_PLAN_SELECTED, SET_PROFESIONAL_SELECTED, SET_ESPECIALIDAD_SELECTED, SET_CENTRO_DE_ATENCION_SELECTED, GET_BUSQUEDA_PROFESIONALES, getObraSociales, getProfesionales, getEspecialidades, getCentrosDeAtencion, postProfesionales, postEspecialidades, setObraSociales, setEspecialidades, setProfesionales, setCentrosDeAtencion, setFechaNacimiento, setObraSocialSelected, setPlanSelected, setProfesionalSelected, setEspecialidadSelected, setCentroDeAtencionSelected, getBusquedaProfesionales */
+/*! exports provided: CLEAN_STORE, CLEAN_STORE_PARCIAL, GET_OBRA_SOCIALES, GET_ESPECIALIDADES, POST_ESPECIALIDADES, GET_PROFESIONALES, POST_PROFESIONALES, GET_CENTROS_DE_ATENCION, SET_OBRA_SOCIALES, SET_ESPECIALIDADES, SET_PROFESIONALES, SET_CENTROS_DE_ATENCION, SET_FECHA_NACIMIENTO, SET_OBRA_SOCIAL_SELECTED, SET_PLAN_SELECTED, SET_PROFESIONAL_SELECTED, SET_ESPECIALIDAD_SELECTED, SET_CENTRO_DE_ATENCION_SELECTED, GET_BUSQUEDA_PROFESIONALES, getObraSociales, getProfesionales, getEspecialidades, getCentrosDeAtencion, cleanStore, cleanStoreParcial, postProfesionales, postEspecialidades, setObraSociales, setEspecialidades, setProfesionales, setCentrosDeAtencion, setFechaNacimiento, setObraSocialSelected, setPlanSelected, setProfesionalSelected, setEspecialidadSelected, setCentroDeAtencionSelected, getBusquedaProfesionales */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAN_STORE", function() { return CLEAN_STORE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAN_STORE_PARCIAL", function() { return CLEAN_STORE_PARCIAL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_OBRA_SOCIALES", function() { return GET_OBRA_SOCIALES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ESPECIALIDADES", function() { return GET_ESPECIALIDADES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "POST_ESPECIALIDADES", function() { return POST_ESPECIALIDADES; });
@@ -1468,6 +1491,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProfesionales", function() { return getProfesionales; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getEspecialidades", function() { return getEspecialidades; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCentrosDeAtencion", function() { return getCentrosDeAtencion; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cleanStore", function() { return cleanStore; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cleanStoreParcial", function() { return cleanStoreParcial; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postProfesionales", function() { return postProfesionales; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postEspecialidades", function() { return postEspecialidades; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setObraSociales", function() { return setObraSociales; });
@@ -1483,6 +1508,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBusquedaProfesionales", function() { return getBusquedaProfesionales; });
 /* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
 
+var CLEAN_STORE = '[Form] - cleanStore';
+var CLEAN_STORE_PARCIAL = '[Form] - cleanStoreParcial';
 var GET_OBRA_SOCIALES = '[Form] - getObraSociales';
 var GET_ESPECIALIDADES = '[Form] - getEspecialidades';
 var POST_ESPECIALIDADES = '[Form] - postEspecialidades';
@@ -1504,6 +1531,8 @@ var getObraSociales = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAct
 var getProfesionales = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(GET_PROFESIONALES);
 var getEspecialidades = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(GET_ESPECIALIDADES);
 var getCentrosDeAtencion = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(GET_CENTROS_DE_ATENCION);
+var cleanStore = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(CLEAN_STORE);
+var cleanStoreParcial = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(CLEAN_STORE_PARCIAL);
 var postProfesionales = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(POST_PROFESIONALES, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
 var postEspecialidades = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(POST_ESPECIALIDADES, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
 var setObraSociales = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(SET_OBRA_SOCIALES, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
@@ -1525,7 +1554,7 @@ var getBusquedaProfesionales = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["
 /*!*******************************************************!*\
   !*** ./src/app/core/store/actions/reserva.actions.ts ***!
   \*******************************************************/
-/*! exports provided: CLEAN_STORE, RESERVA_TURNO, SET_TURNO_SELECTED, GET_RESERVA, SET_PACIENTE, RETRIEVE_TURNO, SET_TURNO, cleanStore, reservaTurno, setTurnoSelected, getReservaSelected, setPaciente, retrieveTurno, setTurno */
+/*! exports provided: CLEAN_STORE, RESERVA_TURNO, SET_TURNO_SELECTED, GET_RESERVA, SET_PACIENTE, SET_CODIGOPACIENTE, RETRIEVE_TURNO, SET_TURNO, cleanStore, reservaTurno, setTurnoSelected, getReservaSelected, setPaciente, setCodigoPaciente, retrieveTurno, setTurno */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1535,6 +1564,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_TURNO_SELECTED", function() { return SET_TURNO_SELECTED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_RESERVA", function() { return GET_RESERVA; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PACIENTE", function() { return SET_PACIENTE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_CODIGOPACIENTE", function() { return SET_CODIGOPACIENTE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RETRIEVE_TURNO", function() { return RETRIEVE_TURNO; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_TURNO", function() { return SET_TURNO; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cleanStore", function() { return cleanStore; });
@@ -1542,6 +1572,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setTurnoSelected", function() { return setTurnoSelected; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getReservaSelected", function() { return getReservaSelected; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setPaciente", function() { return setPaciente; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setCodigoPaciente", function() { return setCodigoPaciente; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "retrieveTurno", function() { return retrieveTurno; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setTurno", function() { return setTurno; });
 /* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
@@ -1551,6 +1582,7 @@ var RESERVA_TURNO = '[Reserva] - ReservaTurno';
 var SET_TURNO_SELECTED = '[Reserva] - setTurnoSelected';
 var GET_RESERVA = '[Reserva] - getReservaSelected ';
 var SET_PACIENTE = '[Reserva] - setPaciente ';
+var SET_CODIGOPACIENTE = '[Reserva] - setCodigoPaciente ';
 var RETRIEVE_TURNO = '[Reserva] - retrieveTurno';
 var SET_TURNO = '[Reserva] - setTurno';
 var cleanStore = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(CLEAN_STORE);
@@ -1558,6 +1590,7 @@ var reservaTurno = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction
 var setTurnoSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(SET_TURNO_SELECTED, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
 var getReservaSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(GET_RESERVA, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
 var setPaciente = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(SET_PACIENTE, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
+var setCodigoPaciente = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(SET_CODIGOPACIENTE, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
 var retrieveTurno = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(RETRIEVE_TURNO, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
 var setTurno = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(SET_TURNO, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
 
@@ -1770,7 +1803,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_calendar_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../actions/calendar.actions */ "./src/app/core/store/actions/calendar.actions.ts");
 /* harmony import */ var _actions_error_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../actions/error.actions */ "./src/app/core/store/actions/error.actions.ts");
 /* harmony import */ var _actions_form_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../actions/form.actions */ "./src/app/core/store/actions/form.actions.ts");
-/* harmony import */ var _services_service_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./../../services/service.service */ "./src/app/core/services/service.service.ts");
+/* harmony import */ var _actions_contexto_actions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../actions/contexto.actions */ "./src/app/core/store/actions/contexto.actions.ts");
+/* harmony import */ var _services_service_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./../../services/service.service */ "./src/app/core/services/service.service.ts");
+
 
 
 
@@ -1786,7 +1821,7 @@ var FormEffects = /** @class */ (function () {
         this.actions$ = actions$;
         this.formService = formService;
         this.getObraSociales$ = Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["createEffect"])(function () {
-            return _this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_actions_form_actions__WEBPACK_IMPORTED_MODULE_7__["GET_OBRA_SOCIALES"]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["mergeMap"])(function () { return _this.formService.getObraSociales().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (obrasSociales) { return ({ type: _actions_form_actions__WEBPACK_IMPORTED_MODULE_7__["SET_OBRA_SOCIALES"], obrasSociales: obrasSociales }); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (error) {
+            return _this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_8__["SET_TOKEN"]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["mergeMap"])(function () { return _this.formService.getObraSociales().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (obrasSociales) { return ({ type: _actions_form_actions__WEBPACK_IMPORTED_MODULE_7__["SET_OBRA_SOCIALES"], obrasSociales: obrasSociales }); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (error) {
                 return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])({ type: _actions_error_actions__WEBPACK_IMPORTED_MODULE_6__["SHOW_ERROR"], error: error.message });
             })); }));
         });
@@ -1803,19 +1838,19 @@ var FormEffects = /** @class */ (function () {
             })); }));
         });
         this.getEspecialidades$ = Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["createEffect"])(function () {
-            return _this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_actions_form_actions__WEBPACK_IMPORTED_MODULE_7__["GET_ESPECIALIDADES"]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["mergeMap"])(function () { return _this.formService.getEspecialidades().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (especialidades) { return ({ type: _actions_form_actions__WEBPACK_IMPORTED_MODULE_7__["SET_ESPECIALIDADES"], especialidades: especialidades }); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (error) {
+            return _this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_actions_form_actions__WEBPACK_IMPORTED_MODULE_7__["SET_FECHA_NACIMIENTO"]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["mergeMap"])(function () { return _this.formService.getEspecialidades().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (especialidades) { return ({ type: _actions_form_actions__WEBPACK_IMPORTED_MODULE_7__["SET_ESPECIALIDADES"], especialidades: especialidades }); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (error) {
                 return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])({ type: _actions_error_actions__WEBPACK_IMPORTED_MODULE_6__["SHOW_ERROR"], error: error.message });
             })); }));
         });
         this.postEspecialidades$ = Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["createEffect"])(function () {
-            return _this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_actions_form_actions__WEBPACK_IMPORTED_MODULE_7__["POST_ESPECIALIDADES"]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["switchMap"])(function (req) { return _this.formService.postEspecialidades(req.filterFecha).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (especialidades) {
+            return _this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_actions_form_actions__WEBPACK_IMPORTED_MODULE_7__["SET_FECHA_NACIMIENTO"]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["switchMap"])(function (req) { return _this.formService.postEspecialidades(req.filterFecha).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (especialidades) {
                 return ({ type: _actions_form_actions__WEBPACK_IMPORTED_MODULE_7__["SET_ESPECIALIDADES"], especialidades: especialidades });
             }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (error) {
                 return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])({ type: _actions_error_actions__WEBPACK_IMPORTED_MODULE_6__["SHOW_ERROR"], error: error.message });
             })); }));
         });
         this.getCentrosDeAtencion$ = Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["createEffect"])(function () {
-            return _this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_actions_form_actions__WEBPACK_IMPORTED_MODULE_7__["GET_CENTROS_DE_ATENCION"]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["mergeMap"])(function () { return _this.formService.getCentrosDeAtencion().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (centrosDeAtencion) { return ({ type: _actions_form_actions__WEBPACK_IMPORTED_MODULE_7__["SET_CENTROS_DE_ATENCION"], centrosDeAtencion: centrosDeAtencion }); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (error) {
+            return _this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_8__["SET_TOKEN"]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["mergeMap"])(function () { return _this.formService.getCentrosDeAtencion().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (centrosDeAtencion) { return ({ type: _actions_form_actions__WEBPACK_IMPORTED_MODULE_7__["SET_CENTROS_DE_ATENCION"], centrosDeAtencion: centrosDeAtencion }); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (error) {
                 return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])({ type: _actions_error_actions__WEBPACK_IMPORTED_MODULE_6__["SHOW_ERROR"], error: error.message });
             })); }));
         });
@@ -1830,7 +1865,7 @@ var FormEffects = /** @class */ (function () {
     FormEffects = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["Actions"],
-            _services_service_service__WEBPACK_IMPORTED_MODULE_8__["ServiceService"]])
+            _services_service_service__WEBPACK_IMPORTED_MODULE_9__["ServiceService"]])
     ], FormEffects);
     return FormEffects;
 }());
@@ -2032,6 +2067,17 @@ var initialState = {
     turnosFuturos: undefined,
     codigoTurnoLiberar: undefined
 };
+var _cleanParcial = function (state) {
+    var stateNew = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state);
+    stateNew.token = undefined;
+    //esAnonimo: true,
+    //credencial: undefined,
+    //infoUsuario: undefined,
+    stateNew.pacienteSelected = undefined;
+    stateNew.turnosFuturos = undefined;
+    stateNew.codigoTurnoLiberar = undefined;
+    return stateNew;
+};
 var _setToken = function (state, newToken) {
     var stateNew = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state);
     stateNew.token = newToken;
@@ -2059,7 +2105,9 @@ var _setPacienteSelected = function (state, paciente) {
     stateNew.pacienteSelected = paciente;
     return stateNew;
 };
-var _contextoReducer = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["createReducer"])(initialState, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["on"])(_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_2__["cleanStore"], function () { return initialState; }), Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["on"])(_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_2__["setToken"], function (state, _a) {
+var _contextoReducer = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["createReducer"])(initialState, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["on"])(_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_2__["cleanStore"], function () { return initialState; }), Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["on"])(_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_2__["cleanStoreParcial"], function (state) {
+    return _cleanParcial(state);
+}), Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["on"])(_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_2__["setToken"], function (state, _a) {
     var token = _a.token;
     return _setToken(state, token);
 }), Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["on"])(_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_2__["setCredencialUsuario"], function (state, _a) {
@@ -2214,7 +2262,19 @@ var _setCentroDeAtencionSelected = function (state, centroDeAtencionSelected) {
     stateNew.centroDeAtencionSelected = centroDeAtencionSelected;
     return stateNew;
 };
-var _formReducer = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["createReducer"])(initialState, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["on"])(_actions_form_actions__WEBPACK_IMPORTED_MODULE_2__["setObraSociales"], function (state, _a) {
+var _cleanParcial = function (state) {
+    var stateNew = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state);
+    stateNew.obraSocialSelected = undefined;
+    stateNew.planSelected = undefined;
+    stateNew.fechaNacimiento = undefined;
+    stateNew.profesionalSelected = undefined;
+    stateNew.especialidadSelected = undefined;
+    stateNew.centroDeAtencionSelected = undefined;
+    return stateNew;
+};
+var _formReducer = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["createReducer"])(initialState, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["on"])(_actions_form_actions__WEBPACK_IMPORTED_MODULE_2__["cleanStore"], function () { return initialState; }), Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["on"])(_actions_form_actions__WEBPACK_IMPORTED_MODULE_2__["cleanStoreParcial"], function (state) {
+    return _cleanParcial(state);
+}), Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["on"])(_actions_form_actions__WEBPACK_IMPORTED_MODULE_2__["setObraSociales"], function (state, _a) {
     var obrasSociales = _a.obrasSociales;
     return _setObraSociales(state, obrasSociales);
 }), Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["on"])(_actions_form_actions__WEBPACK_IMPORTED_MODULE_2__["setEspecialidades"], function (state, _a) {
@@ -2271,6 +2331,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var initialState = {
     paciente: undefined,
+    codigoPaciente: undefined,
     turnoSelected: undefined,
 };
 var _setTurnoSelected = function (state, turnoSelected) {
@@ -2283,12 +2344,20 @@ var _setPaciente = function (state, paciente) {
     stateNew.paciente = paciente;
     return stateNew;
 };
+var _setCodigoPaciente = function (state, codigoPaciente) {
+    var stateNew = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state);
+    stateNew.codigoPaciente = codigoPaciente;
+    return stateNew;
+};
 var _reservaReducer = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["createReducer"])(initialState, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["on"])(_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_2__["cleanStore"], function () { return initialState; }), Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["on"])(_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_2__["setTurnoSelected"], function (state, _a) {
     var turnoSelected = _a.turnoSelected;
     return _setTurnoSelected(state, turnoSelected);
 }), Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["on"])(_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_2__["setPaciente"], function (state, _a) {
     var paciente = _a.paciente;
     return _setPaciente(state, paciente);
+}), Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["on"])(_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_2__["setCodigoPaciente"], function (state, _a) {
+    var codigoPaciente = _a.codigoPaciente;
+    return _setCodigoPaciente(state, codigoPaciente);
 }), Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["on"])(_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_2__["setTurno"], function (state, _a) {
     var turno = _a.turno;
     return _setTurnoSelected(state, turno);
@@ -2374,7 +2443,7 @@ var getNickname = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelecto
     if (!contexto || !contexto.infoUsuario) {
         return undefined;
     }
-    return contexto.infoUsuario.usuarioPaciente;
+    return contexto.credencial.idUsuario;
 });
 var getPacientes = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectContexto, function (contexto) {
     if (!contexto || !contexto.infoUsuario) {
@@ -2413,6 +2482,139 @@ var getCountError = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelec
 
 /***/ }),
 
+/***/ "./src/app/core/store/selectors/form.selectors.ts":
+/*!********************************************************!*\
+  !*** ./src/app/core/store/selectors/form.selectors.ts ***!
+  \********************************************************/
+/*! exports provided: selectFormulario, selectContexto, selectAllObrasSociales, selectAllProfesionales, selectAllEspecialidades, selectAllCentrosDeAtencion, selectObraSocialSelected, selectCodigoObraSocialPaciente, selectCodigoPlanPaciente, selectObraSocialPaciente, selectPlanes, selectPlanPaciente, selectPlanSelected, selectProfComboSelected, selectEspecialidadComboSelected, selectFechaNacimiento, selectBusqueda, selectBusquedaProfesionales, selectDatosFormulario */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectFormulario", function() { return selectFormulario; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectContexto", function() { return selectContexto; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAllObrasSociales", function() { return selectAllObrasSociales; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAllProfesionales", function() { return selectAllProfesionales; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAllEspecialidades", function() { return selectAllEspecialidades; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAllCentrosDeAtencion", function() { return selectAllCentrosDeAtencion; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectObraSocialSelected", function() { return selectObraSocialSelected; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectCodigoObraSocialPaciente", function() { return selectCodigoObraSocialPaciente; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectCodigoPlanPaciente", function() { return selectCodigoPlanPaciente; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectObraSocialPaciente", function() { return selectObraSocialPaciente; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectPlanes", function() { return selectPlanes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectPlanPaciente", function() { return selectPlanPaciente; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectPlanSelected", function() { return selectPlanSelected; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectProfComboSelected", function() { return selectProfComboSelected; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectEspecialidadComboSelected", function() { return selectEspecialidadComboSelected; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectFechaNacimiento", function() { return selectFechaNacimiento; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectBusqueda", function() { return selectBusqueda; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectBusquedaProfesionales", function() { return selectBusquedaProfesionales; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectDatosFormulario", function() { return selectDatosFormulario; });
+/* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
+/* harmony import */ var _shared_models_datos_models__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../shared/models/datos.models */ "./src/app/shared/models/datos.models.ts");
+/* harmony import */ var _shared_models_request_models__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../shared/models/request.models */ "./src/app/shared/models/request.models.ts");
+
+
+
+var selectFormulario = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createFeatureSelector"])('formulario');
+var selectContexto = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createFeatureSelector"])('contexto');
+var selectAllObrasSociales = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.obrasSociales; });
+var selectAllProfesionales = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) {
+    if (formulario.especialidadSelected != undefined && formulario.especialidadSelected.codigo != undefined) {
+        return formulario.profesionales.filter(function (x) {
+            return x.especialidad.filter(function (esp) { return esp.codigo === formulario.especialidadSelected.codigo; }).length > 0;
+        });
+    }
+    return formulario.profesionales;
+});
+var selectAllEspecialidades = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.especialidades; });
+var selectAllCentrosDeAtencion = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.centrosDeAtencion; });
+var selectObraSocialSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.obraSocialSelected; });
+var selectCodigoObraSocialPaciente = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectContexto, function (contexto) {
+    if (contexto.pacienteSelected != undefined) {
+        return contexto.pacienteSelected.codigoObraSocial;
+    }
+    else {
+        return undefined;
+    }
+});
+var selectCodigoPlanPaciente = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectContexto, function (contexto) {
+    if (contexto.pacienteSelected != undefined) {
+        return contexto.pacienteSelected.codigoPlan;
+    }
+    else {
+        return undefined;
+    }
+});
+var selectObraSocialPaciente = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])([selectCodigoObraSocialPaciente, selectAllObrasSociales], function (codigoObraSocial, allOS) {
+    var list = allOS.filter(function (x) { return x.codigo === codigoObraSocial; });
+    if (list && list.length == 1) {
+        return list[0];
+    }
+    else {
+        return undefined;
+    }
+});
+var selectPlanes = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectObraSocialSelected, function (obraSocial) {
+    if (obraSocial) {
+        return obraSocial.plan;
+    }
+});
+var selectPlanPaciente = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])([selectCodigoPlanPaciente, selectObraSocialSelected], function (codigoPlan, os) {
+    if (os != undefined) {
+        var list = os.plan.filter(function (x) { return x.codigo === codigoPlan; });
+        if (list && list.length == 1) {
+            return list[0];
+        }
+        else {
+            return undefined;
+        }
+    }
+    else {
+        return undefined;
+    }
+});
+var selectPlanSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.planSelected; });
+var selectProfComboSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.profesionalSelected; });
+var selectEspecialidadComboSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.especialidadSelected; });
+var selectFechaNacimiento = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.fechaNacimiento; });
+var selectBusqueda = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) {
+    var request = new _shared_models_request_models__WEBPACK_IMPORTED_MODULE_2__["BusquedaRequest"]();
+    request.fechaNacimiento = formulario.fechaNacimiento;
+    return request;
+});
+var selectBusquedaProfesionales = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) {
+    var request = new _shared_models_request_models__WEBPACK_IMPORTED_MODULE_2__["BusquedaProfesionalesRequest"]();
+    request.fechaNacimiento = formulario.fechaNacimiento;
+    request.codigoObraSocial = formulario.obraSocialSelected.codigo;
+    if (formulario.planSelected != undefined) {
+        request.codigoPlan = formulario.planSelected.codigo;
+    }
+    if (formulario.especialidadSelected != undefined) {
+        request.codigoEspecialidad = formulario.especialidadSelected.codigo;
+    }
+    request.codigoCentroAtencion = formulario.centroDeAtencionSelected.codigo;
+    request.profesional = formulario.profesionalSelected;
+    if (request.profesional === undefined ||
+        request.profesional.nombreApellido === undefined) {
+        request.profesional = new _shared_models_datos_models__WEBPACK_IMPORTED_MODULE_1__["Profesional"]();
+    }
+    return request;
+});
+var selectDatosFormulario = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) {
+    var datos = new _shared_models_request_models__WEBPACK_IMPORTED_MODULE_2__["DatosFormulario"]();
+    datos.fechaNacimiento = formulario.fechaNacimiento;
+    datos.obraSocial = formulario.obraSocialSelected;
+    datos.plan = formulario.planSelected;
+    datos.especialidad = formulario.especialidadSelected;
+    datos.centroAtencion = formulario.centroDeAtencionSelected;
+    datos.profesional = formulario.profesionalSelected;
+    return datos;
+});
+
+
+/***/ }),
+
 /***/ "./src/app/core/store/selectors/reserva.selectors.ts":
 /*!***********************************************************!*\
   !*** ./src/app/core/store/selectors/reserva.selectors.ts ***!
@@ -2436,8 +2638,13 @@ var reservarTurno = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelec
         return;
     }
     var request = new _shared_models_request_models__WEBPACK_IMPORTED_MODULE_1__["ReservaTurnoRequest"]();
-    request.paciente = filter.paciente;
     request.codigoTurno = filter.turnoSelected.codigo;
+    // anonimo
+    request.paciente = filter.paciente;
+    // logueado (user y pass lo agrega en el component)
+    request.codigoPaciente = filter.codigoPaciente;
+    request.codigoObraSocial = filter.paciente.codigoObraSocial;
+    request.codigoEspecialidad = filter.paciente.codigoEspecialidad;
     return request;
 });
 var getReserva = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (reservaSelected) {
@@ -2774,13 +2981,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
-/* harmony import */ var _core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../core/store/actions/form.actions */ "./src/app/core/store/actions/form.actions.ts");
-/* harmony import */ var _core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../core/store/actions/contexto.actions */ "./src/app/core/store/actions/contexto.actions.ts");
-/* harmony import */ var _core_store_actions_calendar_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../core/store/actions/calendar.actions */ "./src/app/core/store/actions/calendar.actions.ts");
-/* harmony import */ var _core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../core/store/actions/reserva.actions */ "./src/app/core/store/actions/reserva.actions.ts");
-/* harmony import */ var _core_store_actions_reservacion_actions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../core/store/actions/reservacion.actions */ "./src/app/core/store/actions/reservacion.actions.ts");
-/* harmony import */ var _core_store_selectors_contexto_selectors__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../core/store/selectors/contexto.selectors */ "./src/app/core/store/selectors/contexto.selectors.ts");
-/* harmony import */ var _shared_models_datos_models__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../shared/models/datos.models */ "./src/app/shared/models/datos.models.ts");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../core/store/actions/form.actions */ "./src/app/core/store/actions/form.actions.ts");
+/* harmony import */ var _core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../core/store/actions/contexto.actions */ "./src/app/core/store/actions/contexto.actions.ts");
+/* harmony import */ var _core_store_actions_calendar_actions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../core/store/actions/calendar.actions */ "./src/app/core/store/actions/calendar.actions.ts");
+/* harmony import */ var _core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../core/store/actions/reserva.actions */ "./src/app/core/store/actions/reserva.actions.ts");
+/* harmony import */ var _core_store_actions_reservacion_actions__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../core/store/actions/reservacion.actions */ "./src/app/core/store/actions/reservacion.actions.ts");
+/* harmony import */ var _core_store_selectors_contexto_selectors__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../core/store/selectors/contexto.selectors */ "./src/app/core/store/selectors/contexto.selectors.ts");
+/* harmony import */ var _shared_models_datos_models__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../../shared/models/datos.models */ "./src/app/shared/models/datos.models.ts");
+/* harmony import */ var _core_store_selectors_form_selectors__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../../core/store/selectors/form.selectors */ "./src/app/core/store/selectors/form.selectors.ts");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../../../environments/environment */ "./src/environments/environment.ts");
+
+
+
 
 
 
@@ -2795,34 +3008,49 @@ __webpack_require__.r(__webpack_exports__);
 
 var LoginPageComponent = /** @class */ (function () {
     function LoginPageComponent(store, router) {
+        var _this = this;
         this.store = store;
         this.router = router;
         this.username = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]);
         this.password = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]);
         this.displayedColumns = ['acciones', 'nombre', 'documento', 'fecha'];
         this.displayedColumnsT = ['acciones', 'fecha', 'especialidad', 'lugar'];
-        this.pacientes$ = store.select(_core_store_selectors_contexto_selectors__WEBPACK_IMPORTED_MODULE_10__["getPacientes"]);
-        this.nickname$ = store.select(_core_store_selectors_contexto_selectors__WEBPACK_IMPORTED_MODULE_10__["getNickname"]);
-        this.pacienteSelected$ = store.select(_core_store_selectors_contexto_selectors__WEBPACK_IMPORTED_MODULE_10__["getPacienteSelected"]);
-        this.turnosFuturos$ = store.select(_core_store_selectors_contexto_selectors__WEBPACK_IMPORTED_MODULE_10__["getTurnosFuturos"]);
+        this.pacientes$ = store.select(_core_store_selectors_contexto_selectors__WEBPACK_IMPORTED_MODULE_11__["getPacientes"]);
+        this.nickname$ = store.select(_core_store_selectors_contexto_selectors__WEBPACK_IMPORTED_MODULE_11__["getNickname"]);
+        this.pacienteSelected$ = store.select(_core_store_selectors_contexto_selectors__WEBPACK_IMPORTED_MODULE_11__["getPacienteSelected"]);
+        this.turnosFuturos$ = store.select(_core_store_selectors_contexto_selectors__WEBPACK_IMPORTED_MODULE_11__["getTurnosFuturos"]);
+        var login = new _shared_models_datos_models__WEBPACK_IMPORTED_MODULE_12__["Login"]();
+        login.username = _environments_environment__WEBPACK_IMPORTED_MODULE_14__["environment"].username;
+        login.password = _environments_environment__WEBPACK_IMPORTED_MODULE_14__["environment"].password;
+        this.subscription = this.store.select(_core_store_selectors_contexto_selectors__WEBPACK_IMPORTED_MODULE_11__["getToken"]).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["filter"])(function (token) { return token === undefined; })).subscribe(function () {
+            _this.store.dispatch(_core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_7__["getToken"]({ login: login }));
+            _this.store.select(_core_store_selectors_contexto_selectors__WEBPACK_IMPORTED_MODULE_11__["getToken"]).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["filter"])(function (token) { return (token !== undefined); })).subscribe(function () {
+                _this.subscription.unsubscribe();
+            });
+        });
     }
-    LoginPageComponent.prototype.ngOnInit = function () {
-        this.esAnonimo$ = this.store.select(_core_store_selectors_contexto_selectors__WEBPACK_IMPORTED_MODULE_10__["getEsAnonimo"]);
+    LoginPageComponent.prototype.ngOnDestroy = function () {
+        this.subscription.unsubscribe();
     };
-    LoginPageComponent.prototype.logout = function () {
-        this.store.dispatch(_core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_6__["setToken"]({ token: undefined }));
-        //this.store.dispatch(FormActions.cleanStore());
-        this.store.dispatch(_core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_6__["cleanStore"]());
-        this.store.dispatch(_core_store_actions_calendar_actions__WEBPACK_IMPORTED_MODULE_7__["cleanStore"]());
-        this.store.dispatch(_core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_8__["cleanStore"]());
-        this.store.dispatch(_core_store_actions_reservacion_actions__WEBPACK_IMPORTED_MODULE_9__["cleanStore"]());
+    LoginPageComponent.prototype.ngOnInit = function () {
+        this.esAnonimo$ = this.store.select(_core_store_selectors_contexto_selectors__WEBPACK_IMPORTED_MODULE_11__["getEsAnonimo"]);
+    };
+    LoginPageComponent.prototype.clearBusqTurnos = function () {
+        this.store.dispatch(_core_store_actions_reservacion_actions__WEBPACK_IMPORTED_MODULE_10__["cleanStore"]());
+        this.store.dispatch(_core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_9__["cleanStore"]());
+        this.store.dispatch(_core_store_actions_calendar_actions__WEBPACK_IMPORTED_MODULE_8__["cleanStore"]());
+        this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_6__["cleanStore"]());
+    };
+    LoginPageComponent.prototype.logoutPaciente = function () {
+        this.clearBusqTurnos();
+        this.store.dispatch(_core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_7__["cleanStoreParcial"]());
     };
     LoginPageComponent.prototype.onCancelar = function () {
-        this.logout();
+        this.logoutPaciente();
         this.router.navigate(['/home']);
     };
     LoginPageComponent.prototype.logoutAndRedirect = function () {
-        this.logout();
+        this.logoutPaciente();
         this.router.navigate(['/home']);
     };
     LoginPageComponent.prototype.redirectToTurnos = function (paciente) {
@@ -2830,20 +3058,22 @@ var LoginPageComponent = /** @class */ (function () {
         this.router.navigate(['/home/dashboard']);
     };
     LoginPageComponent.prototype.onSubmit = function () {
-        var credencialUsuario = new _shared_models_datos_models__WEBPACK_IMPORTED_MODULE_11__["Credencial"]();
+        var credencialUsuario = new _shared_models_datos_models__WEBPACK_IMPORTED_MODULE_12__["Credencial"]();
         credencialUsuario.idUsuario = this.username.value;
         credencialUsuario.passUsurio = this.password.value;
-        this.store.dispatch(_core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_6__["setCredencialUsuario"]({ credencialUsuario: credencialUsuario }));
-        this.store.dispatch(_core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_6__["getUsuario"]({ credencialUsuario: credencialUsuario })); // TODO:
+        this.store.dispatch(_core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_7__["setCredencialUsuario"]({ credencialUsuario: credencialUsuario }));
+        this.store.dispatch(_core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_7__["getUsuario"]({ credencialUsuario: credencialUsuario })); // TODO:
     };
     LoginPageComponent.prototype.seleccionar = function (paciente) {
-        var req = {
-            usuario: this.username.value,
-            password: this.password.value,
-            codigoPaciente: paciente.codigo
-        };
-        this.store.dispatch(_core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_6__["setPacienteSelected"]({ paciente: paciente, req: req }));
-        this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_5__["setFechaNacimiento"]({ fechaNacimiento: paciente.fechaNacimiento }));
+        var _this = this;
+        this.store.dispatch(_core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_7__["setPacienteSelected"]({ paciente: paciente }));
+        this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_6__["setFechaNacimiento"]({ fechaNacimiento: paciente.fechaNacimiento }));
+        this.store.select(_core_store_selectors_form_selectors__WEBPACK_IMPORTED_MODULE_13__["selectObraSocialPaciente"]).subscribe(function (os) {
+            _this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_6__["setObraSocialSelected"]({ obraSocialSelected: os }));
+            _this.store.select(_core_store_selectors_form_selectors__WEBPACK_IMPORTED_MODULE_13__["selectPlanPaciente"]).subscribe(function (plan) {
+                _this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_6__["setPlanSelected"]({ planSelected: plan }));
+            });
+        }).unsubscribe();
     };
     LoginPageComponent.prototype.cancelarTurno = function (turno) {
         var request = {
@@ -2852,7 +3082,7 @@ var LoginPageComponent = /** @class */ (function () {
             codigoPaciente: undefined,
             codigoTurno: turno.codigo
         };
-        this.store.dispatch(_core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_6__["setTurnoLiberar"]({ request: request }));
+        this.store.dispatch(_core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_7__["setTurnoLiberar"]({ request: request }));
     };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('footer'),
@@ -3474,7 +3704,8 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 var environment = {
     production: false,
-    endpoint: 'https://hespanolserviciosweb.com.ar:5007/api',
+    //endpoint: 'http://appprohe.dynu.net:4777/api',
+    endpoint: 'https://hespanolserviciosweb.com.ar:5008/api',
     mockups: false,
     username: 'TURNOWEB',
     password: 'TURNOWEB',

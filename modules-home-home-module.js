@@ -24984,94 +24984,6 @@ var getHorariosDisponiblesLength = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0
 
 /***/ }),
 
-/***/ "./src/app/core/store/selectors/form.selectors.ts":
-/*!********************************************************!*\
-  !*** ./src/app/core/store/selectors/form.selectors.ts ***!
-  \********************************************************/
-/*! exports provided: selectFormulario, selectAllObrasSociales, selectAllProfesionales, selectAllEspecialidades, selectAllCentrosDeAtencion, selectObraSocialSelected, selectPlanes, selectPlanSelected, selectProfComboSelected, selectEspecialidadComboSelected, selectFechaNacimiento, selectBusqueda, selectBusquedaProfesionales, selectDatosFormulario */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectFormulario", function() { return selectFormulario; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAllObrasSociales", function() { return selectAllObrasSociales; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAllProfesionales", function() { return selectAllProfesionales; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAllEspecialidades", function() { return selectAllEspecialidades; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAllCentrosDeAtencion", function() { return selectAllCentrosDeAtencion; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectObraSocialSelected", function() { return selectObraSocialSelected; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectPlanes", function() { return selectPlanes; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectPlanSelected", function() { return selectPlanSelected; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectProfComboSelected", function() { return selectProfComboSelected; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectEspecialidadComboSelected", function() { return selectEspecialidadComboSelected; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectFechaNacimiento", function() { return selectFechaNacimiento; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectBusqueda", function() { return selectBusqueda; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectBusquedaProfesionales", function() { return selectBusquedaProfesionales; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectDatosFormulario", function() { return selectDatosFormulario; });
-/* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
-/* harmony import */ var _shared_models_datos_models__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../shared/models/datos.models */ "./src/app/shared/models/datos.models.ts");
-/* harmony import */ var _shared_models_request_models__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../shared/models/request.models */ "./src/app/shared/models/request.models.ts");
-
-
-
-var selectFormulario = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createFeatureSelector"])('formulario');
-var selectAllObrasSociales = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.obrasSociales; });
-var selectAllProfesionales = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) {
-    if (formulario.especialidadSelected != undefined && formulario.especialidadSelected.codigo != undefined) {
-        return formulario.profesionales.filter(function (x) {
-            return x.especialidad.filter(function (esp) { return esp.codigo === formulario.especialidadSelected.codigo; }).length > 0;
-        });
-    }
-    return formulario.profesionales;
-});
-var selectAllEspecialidades = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.especialidades; });
-var selectAllCentrosDeAtencion = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.centrosDeAtencion; });
-var selectObraSocialSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.obraSocialSelected; });
-var selectPlanes = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectObraSocialSelected, function (obraSocial) {
-    if (obraSocial) {
-        return obraSocial.plan;
-    }
-});
-var selectPlanSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.planSelected; });
-var selectProfComboSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.profesionalSelected; });
-var selectEspecialidadComboSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.especialidadSelected; });
-var selectFechaNacimiento = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.fechaNacimiento; });
-var selectBusqueda = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) {
-    var request = new _shared_models_request_models__WEBPACK_IMPORTED_MODULE_2__["BusquedaRequest"]();
-    request.fechaNacimiento = formulario.fechaNacimiento;
-    return request;
-});
-var selectBusquedaProfesionales = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) {
-    var request = new _shared_models_request_models__WEBPACK_IMPORTED_MODULE_2__["BusquedaProfesionalesRequest"]();
-    request.fechaNacimiento = formulario.fechaNacimiento;
-    request.codigoObraSocial = formulario.obraSocialSelected.codigo;
-    if (formulario.planSelected != undefined) {
-        request.codigoPlan = formulario.planSelected.codigo;
-    }
-    if (formulario.especialidadSelected != undefined) {
-        request.codigoEspecialidad = formulario.especialidadSelected.codigo;
-    }
-    request.codigoCentroAtencion = formulario.centroDeAtencionSelected.codigo;
-    request.profesional = formulario.profesionalSelected;
-    if (request.profesional === undefined ||
-        request.profesional.nombreApellido === undefined) {
-        request.profesional = new _shared_models_datos_models__WEBPACK_IMPORTED_MODULE_1__["Profesional"]();
-    }
-    return request;
-});
-var selectDatosFormulario = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) {
-    var datos = new _shared_models_request_models__WEBPACK_IMPORTED_MODULE_2__["DatosFormulario"]();
-    datos.fechaNacimiento = formulario.fechaNacimiento;
-    datos.obraSocial = formulario.obraSocialSelected;
-    datos.plan = formulario.planSelected;
-    datos.especialidad = formulario.especialidadSelected;
-    datos.centroAtencion = formulario.centroDeAtencionSelected;
-    datos.profesional = formulario.profesionalSelected;
-    return datos;
-});
-
-
-/***/ }),
-
 /***/ "./src/app/core/store/selectors/reservacion.selectors.ts":
 /*!***************************************************************!*\
   !*** ./src/app/core/store/selectors/reservacion.selectors.ts ***!
@@ -25279,7 +25191,7 @@ module.exports = ".mat-option {\r\n    margin: 1rem 0;\r\n    overflow: visible;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"cuadro-formulario\">\r\n    <div class=\"row clearfix\">\r\n        <p>\r\n            DATOS DEL PACIENTE\r\n        </p>\r\n        <mat-form-field style=\"width: 100%;\">\r\n            <mat-label>Fecha de Nacimiento</mat-label>\r\n            <input matInput [matDatepicker]=\"picker\" [max]=\"maxDate\" (dateInput)=\"cambioFechaNacimiento($event)\"\r\n                [formControl]=\"fechaNacimiento\">\r\n            <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\r\n            <mat-datepicker touchUi #picker startView=\"multi-year\" [startAt]=\"startDate\"></mat-datepicker>\r\n            <mat-error *ngIf=\"fechaNacimiento.invalid\">Ingrese su Fecha de Nacimiento</mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <mat-form-field style=\"width: 100%;\">\r\n            <mat-label>Obra Social</mat-label>\r\n            <input type=\"text\" placeholder=\"Seleccione una\" matInput [formControl]=\"obrasSocial\" [matAutocomplete]=\"autoOS\"\r\n                #autoObraComplete=\"matAutocompleteTrigger\"\r\n                (keyup.enter)=\"onEnterE($event, 'planField')\" (keyup)=\"onEnterE2($event, 'planField')\">\r\n            <mat-autocomplete #autoOS=\"matAutocomplete\" [displayWith]=\"displayFn\" \r\n                (selectedValueChange)=\"cambioObraSocial($event); onEnterE($event, 'planField')\">\r\n                <mat-option *ngFor=\"let os of filteredObrasSociales$ | async\" [value]=\"os\">\r\n                    {{os.nombre}}\r\n                </mat-option>\r\n            </mat-autocomplete>\r\n            <button mat-icon-button matSuffix (click)=\"clearOS()\" \r\n                *ngIf=\"obrasSocial.value != undefined && obrasSocial?.value !== ''\"><mat-icon>clear</mat-icon></button>\r\n            <mat-error *ngIf=\"obrasSocial.invalid\">Seleccione su Obra Social</mat-error>\r\n        </mat-form-field>\r\n     </div>   \r\n     <div class=\"row clearfix\">\r\n        <mat-form-field style=\"width: 100%;\">     \r\n            <mat-label>Plan</mat-label>\r\n            <mat-select (selectionChange)=\"cambioPlan($event); onEnterE($event, 'especialidadField')\" \r\n                name=\"planField\" [formControl]=\"plan\" panelClass=\"my-select-panel-class\">\r\n                <mat-option *ngFor=\"let p of planes$ | async\" [value]=\"p\"\r\n                    style=\"margin: 1rem 0 !important; overflow: visible !important;\r\n                        line-height: initial !important; word-wrap: break-word !important; white-space: pre-wrap !important; height: unset !important;\">\r\n                    {{p.nombre}}\r\n                </mat-option>\r\n            </mat-select>\r\n            <mat-error *ngIf=\"plan.invalid\">Seleccione su Plan</mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\" >\r\n        <mat-form-field style=\"width: 100%;\">\r\n            <mat-label name=\"labelEspecialidad\">Especialidad</mat-label>\r\n            <input matInput name=\"especialidadField\" type=\"text\"  placeholder=\"Todas\" \r\n                [formControl]=\"especialidad\"    #autoEspecComplete=\"matAutocompleteTrigger\"\r\n                [matAutocomplete]=\"autoEsp\" (keyup.enter)=\"onEnterE($event, 'profesionalField')\" \r\n                (keyup)=\"onEnterE2($event, 'profesionalField')\" >\r\n            <mat-autocomplete #autoEsp=\"matAutocomplete\" [displayWith]=\"displayFn\" >\r\n                <mat-option *ngFor=\"let e of filteredEspecialidades$ | async\" [value]=\"e\"\r\n                    (selectionChange)=\"cambioEspecialidad($event); onEnterE($event, 'profesionalField')\" \r\n                    (click)=\"onEnterE($event, 'profesionalField')\">\r\n                    {{e.nombre}}\r\n                </mat-option>\r\n            </mat-autocomplete>\r\n            <button mat-icon-button matSuffix (click)=\"clear()\" \r\n                *ngIf=\"especialidad.value != undefined && especialidad?.value !== ''\"><mat-icon>clear</mat-icon></button>\r\n            <mat-error *ngIf=\"especialidad.invalid\">Seleccione una Especialidad</mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\" >\r\n        <mat-form-field style=\"width: 100%;\">\r\n            <mat-label name=\"labelProfesional\">Profesional</mat-label>\r\n            <input matInput name=\"profesionalField\" type=\"text\"  placeholder=\"Todos\" \r\n                [formControl]=\"profesional\"    #autoProfComplete=\"matAutocompleteTrigger\"\r\n                [matAutocomplete]=\"autoProf\" (keyup.enter)=\"onEnterE($event, 'centroField')\" \r\n                (keyup)=\"onEnterE2($event, 'centroField')\" >\r\n            <mat-autocomplete #autoProf=\"matAutocomplete\" [displayWith]=\"displayFn2\" >\r\n                <mat-option [value]=\"undefined\" (click)=\"onEnterE($event, 'centroField')\">Todos</mat-option>\r\n                <mat-option *ngFor=\"let e of filteredProfesionales$ | async\" [value]=\"e\"\r\n                    (selectionChange)=\"cambioProfesional($event); onEnterE($event, 'centroField')\" \r\n                    (click)=\"onEnterE($event, 'centroField')\">\r\n                    {{e.nombreApellido}}\r\n                </mat-option>\r\n            </mat-autocomplete>\r\n            <button mat-icon-button matSuffix (click)=\"clearP()\" \r\n                *ngIf=\"profesional.value != undefined && profesional?.value !== ''\"><mat-icon>clear</mat-icon></button>\r\n            <mat-error *ngIf=\"profesional.invalid\">Seleccione un Profesional</mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <mat-form-field style=\"width: 100%;\">\r\n            <mat-label>Centro de Atención</mat-label>\r\n            <mat-select name=\"centroField\" (selectionChange)=\"cambioCentroDeAtencion($event)\" [formControl]=\"centroAtencion\">\r\n                <mat-option *ngFor=\"let ca of centrosDeAtencion$ | async\" [value]=\"ca\">\r\n                    {{ca.nombre}}\r\n                </mat-option>\r\n            </mat-select>\r\n            <mat-error *ngIf=\"centroAtencion.invalid\">Seleccione el Centro de Atención</mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <button style=\"width: 100%;\" class=\"button\" mat-flat-button [disabled]=\"!isValid()\" (click)=\"onSubmit()\">\r\n            BUSCAR\r\n        </button>\r\n    </div>\r\n</div>\r\n<span  style=\"border: 2px solid transparent;\" #footer autofocus></span>"
+module.exports = "<div class=\"cuadro-formulario\">\r\n    <div class=\"row clearfix\">\r\n        <p>\r\n            DATOS DEL PACIENTE\r\n        </p>\r\n        <mat-form-field style=\"width: 100%;\">\r\n            <mat-label>Fecha de Nacimiento</mat-label>\r\n            <input matInput [matDatepicker]=\"picker\" [max]=\"maxDate\" (dateInput)=\"cambioFechaNacimiento($event)\"\r\n                [formControl]=\"fechaNacimiento\">\r\n            <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\r\n            <mat-datepicker touchUi #picker startView=\"multi-year\" [startAt]=\"startDate\"></mat-datepicker>\r\n            <mat-error *ngIf=\"fechaNacimiento.invalid\">Ingrese su Fecha de Nacimiento</mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <mat-form-field style=\"width: 100%;\">\r\n            <mat-label>Obra Social</mat-label>\r\n            <input type=\"text\" placeholder=\"Seleccione una\" matInput [formControl]=\"obrasSocial\" [matAutocomplete]=\"autoOS\"\r\n                #autoObraComplete=\"matAutocompleteTrigger\"\r\n                (keyup.enter)=\"onEnterE($event, 'planField')\" (keyup)=\"onEnterE2($event, 'planField')\">\r\n            <mat-autocomplete #autoOS=\"matAutocomplete\" [displayWith]=\"displayFn\" \r\n                (selectedValueChange)=\"cambioObraSocial($event); onEnterE($event, 'planField')\">\r\n                <mat-option *ngFor=\"let os of filteredObrasSociales$ | async\" [value]=\"os\">\r\n                    {{os.nombre}}\r\n                </mat-option>\r\n            </mat-autocomplete>\r\n            <button mat-icon-button matSuffix (click)=\"clearOS()\" \r\n                *ngIf=\"obrasSocial.value != undefined && obrasSocial?.value !== ''\"><mat-icon>clear</mat-icon></button>\r\n            <mat-error *ngIf=\"obrasSocial.invalid\">Seleccione su Obra Social</mat-error>\r\n        </mat-form-field>\r\n     </div>   \r\n     <div class=\"row clearfix\">\r\n        <mat-form-field style=\"width: 100%;\">     \r\n            <mat-label>Plan</mat-label>\r\n            <mat-select (selectionChange)=\"cambioPlan($event); onEnterE($event, 'especialidadField')\" \r\n                name=\"planField\" [formControl]=\"plan\" panelClass=\"my-select-panel-class\">\r\n                <mat-option *ngFor=\"let p of planes$ | async\" [value]=\"p\"\r\n                    style=\"margin: 1rem 0 !important; overflow: visible !important;\r\n                        line-height: initial !important; word-wrap: break-word !important; white-space: pre-wrap !important; height: unset !important;\">\r\n                    {{p.nombre}}\r\n                </mat-option>\r\n            </mat-select>\r\n            <mat-error *ngIf=\"plan.invalid\">Seleccione su Plan</mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n<!--\r\n    <div class=\"row clearfix\">\r\n        <mat-label></mat-label>\r\n        <mat-radio-group> \r\n            <mat-radio-button value=\"C\">\r\n                Consulta en consultorio\r\n            </mat-radio-button>\r\n            <mat-radio-button value=\"n\">\r\n                Estudios médicos\r\n            </mat-radio-button>                \r\n        </mat-radio-group>\r\n      </div>\r\n-->\r\n    <div class=\"row clearfix\" >\r\n        <mat-form-field style=\"width: 100%;\">\r\n            <mat-label name=\"labelEspecialidad\">Especialidad</mat-label>\r\n            <input matInput name=\"especialidadField\" type=\"text\"  placeholder=\"Todas\" \r\n                [formControl]=\"especialidad\"    #autoEspecComplete=\"matAutocompleteTrigger\"\r\n                [matAutocomplete]=\"autoEsp\" (keyup.enter)=\"onEnterE($event, 'profesionalField')\" \r\n                (keyup)=\"onEnterE2($event, 'profesionalField')\" >\r\n            <mat-autocomplete #autoEsp=\"matAutocomplete\" [displayWith]=\"displayFn\" >\r\n                <mat-option *ngFor=\"let e of filteredEspecialidades$ | async\" [value]=\"e\"\r\n                    (selectionChange)=\"cambioEspecialidad($event); onEnterE($event, 'profesionalField')\" \r\n                    (click)=\"onEnterE($event, 'profesionalField')\">\r\n                    {{e.nombre}}\r\n                </mat-option>\r\n            </mat-autocomplete>\r\n            <button mat-icon-button matSuffix (click)=\"clear()\" \r\n                *ngIf=\"especialidad.value != undefined && especialidad?.value !== ''\"><mat-icon>clear</mat-icon></button>\r\n            <mat-error *ngIf=\"especialidad.invalid\">Seleccione una Especialidad</mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\" >\r\n        <mat-form-field style=\"width: 100%;\">\r\n            <mat-label name=\"labelProfesional\">Profesional</mat-label>\r\n            <input matInput name=\"profesionalField\" type=\"text\"  placeholder=\"Todos\" \r\n                [formControl]=\"profesional\"    #autoProfComplete=\"matAutocompleteTrigger\"\r\n                [matAutocomplete]=\"autoProf\" (keyup.enter)=\"onEnterE($event, 'centroField')\" \r\n                (keyup)=\"onEnterE2($event, 'centroField')\" >\r\n            <mat-autocomplete #autoProf=\"matAutocomplete\" [displayWith]=\"displayFn2\" >\r\n                <mat-option [value]=\"undefined\" (click)=\"onEnterE($event, 'centroField')\">Todos</mat-option>\r\n                <mat-option *ngFor=\"let e of filteredProfesionales$ | async\" [value]=\"e\"\r\n                    (selectionChange)=\"cambioProfesional($event); onEnterE($event, 'centroField')\" \r\n                    (click)=\"onEnterE($event, 'centroField')\">\r\n                    {{e.nombreApellido}}\r\n                </mat-option>\r\n            </mat-autocomplete>\r\n            <button mat-icon-button matSuffix (click)=\"clearP()\" \r\n                *ngIf=\"profesional.value != undefined && profesional?.value !== ''\"><mat-icon>clear</mat-icon></button>\r\n            <mat-error *ngIf=\"profesional.invalid\">Seleccione un Profesional</mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <mat-form-field style=\"width: 100%;\">\r\n            <mat-label>Centro de Atención</mat-label>\r\n            <mat-select name=\"centroField\" (selectionChange)=\"cambioCentroDeAtencion($event)\" [formControl]=\"centroAtencion\">\r\n                <mat-option *ngFor=\"let ca of centrosDeAtencion$ | async\" [value]=\"ca\">\r\n                    {{ca.nombre}}\r\n                </mat-option>\r\n            </mat-select>\r\n            <mat-error *ngIf=\"centroAtencion.invalid\">Seleccione el Centro de Atención</mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <button style=\"width: 100%;\" class=\"button\" mat-flat-button [disabled]=\"!isValid()\" (click)=\"onSubmit()\">\r\n            BUSCAR\r\n        </button>\r\n    </div>\r\n</div>\r\n<span  style=\"border: 2px solid transparent;\" #footer autofocus></span>"
 
 /***/ }),
 
@@ -25341,16 +25253,21 @@ var FormularioComponent = /** @class */ (function () {
         this.maxDate = new Date();
         this.startDate = new Date(1980, 0, 1);
     }
+    FormularioComponent.prototype.ngOnDestroy = function () {
+        this.subscription.unsubscribe();
+    };
     FormularioComponent.prototype.ngOnInit = function () {
         var _this = this;
         var login = new _shared_models_datos_models__WEBPACK_IMPORTED_MODULE_12__["Login"]();
         login.username = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].username;
         login.password = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].password;
-        this.store.select(_core_store_selectors_contexto_selectors__WEBPACK_IMPORTED_MODULE_9__["getToken"]).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["filter"])(function (token) { return token === undefined; })).subscribe(function () {
+        this.subscription = this.store.select(_core_store_selectors_contexto_selectors__WEBPACK_IMPORTED_MODULE_9__["getToken"]).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["filter"])(function (token) { return token === undefined; })).subscribe(function () {
             _this.store.dispatch(_core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_7__["getToken"]({ login: login }));
             _this.store.select(_core_store_selectors_contexto_selectors__WEBPACK_IMPORTED_MODULE_9__["getToken"]).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["filter"])(function (token) { return (token !== undefined); })).subscribe(function () {
-                _this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_8__["getObraSociales"]());
-                _this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_8__["getCentrosDeAtencion"]());
+                _this.subscription.unsubscribe();
+                //console.log("status 0 ok");
+                //this.store.dispatch(FormActions.getObraSociales());
+                //this.store.dispatch(FormActions.getCentrosDeAtencion());
             });
         });
         this.store.select(_core_store_selectors_form_selectors__WEBPACK_IMPORTED_MODULE_11__["selectDatosFormulario"]).subscribe(function (datosFormulario) {
@@ -25363,31 +25280,12 @@ var FormularioComponent = /** @class */ (function () {
                 _this.centroAtencion.setValue(datosFormulario.centroAtencion);
             }
         }).unsubscribe();
-        this.fechaNacimiento.valueChanges.subscribe(function (value) {
-            setTimeout(function () {
-                _this.store.select(_core_store_selectors_form_selectors__WEBPACK_IMPORTED_MODULE_11__["selectBusqueda"])
-                    .subscribe(function (filterFecha) {
-                    _this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_8__["postEspecialidades"]({ filterFecha: filterFecha }));
-                    _this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_8__["postProfesionales"]({ filterFecha: filterFecha }));
-                }).unsubscribe();
-            });
-        });
         this.filteredObrasSociales$ = this.obrasSocial.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["startWith"])(''), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (value) { return typeof value === 'string' ? value : value.nombre; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["switchMap"])(function (x) { return _this.filterOs(x); }));
         this.filteredEspecialidades$ = this.especialidad.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["startWith"])(''), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (value) { return typeof value === 'string' ? value : value.nombre; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["switchMap"])(function (x) { return _this.filterEsp(x); }));
         this.filteredProfesionales$ = this.profesional.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["startWith"])(''), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["filter"])(function (value) { return value !== undefined; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (value) { return typeof value === 'string' ? value : value.nombreApellido; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["switchMap"])(function (x) { return _this.filterProf(x); }));
         this.obrasSocial.valueChanges.subscribe(function (value) { return _this.cambioObraSocial(value); });
         this.especialidad.valueChanges.subscribe(function (value) { return _this.cambioEspecialidad(value); });
         this.profesional.valueChanges.subscribe(function (value) { return _this.cambioProfesional(value); });
-        this.pacienteSelected$.subscribe(function (pac) {
-            if (pac != undefined) {
-                _this.fechaNacimiento.setValue(pac.fechaNacimiento);
-                _this.store.select(_core_store_selectors_form_selectors__WEBPACK_IMPORTED_MODULE_11__["selectBusqueda"])
-                    .subscribe(function (filterFecha) {
-                    _this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_8__["postEspecialidades"]({ filterFecha: filterFecha }));
-                    _this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_8__["postProfesionales"]({ filterFecha: filterFecha }));
-                }).unsubscribe();
-            }
-        });
     };
     FormularioComponent.prototype.filterProf = function (value) {
         var filterValue = value.toLowerCase();
@@ -25973,7 +25871,8 @@ var ReservaEmailComponent = /** @class */ (function () {
         var _this = this;
         this.dialog.open(_reserva_email_dialog_reserva_email_dialog_component__WEBPACK_IMPORTED_MODULE_12__["ReservaEmailDialogComponent"], { data: { datosReserva: datosReserva } })
             .afterClosed().subscribe(function () {
-            _this.store.dispatch(_core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_5__["cleanStore"]());
+            //this.store.dispatch(ContextoActions.cleanStore());
+            _this.store.dispatch(_core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_5__["cleanStoreParcial"]());
             _this.store.dispatch(_core_store_actions_calendar_actions__WEBPACK_IMPORTED_MODULE_6__["cleanStore"]());
             _this.store.dispatch(_core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_7__["cleanStore"]());
             _this.store.dispatch(_core_store_actions_reservacion_actions__WEBPACK_IMPORTED_MODULE_8__["cleanStore"]());
@@ -26102,6 +26001,9 @@ var ReservaComponent = /** @class */ (function () {
         this.planSelected$.subscribe(function (plan) { return _this.planSelected = plan; });
         this.pacienteSelected$.subscribe(function (pac) {
             if (pac != undefined) {
+                _this.store.dispatch(_core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_8__["setCodigoPaciente"]({ codigoPaciente: pac.codigo }));
+                _this.store.dispatch(_core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_8__["setCodigoPaciente"]({ codigoPaciente: pac.codigo }));
+                _this.store.dispatch(_core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_8__["setCodigoPaciente"]({ codigoPaciente: pac.codigo }));
                 _this.dni.setValue(pac.dni);
                 _this.sexo.setValue(pac.sexo);
                 _this.apellido.setValue(pac.nombreApellido);
@@ -26111,6 +26013,9 @@ var ReservaComponent = /** @class */ (function () {
                     _this.telefonoNumero.setValue(pac.telefono.numero);
                 }
                 _this.mail.setValue(pac.email);
+            }
+            else {
+                _this.store.dispatch(_core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_8__["setCodigoPaciente"]({ codigoPaciente: undefined }));
             }
         });
         this.errorBackend$.subscribe(function () {
@@ -26152,7 +26057,13 @@ var ReservaComponent = /** @class */ (function () {
             this.store.select(_core_store_selectors_reserva_selectors__WEBPACK_IMPORTED_MODULE_13__["reservarTurno"])
                 .subscribe(function (filter) {
                 if (filter) {
-                    _this.store.dispatch(_core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_8__["reservaTurno"]({ filter: filter }));
+                    _this.store.select(_core_store_selectors_contexto_selectors__WEBPACK_IMPORTED_MODULE_10__["getCredencial"]).subscribe(function (c) {
+                        if (c != undefined) {
+                            filter.usuario = c.idUsuario;
+                            filter.password = c.passUsurio;
+                        }
+                        _this.store.dispatch(_core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_8__["reservaTurno"]({ filter: filter }));
+                    });
                 }
             })
                 .unsubscribe();
@@ -26763,7 +26674,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"content\"  *ngIf=\"(esAnonimo$ | async)\" >\r\n    <div class=\"my-col-40\">\r\n        <button style=\"width: 45%;margin-right: 10px;margin-left: 155px;\" class=\"button\" mat-flat-button (click)=\"toLogin()\">\r\n        Identificarse\r\n        </button>\r\n    </div>\r\n    <div class=\"my-col-60\"><span> </span></div>\r\n</div>\r\n<div class=\"content\"  *ngIf=\"!(esAnonimo$ | async)\" >\r\n    <div class=\"my-col-40\">\r\n        <button style=\"width: 40%;margin-right: 10px;margin-left: 8px;\" class=\"button\" mat-flat-button (click)=\"toSeleccionPaciente()\">\r\n            Elegir paciente\r\n        </button>        \r\n        <button style=\"width: 40%;margin-right: 10px;margin-left: 8px;\" class=\"button\" mat-flat-button (click)=\"logout()\">\r\n            Cerrar Sesión\r\n        </button>\r\n    </div>\r\n    <div class=\"my-col-60\"><span> </span></div>\r\n</div>\r\n\r\n<div class=\"content\">\r\n    <div class=\"my-col-40\">\r\n        <app-formulario></app-formulario>\r\n    </div>\r\n    <div class=\"my-col-60\">\r\n        <app-grilla-turnos></app-grilla-turnos>\r\n    </div>\r\n</div>\r\n<div class=\"content\">\r\n    <div class=\"my-col-60\">\r\n        <app-scheduler></app-scheduler>\r\n    </div>\r\n    <div class=\"my-col-40\">\r\n        <app-seleccion-horario></app-seleccion-horario>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"content\"  *ngIf=\"(esAnonimo$ | async)\" >\r\n    <div class=\"my-col-40\">\r\n        <button style=\"width: 45%;margin-right: 10px;margin-left: 155px;\" class=\"button\" mat-flat-button (click)=\"toLogin()\">\r\n        Identificarse\r\n        </button>\r\n    </div>\r\n    <div class=\"my-col-60\"><span> </span></div>\r\n</div>\r\n<div class=\"content\"  *ngIf=\"!(esAnonimo$ | async)\" >\r\n    <div class=\"my-col-40\">\r\n        <button style=\"width: 40%;margin-right: 10px;margin-left: 8px;\" class=\"button\" mat-flat-button (click)=\"toSeleccionPaciente()\">\r\n            Elegir paciente\r\n        </button>        \r\n        <button style=\"width: 40%;margin-right: 10px;margin-left: 8px;\" class=\"button\" mat-flat-button (click)=\"logoutPaciente()\">\r\n            Cerrar Sesión\r\n        </button>\r\n    </div>\r\n    <div class=\"my-col-60\"><span> </span></div>\r\n</div>\r\n\r\n<div class=\"content\">\r\n    <div class=\"my-col-40\">\r\n        <app-formulario></app-formulario>\r\n    </div>\r\n    <div class=\"my-col-60\">\r\n        <app-grilla-turnos></app-grilla-turnos>\r\n    </div>\r\n</div>\r\n<div class=\"content\">\r\n    <div class=\"my-col-60\">\r\n        <app-scheduler></app-scheduler>\r\n    </div>\r\n    <div class=\"my-col-40\">\r\n        <app-seleccion-horario></app-seleccion-horario>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -26781,11 +26692,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
-/* harmony import */ var _core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../core/store/actions/contexto.actions */ "./src/app/core/store/actions/contexto.actions.ts");
-/* harmony import */ var _core_store_actions_calendar_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../core/store/actions/calendar.actions */ "./src/app/core/store/actions/calendar.actions.ts");
-/* harmony import */ var _core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../core/store/actions/reserva.actions */ "./src/app/core/store/actions/reserva.actions.ts");
-/* harmony import */ var _core_store_actions_reservacion_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../core/store/actions/reservacion.actions */ "./src/app/core/store/actions/reservacion.actions.ts");
-/* harmony import */ var _core_store_selectors_contexto_selectors__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../core/store/selectors/contexto.selectors */ "./src/app/core/store/selectors/contexto.selectors.ts");
+/* harmony import */ var _core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../core/store/actions/form.actions */ "./src/app/core/store/actions/form.actions.ts");
+/* harmony import */ var _core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../core/store/actions/contexto.actions */ "./src/app/core/store/actions/contexto.actions.ts");
+/* harmony import */ var _core_store_actions_calendar_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../core/store/actions/calendar.actions */ "./src/app/core/store/actions/calendar.actions.ts");
+/* harmony import */ var _core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../core/store/actions/reserva.actions */ "./src/app/core/store/actions/reserva.actions.ts");
+/* harmony import */ var _core_store_actions_reservacion_actions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../core/store/actions/reservacion.actions */ "./src/app/core/store/actions/reservacion.actions.ts");
+/* harmony import */ var _core_store_selectors_contexto_selectors__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../core/store/selectors/contexto.selectors */ "./src/app/core/store/selectors/contexto.selectors.ts");
 
 
 
@@ -26802,22 +26714,25 @@ var DashboardComponent = /** @class */ (function () {
         this.router = router;
     }
     DashboardComponent.prototype.ngOnInit = function () {
-        this.esAnonimo$ = this.store.select(_core_store_selectors_contexto_selectors__WEBPACK_IMPORTED_MODULE_8__["getEsAnonimo"]);
+        this.esAnonimo$ = this.store.select(_core_store_selectors_contexto_selectors__WEBPACK_IMPORTED_MODULE_9__["getEsAnonimo"]);
     };
     DashboardComponent.prototype.toLogin = function () {
-        this.logout();
+        this.logoutPaciente();
         this.router.navigate(['login']);
     };
     DashboardComponent.prototype.toSeleccionPaciente = function () {
+        this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_4__["cleanStoreParcial"]());
+        this.store.dispatch(_core_store_actions_calendar_actions__WEBPACK_IMPORTED_MODULE_6__["cleanStore"]());
+        this.store.dispatch(_core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_7__["cleanStore"]());
+        this.store.dispatch(_core_store_actions_reservacion_actions__WEBPACK_IMPORTED_MODULE_8__["cleanStore"]());
         this.router.navigate(['login']);
     };
-    DashboardComponent.prototype.logout = function () {
-        this.store.dispatch(_core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_4__["setToken"]({ token: undefined }));
-        this.store.dispatch(_core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_4__["cleanStore"]());
-        this.store.dispatch(_core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_4__["cleanStore"]());
-        this.store.dispatch(_core_store_actions_calendar_actions__WEBPACK_IMPORTED_MODULE_5__["cleanStore"]());
-        this.store.dispatch(_core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_6__["cleanStore"]());
-        this.store.dispatch(_core_store_actions_reservacion_actions__WEBPACK_IMPORTED_MODULE_7__["cleanStore"]());
+    DashboardComponent.prototype.logoutPaciente = function () {
+        this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_4__["cleanStore"]());
+        this.store.dispatch(_core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_5__["cleanStoreParcial"]());
+        this.store.dispatch(_core_store_actions_calendar_actions__WEBPACK_IMPORTED_MODULE_6__["cleanStore"]());
+        this.store.dispatch(_core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_7__["cleanStore"]());
+        this.store.dispatch(_core_store_actions_reservacion_actions__WEBPACK_IMPORTED_MODULE_8__["cleanStore"]());
     };
     DashboardComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
