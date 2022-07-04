@@ -2555,8 +2555,11 @@ var selectObraSocialPaciente = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["
         return undefined;
     }
 });
-var selectPlanes = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectObraSocialSelected, function (obraSocial) {
-    if (obraSocial) {
+var selectPlanes = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])([selectObraSocialSelected, selectObraSocialPaciente], function (obraSocial, osPac) {
+    if (osPac) {
+        return osPac.plan;
+    }
+    else if (obraSocial) {
         return obraSocial.plan;
     }
 });
