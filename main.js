@@ -1837,7 +1837,7 @@ var FormEffects = /** @class */ (function () {
             })); }));
         });
         this.postProfesionales$ = Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["createEffect"])(function () {
-            return _this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_actions_form_actions__WEBPACK_IMPORTED_MODULE_7__["POST_PROFESIONALES"]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["switchMap"])(function (req) { return _this.formService.postProfesionales(req.fechaNacimiento).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (profesionales) {
+            return _this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_actions_form_actions__WEBPACK_IMPORTED_MODULE_7__["SET_FECHA_NACIMIENTO"]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["switchMap"])(function (req) { return _this.formService.postProfesionales(req.fechaNacimiento).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (profesionales) {
                 return ({ type: _actions_form_actions__WEBPACK_IMPORTED_MODULE_7__["SET_PROFESIONALES"], profesionales: profesionales });
             }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (error) {
                 return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])({ type: _actions_error_actions__WEBPACK_IMPORTED_MODULE_6__["SHOW_ERROR"], error: error.message });
@@ -2570,7 +2570,7 @@ var selectPlanes = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelect
     }
 });
 var selectPlanPaciente = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])([selectCodigoPlanPaciente, selectObraSocialSelected], function (codigoPlan, os) {
-    if (os != undefined) {
+    if (os != undefined && os.plan != undefined) {
         var list = os.plan.filter(function (x) { return x.codigo === codigoPlan; });
         if (list && list.length == 1) {
             return list[0];
