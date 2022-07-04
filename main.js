@@ -911,9 +911,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var _mocks_mocks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../mocks/mocks */ "./src/app/core/mocks/mocks.ts");
-/* harmony import */ var _utils_service_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/service.utils */ "./src/app/core/utils/service.utils.ts");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./../../../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _shared_models_request_models__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../shared/models/request.models */ "./src/app/shared/models/request.models.ts");
+/* harmony import */ var _mocks_mocks__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../mocks/mocks */ "./src/app/core/mocks/mocks.ts");
+/* harmony import */ var _utils_service_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/service.utils */ "./src/app/core/utils/service.utils.ts");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./../../../environments/environment */ "./src/environments/environment.ts");
+
 
 
 
@@ -924,8 +926,8 @@ __webpack_require__.r(__webpack_exports__);
 var ServiceService = /** @class */ (function () {
     function ServiceService(http) {
         this.http = http;
-        this.useMockups = _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].mockups;
-        this.endpoint = _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].endpoint;
+        this.useMockups = _environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].mockups;
+        this.endpoint = _environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].endpoint;
         this.endpointC = this.endpoint + "/Consext";
         this.endpointG = this.endpoint + "/Gestion";
         this.endpointA = this.endpoint + "/Auth";
@@ -950,13 +952,13 @@ var ServiceService = /** @class */ (function () {
     ServiceService.prototype.login = function (usuario) {
         if (this.useMockups) {
             console.log("call P login: " + usuario);
-            return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_4__["tokenMock"]);
+            return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_5__["tokenMock"]);
         }
         else {
             return this.http.post(this.endpoint_login, usuario)
                 .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
                 if (res.token == undefined || res.token.length == 0) {
-                    Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["throwErrorToUser"])("Por favor intente m\u00E1s tarde.");
+                    Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["throwErrorToUser"])("Por favor intente m\u00E1s tarde.");
                 }
                 return res.token;
             }));
@@ -965,7 +967,7 @@ var ServiceService = /** @class */ (function () {
     ServiceService.prototype.getObraSociales = function () {
         if (this.useMockups) {
             console.log("call G os: ");
-            return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_4__["obrasSocialesMocks"]);
+            return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_5__["obrasSocialesMocks"]);
         }
         else {
             return this.http.get(this.endpoint_obraSocial)
@@ -976,7 +978,7 @@ var ServiceService = /** @class */ (function () {
                         elementp.nombre = elementp.nombre.trim();
                     });
                 });
-                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["throwErrorIfBadCode"])(res);
+                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["throwErrorIfBadCode"])(res);
                 return res.obraSocial.sort(function (a, b) {
                     if (a.nombre > b.nombre)
                         return 1;
@@ -987,15 +989,17 @@ var ServiceService = /** @class */ (function () {
             }));
         }
     };
-    ServiceService.prototype.postEspecialidades = function (filter) {
+    ServiceService.prototype.postEspecialidades = function (fechaNacimiento) {
         if (this.useMockups) {
-            console.log("call P especialidades: " + filter);
-            return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_4__["especialidadesMocks"]);
+            console.log("call P especialidades: " + fechaNacimiento);
+            return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_5__["especialidadesMocks"]);
         }
         else {
-            return this.http.post(this.endpoint_postespecialidad, filter)
+            var request = new _shared_models_request_models__WEBPACK_IMPORTED_MODULE_4__["BusquedaRequest"]();
+            request.fechaNacimiento = fechaNacimiento;
+            return this.http.post(this.endpoint_postespecialidad, request)
                 .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
-                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["throwErrorIfBadCode"])(res);
+                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["throwErrorIfBadCode"])(res);
                 res.especialidad.forEach(function (element) {
                     element.nombre = element.nombre.trim();
                 });
@@ -1012,12 +1016,12 @@ var ServiceService = /** @class */ (function () {
     ServiceService.prototype.getEspecialidades = function () {
         if (this.useMockups) {
             console.log("call G especialid: ");
-            return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_4__["especialidadesMocks"]);
+            return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_5__["especialidadesMocks"]);
         }
         else {
             return this.http.get(this.endpoint_especialidad)
                 .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
-                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["throwErrorIfBadCode"])(res);
+                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["throwErrorIfBadCode"])(res);
                 res.especialidad.forEach(function (element) {
                     element.nombre = element.nombre.trim();
                 });
@@ -1031,15 +1035,17 @@ var ServiceService = /** @class */ (function () {
             }));
         }
     };
-    ServiceService.prototype.postProfesionales = function (filter) {
+    ServiceService.prototype.postProfesionales = function (fechaNacimiento) {
         if (this.useMockups) {
-            console.log("call P profesional: " + filter);
-            return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_4__["profesionalesMocks"]);
+            console.log("call P profesional: " + fechaNacimiento);
+            return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_5__["profesionalesMocks"]);
         }
         else {
-            return this.http.post(this.endpoint_postprofesional, filter)
+            var request = new _shared_models_request_models__WEBPACK_IMPORTED_MODULE_4__["BusquedaRequest"]();
+            request.fechaNacimiento = fechaNacimiento;
+            return this.http.post(this.endpoint_postprofesional, request)
                 .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
-                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["throwErrorIfBadCode"])(res);
+                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["throwErrorIfBadCode"])(res);
                 res.profesionales.forEach(function (element) {
                     element.nombreApellido = element.nombreApellido.trim();
                 });
@@ -1056,12 +1062,12 @@ var ServiceService = /** @class */ (function () {
     ServiceService.prototype.getProfesionales = function () {
         if (this.useMockups) {
             console.log("call G profesional: ");
-            return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_4__["profesionalesMocks"]);
+            return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_5__["profesionalesMocks"]);
         }
         else {
             return this.http.get(this.endpoint_profesional)
                 .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
-                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["throwErrorIfBadCode"])(res);
+                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["throwErrorIfBadCode"])(res);
                 res.profesionales.forEach(function (element) {
                     element.nombreApellido = element.nombreApellido.trim();
                 });
@@ -1078,12 +1084,12 @@ var ServiceService = /** @class */ (function () {
     ServiceService.prototype.getCentrosDeAtencion = function () {
         if (this.useMockups) {
             console.log("call G centro at: ");
-            return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_4__["centroAtencionesMocks"]);
+            return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_5__["centroAtencionesMocks"]);
         }
         else {
             return this.http.get(this.endpoint_centroAtencion)
                 .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
-                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["throwErrorIfBadCode"])(res);
+                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["throwErrorIfBadCode"])(res);
                 return res.centroAtencion.sort(function (a, b) {
                     if (a.nombre > b.nombre)
                         return 1;
@@ -1097,14 +1103,14 @@ var ServiceService = /** @class */ (function () {
     ServiceService.prototype.busquedaProfesionales = function (filter) {
         if (this.useMockups) {
             console.log("call P disp profesional: " + filter);
-            return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_4__["profesionalesDisponibilidadMocks"]);
+            return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_5__["profesionalesDisponibilidadMocks"]);
         }
         else {
             return this.http.post(this.endpoint_busquedaProfesionales, filter)
                 .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
-                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["throwErrorIfBadCode"])(res);
+                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["throwErrorIfBadCode"])(res);
                 if (res.disponibilidad == undefined || res.disponibilidad.length == 0) {
-                    Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["throwErrorToUser"])("No se encontraron coincidencias para los criterios ingresados.");
+                    Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["throwErrorToUser"])("No se encontraron coincidencias para los criterios ingresados.");
                 }
                 else {
                     res.disponibilidad.forEach(function (element) {
@@ -1155,15 +1161,15 @@ var ServiceService = /** @class */ (function () {
     ServiceService.prototype.busquedaDiasDisponibles = function (filter) {
         if (this.useMockups) {
             console.log("call P busq dias: " + filter);
-            return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_4__["diasDisponiblesMock"]);
+            return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_5__["diasDisponiblesMock"]);
         }
         else {
             return this.http.post(this.endpoint_busquedaDiasDisponibles, filter)
                 .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
-                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["throwErrorIfBadCode"])(res);
-                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["throwErrorIfBadCode"])(res);
+                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["throwErrorIfBadCode"])(res);
+                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["throwErrorIfBadCode"])(res);
                 if (res.dia == undefined || res.dia.length == 0) {
-                    Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["throwErrorToUser"])("No se encontraron coincidencias para los criterios ingresados.");
+                    Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["throwErrorToUser"])("No se encontraron coincidencias para los criterios ingresados.");
                 }
                 else {
                     return res.dia;
@@ -1174,14 +1180,14 @@ var ServiceService = /** @class */ (function () {
     ServiceService.prototype.busquedaHorarios = function (filter) {
         if (this.useMockups) {
             console.log("call P busq horarios: " + filter);
-            return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_4__["horariosMock2"]);
+            return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_5__["horariosMock2"]);
         }
         else {
             return this.http.post(this.endpoint_busquedaHorarios, filter)
                 .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
-                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["throwErrorIfBadCode"])(res);
+                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["throwErrorIfBadCode"])(res);
                 if (res.turno == undefined || res.turno.length == 0) {
-                    Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["throwErrorToUser"])("No hay turnos disponibles para el d\u00EDa seleccionado");
+                    Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["throwErrorToUser"])("No hay turnos disponibles para el d\u00EDa seleccionado");
                 }
                 else {
                     res.turno.forEach(function (element) {
@@ -1218,20 +1224,20 @@ var ServiceService = /** @class */ (function () {
     ServiceService.prototype.reservaTurno = function (filter) {
         if (this.useMockups) {
             console.log("call P reserva: " + filter);
-            return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_4__["reservaTurnoMock"]);
+            return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_5__["reservaTurnoMock"]);
         }
         else {
             if (filter.codigoPaciente != undefined) {
                 return this.http.post(this.endpoint_reservaTurnoP, filter)
                     .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
-                    Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["throwErrorIfBadCode"])(res);
+                    Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["throwErrorIfBadCode"])(res);
                     return res.reserva;
                 }));
             }
             else {
                 return this.http.post(this.endpoint_reservaTurno, filter)
                     .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
-                    Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["throwErrorIfBadCode"])(res);
+                    Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["throwErrorIfBadCode"])(res);
                     return res.reserva;
                 }));
             }
@@ -1240,12 +1246,12 @@ var ServiceService = /** @class */ (function () {
     ServiceService.prototype.retrieveTurno = function (reserva) {
         if (this.useMockups) {
             console.log("call P confirmar reserva: " + reserva);
-            return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_4__["turnoMock"]);
+            return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_5__["turnoMock"]);
         }
         else {
             return this.http.post(this.endpoint_confirmacionTurno, reserva)
                 .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
-                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["throwErrorIfBadCode"])(res);
+                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["throwErrorIfBadCode"])(res);
                 return res.turno;
             }));
         }
@@ -1254,7 +1260,7 @@ var ServiceService = /** @class */ (function () {
     ServiceService.prototype.getInfoUsuario = function (credencialUsuario) {
         if (this.useMockups) {
             console.log("call P infoUsuario: " + credencialUsuario);
-            return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_4__["infoUsuario"]);
+            return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_5__["infoUsuario"]);
         }
         else {
             var req = {
@@ -1264,7 +1270,7 @@ var ServiceService = /** @class */ (function () {
             };
             return this.http.post(this.endpoint_infoUsuario, req)
                 .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
-                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["throwErrorIfBadCode"])(res);
+                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["throwErrorIfBadCode"])(res);
                 return res.usuario;
             }));
         }
@@ -1272,12 +1278,12 @@ var ServiceService = /** @class */ (function () {
     ServiceService.prototype.getTurnosPaciente = function (req) {
         if (this.useMockups) {
             console.log("call P turnos futuros: " + req);
-            return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_4__["turnosFuturos"]);
+            return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_5__["turnosFuturos"]);
         }
         else {
             return this.http.post(this.endpoint_turnosFuturos, req)
                 .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
-                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["throwErrorIfBadCode"])(res);
+                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["throwErrorIfBadCode"])(res);
                 return res.turnosPaciente;
             }));
         }
@@ -1290,7 +1296,7 @@ var ServiceService = /** @class */ (function () {
         else {
             return this.http.post(this.endpoint_liberarTurno, req)
                 .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
-                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_5__["throwErrorIfBadCode"])(res);
+                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["throwErrorIfBadCode"])(res);
                 return;
             }));
         }
@@ -1831,7 +1837,7 @@ var FormEffects = /** @class */ (function () {
             })); }));
         });
         this.postProfesionales$ = Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["createEffect"])(function () {
-            return _this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_actions_form_actions__WEBPACK_IMPORTED_MODULE_7__["POST_PROFESIONALES"]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["switchMap"])(function (req) { return _this.formService.postProfesionales(req.filterFecha).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (profesionales) {
+            return _this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_actions_form_actions__WEBPACK_IMPORTED_MODULE_7__["POST_PROFESIONALES"]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["switchMap"])(function (req) { return _this.formService.postProfesionales(req.fechaNacimiento).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (profesionales) {
                 return ({ type: _actions_form_actions__WEBPACK_IMPORTED_MODULE_7__["SET_PROFESIONALES"], profesionales: profesionales });
             }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (error) {
                 return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])({ type: _actions_error_actions__WEBPACK_IMPORTED_MODULE_6__["SHOW_ERROR"], error: error.message });
@@ -1843,7 +1849,7 @@ var FormEffects = /** @class */ (function () {
             })); }));
         });
         this.postEspecialidades$ = Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["createEffect"])(function () {
-            return _this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_actions_form_actions__WEBPACK_IMPORTED_MODULE_7__["SET_FECHA_NACIMIENTO"]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["switchMap"])(function (req) { return _this.formService.postEspecialidades(req.filterFecha).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (especialidades) {
+            return _this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_actions_form_actions__WEBPACK_IMPORTED_MODULE_7__["SET_FECHA_NACIMIENTO"]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["switchMap"])(function (req) { return _this.formService.postEspecialidades(req.fechaNacimiento).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (especialidades) {
                 return ({ type: _actions_form_actions__WEBPACK_IMPORTED_MODULE_7__["SET_ESPECIALIDADES"], especialidades: especialidades });
             }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (error) {
                 return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])({ type: _actions_error_actions__WEBPACK_IMPORTED_MODULE_6__["SHOW_ERROR"], error: error.message });
