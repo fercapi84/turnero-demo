@@ -25309,7 +25309,7 @@ var FormularioComponent = /** @class */ (function () {
             if (!anonimo) {
                 _this.fechaNacimiento.disable();
                 _this.obrasSocial.disable();
-                _this.plan.disable();
+                //this.plan.disable();
             }
             else {
                 _this.fechaNacimiento.enable();
@@ -26014,6 +26014,7 @@ var ReservaComponent = /** @class */ (function () {
             _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')]);
         this.sexo$ = ['Femenino', 'Masculino'];
         this.loading = false;
+        this.anonimo = true;
         this.turnoSelected$ = store.select(_core_store_selectors_reserva_selectors__WEBPACK_IMPORTED_MODULE_13__["getTurnoSelected"]);
         this.obraSocialSelected$ = store.select(_core_store_selectors_form_selectors__WEBPACK_IMPORTED_MODULE_12__["selectObraSocialSelected"]);
         this.planSelected$ = store.select(_core_store_selectors_form_selectors__WEBPACK_IMPORTED_MODULE_12__["selectPlanSelected"]);
@@ -26050,6 +26051,7 @@ var ReservaComponent = /** @class */ (function () {
                 _this.telefonoArea.disable();
                 _this.telefonoNumero.disable();
                 _this.mail.disable();
+                _this.anonimo = false;
             }
             else {
                 _this.store.dispatch(_core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_8__["setCodigoPaciente"]({ codigoPaciente: undefined }));
@@ -26059,6 +26061,7 @@ var ReservaComponent = /** @class */ (function () {
                 _this.telefonoArea.enable();
                 _this.telefonoNumero.enable();
                 _this.mail.enable();
+                _this.anonimo = true;
             }
         });
         this.errorBackend$.subscribe(function () {
@@ -26116,6 +26119,9 @@ var ReservaComponent = /** @class */ (function () {
         }
     };
     ReservaComponent.prototype.isValid = function () {
+        if (!this.anonimo) {
+            return true;
+        }
         var result = false;
         if (this.dni.valid && this.sexo.valid && this.nombreapellido.valid &&
             this.telefonoArea.valid && this.telefonoNumero.valid && this.mail.valid) {
