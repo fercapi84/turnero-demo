@@ -25191,7 +25191,7 @@ module.exports = ".mat-option {\r\n    margin: 1rem 0;\r\n    overflow: visible;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"cuadro-formulario\">\r\n    <div class=\"row clearfix\">\r\n        <p>\r\n            DATOS DEL PACIENTE\r\n        </p>\r\n        <mat-form-field style=\"width: 100%;\">\r\n            <mat-label>Fecha de Nacimiento</mat-label>\r\n            <input matInput [matDatepicker]=\"picker\" [max]=\"maxDate\" (dateInput)=\"cambioFechaNacimiento($event)\"\r\n                [formControl]=\"fechaNacimiento\">\r\n            <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\r\n            <mat-datepicker touchUi #picker startView=\"multi-year\" [startAt]=\"startDate\"></mat-datepicker>\r\n            <mat-error *ngIf=\"fechaNacimiento.invalid\">Ingrese su Fecha de Nacimiento</mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <mat-form-field style=\"width: 100%;\">\r\n            <mat-label>Obra Social</mat-label>\r\n            <input type=\"text\" placeholder=\"Seleccione una\" matInput [formControl]=\"obrasSocial\" [matAutocomplete]=\"autoOS\"\r\n                #autoObraComplete=\"matAutocompleteTrigger\"\r\n                (keyup.enter)=\"onEnterE($event, 'planField')\" (keyup)=\"onEnterE2($event, 'planField')\">\r\n            <mat-autocomplete #autoOS=\"matAutocomplete\" [displayWith]=\"displayFn\" \r\n                (selectedValueChange)=\"cambioObraSocial($event); onEnterE($event, 'planField')\">\r\n                <mat-option *ngFor=\"let os of filteredObrasSociales$ | async\" [value]=\"os\">\r\n                    {{os.nombre}}\r\n                </mat-option>\r\n            </mat-autocomplete>\r\n            <button mat-icon-button matSuffix (click)=\"clearOS()\" \r\n                *ngIf=\"esAnonimo && obrasSocial.value != undefined && obrasSocial?.value !== ''\"><mat-icon>clear</mat-icon></button>\r\n            <mat-error *ngIf=\"obrasSocial.invalid\">Seleccione su Obra Social</mat-error>\r\n        </mat-form-field>\r\n     </div>   \r\n     <div class=\"row clearfix\">\r\n        <mat-form-field style=\"width: 100%;\">     \r\n            <mat-label>Plan</mat-label>\r\n            <mat-select (selectionChange)=\"cambioPlan($event); onEnterE($event, 'especialidadField')\" \r\n                name=\"planField\" [formControl]=\"plan\" panelClass=\"my-select-panel-class\">\r\n                <mat-option *ngFor=\"let p of planes$ | async\" [value]=\"p\"\r\n                    style=\"margin: 1rem 0 !important; overflow: visible !important;\r\n                        line-height: initial !important; word-wrap: break-word !important; white-space: pre-wrap !important; height: unset !important;\">\r\n                    {{p.nombre}}\r\n                </mat-option>\r\n            </mat-select>\r\n            <mat-error *ngIf=\"plan.invalid\">Seleccione su Plan</mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n<!--\r\n    <div class=\"row clearfix\">\r\n        <mat-label></mat-label>\r\n        <mat-radio-group> \r\n            <mat-radio-button value=\"C\">\r\n                Consulta en consultorio\r\n            </mat-radio-button>\r\n            <mat-radio-button value=\"n\">\r\n                Estudios médicos\r\n            </mat-radio-button>                \r\n        </mat-radio-group>\r\n      </div>\r\n-->\r\n    <div class=\"row clearfix\" >\r\n        <mat-form-field style=\"width: 100%;\">\r\n            <mat-label name=\"labelEspecialidad\">Especialidad</mat-label>\r\n            <input matInput name=\"especialidadField\" type=\"text\"  placeholder=\"Todas\" \r\n                [formControl]=\"especialidad\"    #autoEspecComplete=\"matAutocompleteTrigger\"\r\n                [matAutocomplete]=\"autoEsp\" (keyup.enter)=\"onEnterE($event, 'profesionalField')\" \r\n                (keyup)=\"onEnterE2($event, 'profesionalField')\" >\r\n            <mat-autocomplete #autoEsp=\"matAutocomplete\" [displayWith]=\"displayFn\" >\r\n                <mat-option *ngFor=\"let e of filteredEspecialidades$ | async\" [value]=\"e\"\r\n                    (selectionChange)=\"cambioEspecialidad($event); onEnterE($event, 'profesionalField')\" \r\n                    (click)=\"onEnterE($event, 'profesionalField')\">\r\n                    {{e.nombre}}\r\n                </mat-option>\r\n            </mat-autocomplete>\r\n            <button mat-icon-button matSuffix (click)=\"clear()\" \r\n                *ngIf=\"especialidad.value != undefined && especialidad?.value !== ''\"><mat-icon>clear</mat-icon></button>\r\n            <mat-error *ngIf=\"especialidad.invalid\">Seleccione una Especialidad</mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\" >\r\n        <mat-form-field style=\"width: 100%;\">\r\n            <mat-label name=\"labelProfesional\">Profesional</mat-label>\r\n            <input matInput name=\"profesionalField\" type=\"text\"  placeholder=\"Todos\" \r\n                [formControl]=\"profesional\"    #autoProfComplete=\"matAutocompleteTrigger\"\r\n                [matAutocomplete]=\"autoProf\" (keyup.enter)=\"onEnterE($event, 'centroField')\" \r\n                (keyup)=\"onEnterE2($event, 'centroField')\" >\r\n            <mat-autocomplete #autoProf=\"matAutocomplete\" [displayWith]=\"displayFn2\" >\r\n                <mat-option [value]=\"undefined\" (click)=\"onEnterE($event, 'centroField')\">Todos</mat-option>\r\n                <mat-option *ngFor=\"let e of filteredProfesionales$ | async\" [value]=\"e\"\r\n                    (selectionChange)=\"cambioProfesional($event); onEnterE($event, 'centroField')\" \r\n                    (click)=\"onEnterE($event, 'centroField')\">\r\n                    {{e.nombreApellido}}\r\n                </mat-option>\r\n            </mat-autocomplete>\r\n            <button mat-icon-button matSuffix (click)=\"clearP()\" \r\n                *ngIf=\"profesional.value != undefined && profesional?.value !== ''\"><mat-icon>clear</mat-icon></button>\r\n            <mat-error *ngIf=\"profesional.invalid\">Seleccione un Profesional</mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <mat-form-field style=\"width: 100%;\">\r\n            <mat-label>Centro de Atención</mat-label>\r\n            <mat-select name=\"centroField\" (selectionChange)=\"cambioCentroDeAtencion($event)\" [formControl]=\"centroAtencion\">\r\n                <mat-option *ngFor=\"let ca of centrosDeAtencion$ | async\" [value]=\"ca\">\r\n                    {{ca.nombre}}\r\n                </mat-option>\r\n            </mat-select>\r\n            <mat-error *ngIf=\"centroAtencion.invalid\">Seleccione el Centro de Atención</mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <button style=\"width: 100%;\" class=\"button\" mat-flat-button [disabled]=\"!isValid()\" (click)=\"onSubmit()\">\r\n            BUSCAR\r\n        </button>\r\n    </div>\r\n</div>\r\n<span  style=\"border: 2px solid transparent;\" #footer autofocus></span>"
+module.exports = "<div class=\"cuadro-formulario\">\r\n    <div class=\"row clearfix\">\r\n        <p>\r\n            DATOS DEL PACIENTE\r\n        </p>\r\n        <mat-form-field style=\"width: 100%;\">\r\n            <mat-label>Fecha de Nacimiento</mat-label>\r\n            <input matInput [matDatepicker]=\"picker\" [max]=\"maxDate\" (dateInput)=\"cambioFechaNacimiento($event)\"\r\n                [formControl]=\"fechaNacimiento\">\r\n            <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\r\n            <mat-datepicker touchUi #picker startView=\"multi-year\" [startAt]=\"startDate\"></mat-datepicker>\r\n            <mat-error *ngIf=\"fechaNacimiento.invalid\">Ingrese su Fecha de Nacimiento</mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <mat-form-field style=\"width: 100%;\">\r\n            <mat-label>Obra Social</mat-label>\r\n            <input type=\"text\" placeholder=\"Seleccione una\" matInput [formControl]=\"obrasSocial\" [matAutocomplete]=\"autoOS\"\r\n                #autoObraComplete=\"matAutocompleteTrigger\"\r\n                (keyup.enter)=\"onEnterE($event, 'planField')\" (keyup)=\"onEnterE2($event, 'planField')\">\r\n            <mat-autocomplete #autoOS=\"matAutocomplete\" [displayWith]=\"displayFn\" \r\n                (selectedValueChange)=\"cambioObraSocial($event); onEnterE($event, 'planField')\">\r\n                <mat-option *ngFor=\"let os of filteredObrasSociales$ | async\" [value]=\"os\">\r\n                    {{os.nombre}}\r\n                </mat-option>\r\n            </mat-autocomplete>\r\n            <button mat-icon-button matSuffix (click)=\"clearOS()\" \r\n                *ngIf=\"obrasSocial.value != undefined && obrasSocial?.value !== ''\"><mat-icon>clear</mat-icon></button>\r\n            <mat-error *ngIf=\"obrasSocial.invalid\">Seleccione su Obra Social</mat-error>\r\n        </mat-form-field>\r\n     </div>   \r\n     <div class=\"row clearfix\">\r\n        <mat-form-field style=\"width: 100%;\">     \r\n            <mat-label>Plan</mat-label>\r\n            <mat-select (selectionChange)=\"cambioPlan($event); onEnterE($event, 'especialidadField')\" \r\n                name=\"planField\" [formControl]=\"plan\" panelClass=\"my-select-panel-class\">\r\n                <mat-option *ngFor=\"let p of planes$ | async\" [value]=\"p\"\r\n                    style=\"margin: 1rem 0 !important; overflow: visible !important;\r\n                        line-height: initial !important; word-wrap: break-word !important; white-space: pre-wrap !important; height: unset !important;\">\r\n                    {{p.nombre}}\r\n                </mat-option>\r\n            </mat-select>\r\n            <mat-error *ngIf=\"plan.invalid\">Seleccione su Plan</mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n<!--\r\n    <div class=\"row clearfix\">\r\n        <mat-label></mat-label>\r\n        <mat-radio-group> \r\n            <mat-radio-button value=\"C\">\r\n                Consulta en consultorio\r\n            </mat-radio-button>\r\n            <mat-radio-button value=\"n\">\r\n                Estudios médicos\r\n            </mat-radio-button>                \r\n        </mat-radio-group>\r\n      </div>\r\n-->\r\n    <div class=\"row clearfix\" >\r\n        <mat-form-field style=\"width: 100%;\">\r\n            <mat-label name=\"labelEspecialidad\">Especialidad</mat-label>\r\n            <input matInput name=\"especialidadField\" type=\"text\"  placeholder=\"Todas\" \r\n                [formControl]=\"especialidad\"    #autoEspecComplete=\"matAutocompleteTrigger\"\r\n                [matAutocomplete]=\"autoEsp\" (keyup.enter)=\"onEnterE($event, 'profesionalField')\" \r\n                (keyup)=\"onEnterE2($event, 'profesionalField')\" >\r\n            <mat-autocomplete #autoEsp=\"matAutocomplete\" [displayWith]=\"displayFn\" >\r\n                <mat-option *ngFor=\"let e of filteredEspecialidades$ | async\" [value]=\"e\"\r\n                    (selectionChange)=\"cambioEspecialidad($event); onEnterE($event, 'profesionalField')\" \r\n                    (click)=\"onEnterE($event, 'profesionalField')\">\r\n                    {{e.nombre}}\r\n                </mat-option>\r\n            </mat-autocomplete>\r\n            <button mat-icon-button matSuffix (click)=\"clear()\" \r\n                *ngIf=\"especialidad.value != undefined && especialidad?.value !== ''\"><mat-icon>clear</mat-icon></button>\r\n            <mat-error *ngIf=\"especialidad.invalid\">Seleccione una Especialidad</mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\" >\r\n        <mat-form-field style=\"width: 100%;\">\r\n            <mat-label name=\"labelProfesional\">Profesional</mat-label>\r\n            <input matInput name=\"profesionalField\" type=\"text\"  placeholder=\"Todos\" \r\n                [formControl]=\"profesional\"    #autoProfComplete=\"matAutocompleteTrigger\"\r\n                [matAutocomplete]=\"autoProf\" (keyup.enter)=\"onEnterE($event, 'centroField')\" \r\n                (keyup)=\"onEnterE2($event, 'centroField')\" >\r\n            <mat-autocomplete #autoProf=\"matAutocomplete\" [displayWith]=\"displayFn2\" >\r\n                <mat-option [value]=\"undefined\" (click)=\"onEnterE($event, 'centroField')\">Todos</mat-option>\r\n                <mat-option *ngFor=\"let e of filteredProfesionales$ | async\" [value]=\"e\"\r\n                    (selectionChange)=\"cambioProfesional($event); onEnterE($event, 'centroField')\" \r\n                    (click)=\"onEnterE($event, 'centroField')\">\r\n                    {{e.nombreApellido}}\r\n                </mat-option>\r\n            </mat-autocomplete>\r\n            <button mat-icon-button matSuffix (click)=\"clearP()\" \r\n                *ngIf=\"profesional.value != undefined && profesional?.value !== ''\"><mat-icon>clear</mat-icon></button>\r\n            <mat-error *ngIf=\"profesional.invalid\">Seleccione un Profesional</mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <mat-form-field style=\"width: 100%;\">\r\n            <mat-label>Centro de Atención</mat-label>\r\n            <mat-select name=\"centroField\" (selectionChange)=\"cambioCentroDeAtencion($event)\" [formControl]=\"centroAtencion\">\r\n                <mat-option *ngFor=\"let ca of centrosDeAtencion$ | async\" [value]=\"ca\">\r\n                    {{ca.nombre}}\r\n                </mat-option>\r\n            </mat-select>\r\n            <mat-error *ngIf=\"centroAtencion.invalid\">Seleccione el Centro de Atención</mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <button style=\"width: 100%;\" class=\"button\" mat-flat-button [disabled]=\"!isValid()\" (click)=\"onSubmit()\">\r\n            BUSCAR\r\n        </button>\r\n    </div>\r\n</div>\r\n<span  style=\"border: 2px solid transparent;\" #footer autofocus></span>"
 
 /***/ }),
 
@@ -25308,7 +25308,7 @@ var FormularioComponent = /** @class */ (function () {
             _this.esAnonimo = anonimo;
             if (!anonimo) {
                 _this.fechaNacimiento.disable();
-                _this.obrasSocial.disable();
+                //this.obrasSocial.disable();
                 //this.plan.disable();
             }
             else {
@@ -25348,22 +25348,22 @@ var FormularioComponent = /** @class */ (function () {
     };
     FormularioComponent.prototype.cambioObraSocial = function (value) {
         var _this = this;
-        if (this.esAnonimo) {
-            this.cleanResultadoDisponibilidad();
-            this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_8__["setObraSocialSelected"]({ obraSocialSelected: value }));
-            this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_8__["setPlanSelected"]({ planSelected: undefined }));
-            this.plan.setValue(undefined);
-            setTimeout(function () {
-                if (_this.obrasSocial.value != undefined &&
-                    _this.obrasSocial.value.plan != undefined &&
-                    _this.obrasSocial.value.plan.length > 0) {
-                    _this.plan = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required);
-                }
-                else {
-                    _this.plan = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('');
-                }
-            });
-        }
+        //    if (this.esAnonimo) {
+        this.cleanResultadoDisponibilidad();
+        this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_8__["setObraSocialSelected"]({ obraSocialSelected: value }));
+        this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_8__["setPlanSelected"]({ planSelected: undefined }));
+        this.plan.setValue(undefined);
+        setTimeout(function () {
+            if (_this.obrasSocial.value != undefined &&
+                _this.obrasSocial.value.plan != undefined &&
+                _this.obrasSocial.value.plan.length > 0) {
+                _this.plan = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required);
+            }
+            else {
+                _this.plan = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('');
+            }
+        });
+        //    }
     };
     FormularioComponent.prototype.clear = function () {
         var _this = this;
@@ -25905,7 +25905,7 @@ var ReservaEmailComponent = /** @class */ (function () {
         this.dialog.open(_reserva_email_dialog_reserva_email_dialog_component__WEBPACK_IMPORTED_MODULE_12__["ReservaEmailDialogComponent"], { data: { datosReserva: datosReserva } })
             .afterClosed().subscribe(function () {
             //this.store.dispatch(ContextoActions.cleanStore());
-            _this.store.dispatch(_core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_5__["cleanStoreParcial"]());
+            _this.store.dispatch(_core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_5__["cleanStoreParcialMin"]());
             _this.store.dispatch(_core_store_actions_calendar_actions__WEBPACK_IMPORTED_MODULE_6__["cleanStore"]());
             _this.store.dispatch(_core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_7__["cleanStore"]());
             _this.store.dispatch(_core_store_actions_reservacion_actions__WEBPACK_IMPORTED_MODULE_8__["cleanStore"]());
@@ -26027,7 +26027,12 @@ var ReservaComponent = /** @class */ (function () {
         this.turnoSelected$.subscribe(function (turno) {
             _this.turnoSelected = turno;
             if (!turno) {
-                _this.router.navigate(['/home']);
+                if (!_this.anonimo) {
+                    _this.router.navigate(['login']); // pueda ver su turno
+                }
+                else {
+                    _this.router.navigate(['/home']); // sel de turno
+                }
             }
         });
         this.obraSocialSelected$.subscribe(function (obraSocial) { return _this.obraSocialSelected = obraSocial; });
@@ -26048,8 +26053,8 @@ var ReservaComponent = /** @class */ (function () {
                 _this.dni.disable();
                 _this.sexo.disable();
                 _this.nombreapellido.disable();
-                _this.telefonoArea.disable();
-                _this.telefonoNumero.disable();
+                //this.telefonoArea.disable();
+                //this.telefonoNumero.disable();
                 _this.mail.disable();
                 _this.anonimo = false;
             }
@@ -26109,7 +26114,7 @@ var ReservaComponent = /** @class */ (function () {
                             filter.password = c.passUsurio;
                         }
                         _this.store.dispatch(_core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_8__["reservaTurno"]({ filter: filter }));
-                    });
+                    }).unsubscribe();
                 }
             })
                 .unsubscribe();

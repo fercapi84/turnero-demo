@@ -847,7 +847,10 @@ var pacientes = [
         dni: 11222333,
         sexo: "F",
         nombreApellido: 'María Perez',
-        telefono: undefined,
+        telefono: {
+            area: "333",
+            numero: "1231231",
+        },
         email: 'mail@mail.com',
         fechaNacimiento: new Date('2022/03/30'),
         codigoObraSocial: 123,
@@ -861,7 +864,10 @@ var pacientes = [
         dni: 11222444,
         sexo: "M",
         nombreApellido: 'Juan Perez',
-        telefono: undefined,
+        telefono: {
+            area: "123",
+            numero: "1231231",
+        },
         email: 'otromail@mail.com',
         fechaNacimiento: new Date('2000/01/15'),
         codigoObraSocial: 12345,
@@ -1223,7 +1229,7 @@ var ServiceService = /** @class */ (function () {
     };
     ServiceService.prototype.reservaTurno = function (filter) {
         if (this.useMockups) {
-            console.log("call P reserva: " + filter);
+            console.log("call P reserva: " + filter.paciente.telefono.area);
             return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_5__["reservaTurnoMock"]);
         }
         else {
@@ -1375,13 +1381,14 @@ var setHorariosDisponibles = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["cr
 /*!********************************************************!*\
   !*** ./src/app/core/store/actions/contexto.actions.ts ***!
   \********************************************************/
-/*! exports provided: CLEAN_STORE, CLEAN_STORE_PARCIAL, GET_TOKEN, SET_TOKEN, GET_CREDENCIALUSUARIO, SET_CREDENCIALUSUARIO, GET_USUARIO, SET_USUARIO, GET_PACIENTESELECTED, SET_PACIENTESELECTED, GET_TURNOSPACIENTE, SET_TURNOSPACIENTE, SET_TURNOLIBERAR, GET_TURNOSPACIENTERELOAD, cleanStore, cleanStoreParcial, getToken, setToken, getCredencialUsuario, setCredencialUsuario, getUsuario, setUsuario, getPacienteSelected, setPacienteSelected, getTurnosPacienteReload, getTurnosPaciente, setTurnosPaciente, setTurnoLiberar */
+/*! exports provided: CLEAN_STORE, CLEAN_STORE_PARCIAL, CLEAN_STORE_PARCIAL_MIN, GET_TOKEN, SET_TOKEN, GET_CREDENCIALUSUARIO, SET_CREDENCIALUSUARIO, GET_USUARIO, SET_USUARIO, GET_PACIENTESELECTED, SET_PACIENTESELECTED, GET_TURNOSPACIENTE, SET_TURNOSPACIENTE, SET_TURNOLIBERAR, GET_TURNOSPACIENTERELOAD, cleanStore, cleanStoreParcialMin, cleanStoreParcial, getToken, setToken, getCredencialUsuario, setCredencialUsuario, getUsuario, setUsuario, getPacienteSelected, setPacienteSelected, getTurnosPacienteReload, getTurnosPaciente, setTurnosPaciente, setTurnoLiberar */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAN_STORE", function() { return CLEAN_STORE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAN_STORE_PARCIAL", function() { return CLEAN_STORE_PARCIAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAN_STORE_PARCIAL_MIN", function() { return CLEAN_STORE_PARCIAL_MIN; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_TOKEN", function() { return GET_TOKEN; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_TOKEN", function() { return SET_TOKEN; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_CREDENCIALUSUARIO", function() { return GET_CREDENCIALUSUARIO; });
@@ -1395,6 +1402,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_TURNOLIBERAR", function() { return SET_TURNOLIBERAR; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_TURNOSPACIENTERELOAD", function() { return GET_TURNOSPACIENTERELOAD; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cleanStore", function() { return cleanStore; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cleanStoreParcialMin", function() { return cleanStoreParcialMin; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cleanStoreParcial", function() { return cleanStoreParcial; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getToken", function() { return getToken; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setToken", function() { return setToken; });
@@ -1412,6 +1420,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var CLEAN_STORE = '[Contexto] - cleanStore';
 var CLEAN_STORE_PARCIAL = '[Contexto] - cleanStoreParcial';
+var CLEAN_STORE_PARCIAL_MIN = '[Contexto] - cleanStoreParcialMin';
 var GET_TOKEN = '[Contexto] - getToken';
 var SET_TOKEN = '[Contexto] - setToken';
 var GET_CREDENCIALUSUARIO = '[Contexto] - getCredencialUsuario';
@@ -1425,6 +1434,7 @@ var SET_TURNOSPACIENTE = '[Contexto] - setTurnosPacientes';
 var SET_TURNOLIBERAR = '[Contexto] - setTurnoLiberar';
 var GET_TURNOSPACIENTERELOAD = '[Contexto] - getTurnosPacienteReload';
 var cleanStore = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(CLEAN_STORE);
+var cleanStoreParcialMin = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(CLEAN_STORE_PARCIAL_MIN);
 var cleanStoreParcial = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(CLEAN_STORE_PARCIAL);
 var getToken = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(GET_TOKEN, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
 var setToken = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(SET_TOKEN, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
@@ -2087,7 +2097,18 @@ var _cleanParcial = function (state) {
     //esAnonimo: true,
     //credencial: undefined,
     //infoUsuario: undefined,
-    stateNew.pacienteSelected = undefined;
+    //stateNew.pacienteSelected = undefined;
+    stateNew.turnosFuturos = undefined;
+    stateNew.codigoTurnoLiberar = undefined;
+    return stateNew;
+};
+var _cleanParcialMin = function (state) {
+    var stateNew = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state);
+    //stateNew.token = undefined;
+    //esAnonimo: true,
+    //credencial: undefined,
+    //infoUsuario: undefined,
+    //stateNew.pacienteSelected = undefined;
     stateNew.turnosFuturos = undefined;
     stateNew.codigoTurnoLiberar = undefined;
     return stateNew;
@@ -2121,6 +2142,8 @@ var _setPacienteSelected = function (state, paciente) {
 };
 var _contextoReducer = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["createReducer"])(initialState, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["on"])(_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_2__["cleanStore"], function () { return initialState; }), Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["on"])(_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_2__["cleanStoreParcial"], function (state) {
     return _cleanParcial(state);
+}), Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["on"])(_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_2__["cleanStoreParcialMin"], function (state) {
+    return _cleanParcialMin(state);
 }), Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["on"])(_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_2__["setToken"], function (state, _a) {
     var token = _a.token;
     return _setToken(state, token);
@@ -2569,11 +2592,20 @@ var selectObraSocialPaciente = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["
         return undefined;
     }
 });
-var selectPlanes = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])([selectObraSocialSelected, selectObraSocialPaciente], function (obraSocial, osPac) {
-    if (osPac) {
-        return osPac.plan;
+/*
+export const selectPlanes = createSelector(
+    [selectObraSocialSelected, selectObraSocialPaciente],
+    (obraSocial: ObraSocial, osPac: ObraSocial) => {
+        if (osPac) {
+            return osPac.plan;
+        } else if (obraSocial) {
+            return obraSocial.plan;
+        }
     }
-    else if (obraSocial) {
+);
+*/
+var selectPlanes = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectObraSocialSelected, function (obraSocial) {
+    if (obraSocial) {
         return obraSocial.plan;
     }
 });
