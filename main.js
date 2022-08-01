@@ -627,7 +627,7 @@ var TokenInterceptor = /** @class */ (function () {
 /*!*************************************!*\
   !*** ./src/app/core/mocks/mocks.ts ***!
   \*************************************/
-/*! exports provided: planMock1, planMock2, planMock3, planMock4, obraSocialMock1, obraSocialMock2, obrasSocialesMocks, especialidadesMocks, centroAtencionMock, centroAtencionesMocks, profesionalesDisponibilidadMocks, profesionalesMocks, diasDisponiblesMock, horariosMock, horariosMock2, reservaTurnoMock, turnoMock, tokenMock, pacientes, infoUsuario, turnosFuturosMOCK */
+/*! exports provided: planMock1, planMock2, planMock3, planMock4, obraSocialMock1, obraSocialMock2, obrasSocialesMocks, especialidadesMocks, centroAtencionMock, estudioMock, estudioMock2, servicio, servicios, centroAtencionesMocks, estudiosMocks, profesionalesDisponibilidadMocks, profesionalesMocks, diasDisponiblesMock, horariosMock, horariosMock2, reservaTurnoMock, turnoMock, tokenMock, pacientes, infoUsuario, turnosFuturosMOCK */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -641,7 +641,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "obrasSocialesMocks", function() { return obrasSocialesMocks; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "especialidadesMocks", function() { return especialidadesMocks; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "centroAtencionMock", function() { return centroAtencionMock; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "estudioMock", function() { return estudioMock; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "estudioMock2", function() { return estudioMock2; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "servicio", function() { return servicio; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "servicios", function() { return servicios; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "centroAtencionesMocks", function() { return centroAtencionesMocks; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "estudiosMocks", function() { return estudiosMocks; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "profesionalesDisponibilidadMocks", function() { return profesionalesDisponibilidadMocks; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "profesionalesMocks", function() { return profesionalesMocks; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "diasDisponiblesMock", function() { return diasDisponiblesMock; });
@@ -702,7 +707,24 @@ var centroAtencionMock = {
     codigo: 1,
     nombre: 'Hospital Español'
 };
+var estudioMock = {
+    codigo: 1,
+    nombre: 'Ecografía'
+};
+var estudioMock2 = {
+    codigo: 1,
+    nombre: 'Electro'
+};
+var servicio = {
+    codigo: 2,
+    nombre: 'RESONANCIA',
+    tipoEstudio: [
+        estudioMock, estudioMock2
+    ]
+};
+var servicios = [servicio];
 var centroAtencionesMocks = [centroAtencionMock];
+var estudiosMocks = [estudioMock, estudioMock2];
 var profesional1 = {
     nombreApellido: 'Perez, Juan',
     especialidad: especialidadesMocks,
@@ -827,18 +849,18 @@ var diasDisponibles = function () {
 };
 var diasDisponiblesMock = diasDisponibles();
 var horariosMock = [
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, turno1, { profesional: profesionalE1 }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, turno2, { profesional: profesionalE1 })
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, turno1, { codigoEstudio: 1, profesional: profesionalE1 }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, turno2, { codigoEstudio: 1, profesional: profesionalE1 })
 ];
 var horariosMock2 = [
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, turno5, { profesional: profesionalE1 }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, turno6, { profesional: profesionalE1 })
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, turno5, { codigoEstudio: 1, profesional: profesionalE1 }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, turno6, { codigoEstudio: 1, profesional: profesionalE1 })
 ];
 var reservaTurnoMock = {
     codigo: 123,
     vencimiento: new Date('2022/07/30')
 };
-var turnoMock = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, turno1, { profesional: profesionalE1 });
+var turnoMock = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, turno1, { codigoEstudio: 1, profesional: profesionalE1 });
 // tslint:disable-next-line: max-line-length
 var tokenMock = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VybmFtZSI6IlNPUE9SVEVJVCIsIlNlc3Npb25JZCI6IjExYTEzYTljLTc3NmQtNGM3Ni05YjUwLThjZDM0YWIwZThiNCIsImV4cCI6MTU4NzkwMDMxOSwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzNzMvIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzNzMvIn0.n5SJmebQ5BzAwRrWt0JCDoD5qW7rVr7aXVGcGJSk7eY';
 var pacientes = [
@@ -857,7 +879,13 @@ var pacientes = [
         codigoPlan: 1,
         codigoProfesional: 1,
         codigoEspecialidad: 1,
+        codigoEstudio: 77,
+        codigoServicio: 1,
         parentesco: 'TITULAR',
+        credencial: undefined,
+        diaSugerido: undefined,
+        pedidoMedico: undefined,
+        varios: undefined
     },
     {
         codigo: 2,
@@ -874,7 +902,13 @@ var pacientes = [
         codigoPlan: 4,
         codigoProfesional: 1,
         codigoEspecialidad: 1,
+        codigoEstudio: 77,
+        codigoServicio: 1,
         parentesco: 'HIJO/A',
+        credencial: undefined,
+        diaSugerido: undefined,
+        pedidoMedico: undefined,
+        varios: undefined
     }
 ];
 var infoUsuario = {
@@ -937,9 +971,9 @@ var ServiceService = /** @class */ (function () {
         this.endpointC = this.endpoint + "/Consext";
         this.endpointG = this.endpoint + "/Gestion";
         this.endpointA = this.endpoint + "/Auth";
-        this.endpointL = "https://5h0kk3jtde.api.quickmocker.com";
         this.endpoint_login = this.endpointA + '/Login';
         this.endpoint_obraSocial = this.endpointC + '/getObraSocial';
+        this.endpoint_estudios = this.endpointC + '/getTipoEstudio';
         this.endpoint_especialidad = this.endpointC + '/getEspecialidad';
         this.endpoint_postespecialidad = this.endpointC + '/postEspecialidad';
         this.endpoint_profesional = this.endpointC + '/getProfesionales';
@@ -950,10 +984,12 @@ var ServiceService = /** @class */ (function () {
         this.endpoint_busquedaHorarios = this.endpointC + '/busquedaHorarios';
         this.endpoint_reservaTurno = this.endpointC + '/reservaTurno';
         this.endpoint_confirmacionTurno = this.endpointC + '/confirmacionTurno';
+        this.endpoint_reservaTurnoEstudio = this.endpointC + '/reservaTurnoEstudio';
         this.endpoint_infoUsuario = this.endpointC + '/InfoUsuario';
         this.endpoint_reservaTurnoP = this.endpointC + '/reservaTurnoPaciente';
+        this.endpoint_reservaTurnoPEstudio = this.endpointC + '/reservaTurnoPacienteEstudio';
         this.endpoint_turnosFuturos = this.endpointC + '/pacienteTurnosFuturos';
-        this.endpoint_cancelarTurno = this.endpointL + '/pacienteTurnosFuturosCancelar';
+        this.endpoint_cancelarTurno = this.endpointC + '/pacienteTurnosFuturosCancelar';
     }
     ServiceService.prototype.login = function (usuario) {
         if (this.useMockups) {
@@ -1087,6 +1123,26 @@ var ServiceService = /** @class */ (function () {
             }));
         }
     };
+    ServiceService.prototype.getServicios = function () {
+        if (this.useMockups) {
+            console.log("call G getServicios: ");
+            return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_5__["servicios"]);
+            ;
+        }
+        else {
+            return this.http.get(this.endpoint_estudios)
+                .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
+                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["throwErrorIfBadCode"])(res);
+                return res.servicio.sort(function (a, b) {
+                    if (a.nombre > b.nombre)
+                        return 1;
+                    if (a.nombre < b.nombre)
+                        return -1;
+                    return 0;
+                });
+            }));
+        }
+    };
     ServiceService.prototype.getCentrosDeAtencion = function () {
         if (this.useMockups) {
             console.log("call G centro at: ");
@@ -1166,7 +1222,7 @@ var ServiceService = /** @class */ (function () {
     };
     ServiceService.prototype.busquedaDiasDisponibles = function (filter) {
         if (this.useMockups) {
-            console.log("call P busq dias: " + filter);
+            console.log("call P busq dias: ");
             return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_5__["diasDisponiblesMock"]);
         }
         else {
@@ -1185,7 +1241,7 @@ var ServiceService = /** @class */ (function () {
     };
     ServiceService.prototype.busquedaHorarios = function (filter) {
         if (this.useMockups) {
-            console.log("call P busq horarios: " + filter);
+            console.log("call P busq horarios: ");
             return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_5__["horariosMock2"]);
         }
         else {
@@ -1227,26 +1283,31 @@ var ServiceService = /** @class */ (function () {
             }));
         }
     };
-    ServiceService.prototype.reservaTurno = function (filter) {
+    ServiceService.prototype.reservaTurnoEstudio = function (filter) {
         if (this.useMockups) {
-            console.log("call P reserva: " + filter.paciente.telefono.area);
+            console.log("call P reservaTurnoEstudio: " + filter.codigoEstudio);
             return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_5__["reservaTurnoMock"]);
         }
         else {
-            if (filter.codigoPaciente != undefined) {
-                return this.http.post(this.endpoint_reservaTurnoP, filter)
-                    .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
-                    Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["throwErrorIfBadCode"])(res);
-                    return res.reserva;
-                }));
-            }
-            else {
-                return this.http.post(this.endpoint_reservaTurno, filter)
-                    .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
-                    Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["throwErrorIfBadCode"])(res);
-                    return res.reserva;
-                }));
-            }
+            var endpoint = (filter.codigoPaciente != undefined ? this.endpoint_reservaTurnoPEstudio : this.endpoint_reservaTurnoEstudio);
+            return this.http.post(endpoint, filter)
+                .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
+                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["throwErrorIfBadCode"])(res);
+                return res.reserva;
+            }));
+        }
+    };
+    ServiceService.prototype.reservaTurno = function (filter) {
+        if (this.useMockups) {
+            return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_5__["reservaTurnoMock"]);
+        }
+        else {
+            var endpoint = (filter.codigoPaciente != undefined ? this.endpoint_reservaTurnoP : this.endpoint_reservaTurno);
+            return this.http.post(endpoint, filter)
+                .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
+                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["throwErrorIfBadCode"])(res);
+                return res.reserva;
+            }));
         }
     };
     ServiceService.prototype.retrieveTurno = function (reserva) {
@@ -1479,7 +1540,7 @@ var cleanError = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"]
 /*!****************************************************!*\
   !*** ./src/app/core/store/actions/form.actions.ts ***!
   \****************************************************/
-/*! exports provided: CLEAN_STORE, CLEAN_STORE_PARCIAL, GET_OBRA_SOCIALES, GET_ESPECIALIDADES, POST_ESPECIALIDADES, GET_PROFESIONALES, POST_PROFESIONALES, GET_CENTROS_DE_ATENCION, SET_OBRA_SOCIALES, SET_ESPECIALIDADES, SET_PROFESIONALES, SET_CENTROS_DE_ATENCION, SET_FECHA_NACIMIENTO, SET_OBRA_SOCIAL_SELECTED, SET_PLAN_SELECTED, SET_PROFESIONAL_SELECTED, SET_ESPECIALIDAD_SELECTED, SET_CENTRO_DE_ATENCION_SELECTED, GET_BUSQUEDA_PROFESIONALES, getObraSociales, getProfesionales, getEspecialidades, getCentrosDeAtencion, cleanStore, cleanStoreParcial, postProfesionales, postEspecialidades, setObraSociales, setEspecialidades, setProfesionales, setCentrosDeAtencion, setFechaNacimiento, setObraSocialSelected, setPlanSelected, setProfesionalSelected, setEspecialidadSelected, setCentroDeAtencionSelected, getBusquedaProfesionales */
+/*! exports provided: CLEAN_STORE, CLEAN_STORE_PARCIAL, GET_OBRA_SOCIALES, GET_ESPECIALIDADES, POST_ESPECIALIDADES, GET_PROFESIONALES, POST_PROFESIONALES, GET_CENTROS_DE_ATENCION, GET_ESTUDIOS, SET_OBRA_SOCIALES, SET_ESPECIALIDADES, SET_PROFESIONALES, SET_CENTROS_DE_ATENCION, SET_SERVICIOS, SET_FECHA_NACIMIENTO, SET_OBRA_SOCIAL_SELECTED, SET_PLAN_SELECTED, SET_PROFESIONAL_SELECTED, SET_ESPECIALIDAD_SELECTED, SET_CENTRO_DE_ATENCION_SELECTED, SET_SERVICIO_SELECTED, SET_ESTUDIO_SELECTED, GET_BUSQUEDA_PROFESIONALES, getObraSociales, getProfesionales, getEspecialidades, getCentrosDeAtencion, getEstudios, cleanStore, cleanStoreParcial, postProfesionales, postEspecialidades, setObraSociales, setEspecialidades, setProfesionales, setServicios, setCentrosDeAtencion, setFechaNacimiento, setObraSocialSelected, setPlanSelected, setProfesionalSelected, setEspecialidadSelected, setCentroDeAtencionSelected, setServicioSelected, setEstudioSelected, getBusquedaProfesionales */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1492,21 +1553,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_PROFESIONALES", function() { return GET_PROFESIONALES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "POST_PROFESIONALES", function() { return POST_PROFESIONALES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_CENTROS_DE_ATENCION", function() { return GET_CENTROS_DE_ATENCION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ESTUDIOS", function() { return GET_ESTUDIOS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_OBRA_SOCIALES", function() { return SET_OBRA_SOCIALES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_ESPECIALIDADES", function() { return SET_ESPECIALIDADES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PROFESIONALES", function() { return SET_PROFESIONALES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_CENTROS_DE_ATENCION", function() { return SET_CENTROS_DE_ATENCION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SERVICIOS", function() { return SET_SERVICIOS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_FECHA_NACIMIENTO", function() { return SET_FECHA_NACIMIENTO; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_OBRA_SOCIAL_SELECTED", function() { return SET_OBRA_SOCIAL_SELECTED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PLAN_SELECTED", function() { return SET_PLAN_SELECTED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PROFESIONAL_SELECTED", function() { return SET_PROFESIONAL_SELECTED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_ESPECIALIDAD_SELECTED", function() { return SET_ESPECIALIDAD_SELECTED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_CENTRO_DE_ATENCION_SELECTED", function() { return SET_CENTRO_DE_ATENCION_SELECTED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SERVICIO_SELECTED", function() { return SET_SERVICIO_SELECTED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_ESTUDIO_SELECTED", function() { return SET_ESTUDIO_SELECTED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_BUSQUEDA_PROFESIONALES", function() { return GET_BUSQUEDA_PROFESIONALES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getObraSociales", function() { return getObraSociales; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProfesionales", function() { return getProfesionales; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getEspecialidades", function() { return getEspecialidades; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCentrosDeAtencion", function() { return getCentrosDeAtencion; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getEstudios", function() { return getEstudios; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cleanStore", function() { return cleanStore; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cleanStoreParcial", function() { return cleanStoreParcial; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postProfesionales", function() { return postProfesionales; });
@@ -1514,6 +1580,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setObraSociales", function() { return setObraSociales; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setEspecialidades", function() { return setEspecialidades; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setProfesionales", function() { return setProfesionales; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setServicios", function() { return setServicios; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setCentrosDeAtencion", function() { return setCentrosDeAtencion; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setFechaNacimiento", function() { return setFechaNacimiento; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setObraSocialSelected", function() { return setObraSocialSelected; });
@@ -1521,6 +1588,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setProfesionalSelected", function() { return setProfesionalSelected; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setEspecialidadSelected", function() { return setEspecialidadSelected; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setCentroDeAtencionSelected", function() { return setCentroDeAtencionSelected; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setServicioSelected", function() { return setServicioSelected; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setEstudioSelected", function() { return setEstudioSelected; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBusquedaProfesionales", function() { return getBusquedaProfesionales; });
 /* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
 
@@ -1532,21 +1601,26 @@ var POST_ESPECIALIDADES = '[Form] - postEspecialidades';
 var GET_PROFESIONALES = '[Form] - getProfesionales';
 var POST_PROFESIONALES = '[Form] - postProfesionales';
 var GET_CENTROS_DE_ATENCION = '[Form] - getCentrosDeAtencion';
+var GET_ESTUDIOS = '[Form] - getEstudios';
 var SET_OBRA_SOCIALES = '[API] - setObraSociales ';
 var SET_ESPECIALIDADES = '[API] - setEspecialidades';
 var SET_PROFESIONALES = '[API] - setProfesionales';
 var SET_CENTROS_DE_ATENCION = '[API] - setCentrosDeAtencion';
+var SET_SERVICIOS = '[API] - setServicios';
 var SET_FECHA_NACIMIENTO = '[Form] - setFechaNacimiento ';
 var SET_OBRA_SOCIAL_SELECTED = '[Form] - setObraSocialSelected ';
 var SET_PLAN_SELECTED = '[Form] - setPlanSelected ';
 var SET_PROFESIONAL_SELECTED = '[Form] - setProfesionalSelected ';
 var SET_ESPECIALIDAD_SELECTED = '[Form] - setEspecialidadSelected ';
 var SET_CENTRO_DE_ATENCION_SELECTED = '[Form] - setCentroDeAtencionSelected ';
+var SET_SERVICIO_SELECTED = '[Form] - setServicioSelected ';
+var SET_ESTUDIO_SELECTED = '[Form] - setEstudioSelected ';
 var GET_BUSQUEDA_PROFESIONALES = '[Form] - getBusquedaProfesionales ';
 var getObraSociales = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(GET_OBRA_SOCIALES);
 var getProfesionales = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(GET_PROFESIONALES);
 var getEspecialidades = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(GET_ESPECIALIDADES);
 var getCentrosDeAtencion = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(GET_CENTROS_DE_ATENCION);
+var getEstudios = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(GET_ESTUDIOS);
 var cleanStore = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(CLEAN_STORE);
 var cleanStoreParcial = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(CLEAN_STORE_PARCIAL);
 var postProfesionales = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(POST_PROFESIONALES, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
@@ -1554,6 +1628,7 @@ var postEspecialidades = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["create
 var setObraSociales = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(SET_OBRA_SOCIALES, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
 var setEspecialidades = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(SET_ESPECIALIDADES, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
 var setProfesionales = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(SET_PROFESIONALES, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
+var setServicios = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(SET_SERVICIOS, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
 var setCentrosDeAtencion = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(SET_CENTROS_DE_ATENCION, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
 var setFechaNacimiento = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(SET_FECHA_NACIMIENTO, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
 var setObraSocialSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(SET_OBRA_SOCIAL_SELECTED, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
@@ -1561,6 +1636,8 @@ var setPlanSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAct
 var setProfesionalSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(SET_PROFESIONAL_SELECTED, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
 var setEspecialidadSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(SET_ESPECIALIDAD_SELECTED, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
 var setCentroDeAtencionSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(SET_CENTRO_DE_ATENCION_SELECTED, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
+var setServicioSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(SET_SERVICIO_SELECTED, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
+var setEstudioSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(SET_ESTUDIO_SELECTED, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
 var getBusquedaProfesionales = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(GET_BUSQUEDA_PROFESIONALES, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
 
 
@@ -1570,13 +1647,14 @@ var getBusquedaProfesionales = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["
 /*!*******************************************************!*\
   !*** ./src/app/core/store/actions/reserva.actions.ts ***!
   \*******************************************************/
-/*! exports provided: CLEAN_STORE, RESERVA_TURNO, SET_TURNO_SELECTED, GET_RESERVA, SET_PACIENTE, SET_CODIGOPACIENTE, RETRIEVE_TURNO, SET_TURNO, cleanStore, reservaTurno, setTurnoSelected, getReservaSelected, setPaciente, setCodigoPaciente, retrieveTurno, setTurno */
+/*! exports provided: CLEAN_STORE, RESERVA_TURNO, RESERVA_TURNOESTUDIO, SET_TURNO_SELECTED, GET_RESERVA, SET_PACIENTE, SET_CODIGOPACIENTE, RETRIEVE_TURNO, SET_TURNO, cleanStore, reservaTurno, reservaTurnoEstudio, setTurnoSelected, getReservaSelected, setPaciente, setCodigoPaciente, retrieveTurno, setTurno */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAN_STORE", function() { return CLEAN_STORE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RESERVA_TURNO", function() { return RESERVA_TURNO; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RESERVA_TURNOESTUDIO", function() { return RESERVA_TURNOESTUDIO; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_TURNO_SELECTED", function() { return SET_TURNO_SELECTED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_RESERVA", function() { return GET_RESERVA; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PACIENTE", function() { return SET_PACIENTE; });
@@ -1585,6 +1663,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_TURNO", function() { return SET_TURNO; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cleanStore", function() { return cleanStore; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reservaTurno", function() { return reservaTurno; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reservaTurnoEstudio", function() { return reservaTurnoEstudio; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setTurnoSelected", function() { return setTurnoSelected; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getReservaSelected", function() { return getReservaSelected; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setPaciente", function() { return setPaciente; });
@@ -1595,6 +1674,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var CLEAN_STORE = '[Reserva] - cleanStore';
 var RESERVA_TURNO = '[Reserva] - ReservaTurno';
+var RESERVA_TURNOESTUDIO = '[Reserva] - reservaTurnoEstudio';
 var SET_TURNO_SELECTED = '[Reserva] - setTurnoSelected';
 var GET_RESERVA = '[Reserva] - getReservaSelected ';
 var SET_PACIENTE = '[Reserva] - setPaciente ';
@@ -1603,6 +1683,7 @@ var RETRIEVE_TURNO = '[Reserva] - retrieveTurno';
 var SET_TURNO = '[Reserva] - setTurno';
 var cleanStore = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(CLEAN_STORE);
 var reservaTurno = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(RESERVA_TURNO, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
+var reservaTurnoEstudio = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(RESERVA_TURNOESTUDIO, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
 var setTurnoSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(SET_TURNO_SELECTED, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
 var getReservaSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(GET_RESERVA, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
 var setPaciente = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(SET_PACIENTE, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
@@ -1873,6 +1954,11 @@ var FormEffects = /** @class */ (function () {
                 return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])({ type: _actions_error_actions__WEBPACK_IMPORTED_MODULE_6__["SHOW_ERROR"], error: error.message });
             })); }));
         });
+        this.getEstudios$ = Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["createEffect"])(function () {
+            return _this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_8__["SET_TOKEN"]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["mergeMap"])(function () { return _this.formService.getServicios().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (servicios) { return ({ type: _actions_form_actions__WEBPACK_IMPORTED_MODULE_7__["SET_SERVICIOS"], servicios: servicios }); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (error) {
+                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])({ type: _actions_error_actions__WEBPACK_IMPORTED_MODULE_6__["SHOW_ERROR"], error: error.message });
+            })); }));
+        });
         this.getCentrosDeAtencion$ = Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["createEffect"])(function () {
             return _this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_8__["SET_TOKEN"]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["mergeMap"])(function () { return _this.formService.getCentrosDeAtencion().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (centrosDeAtencion) { return ({ type: _actions_form_actions__WEBPACK_IMPORTED_MODULE_7__["SET_CENTROS_DE_ATENCION"], centrosDeAtencion: centrosDeAtencion }); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (error) {
                 return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])({ type: _actions_error_actions__WEBPACK_IMPORTED_MODULE_6__["SHOW_ERROR"], error: error.message });
@@ -1933,6 +2019,13 @@ var ReservaEffects = /** @class */ (function () {
         this.reservaService = reservaService;
         this.reservaTurno$ = Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["createEffect"])(function () {
             return _this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_6__["RESERVA_TURNO"]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["mergeMap"])(function (payload) { return _this.reservaService.reservaTurno(payload.filter).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (reserva) {
+                return ({ type: _actions_reservacion_actions__WEBPACK_IMPORTED_MODULE_7__["SET_RESERVA"], reserva: reserva });
+            }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (error) {
+                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])({ type: _actions_error_actions__WEBPACK_IMPORTED_MODULE_5__["SHOW_ERROR"], error: error.message });
+            })); }));
+        });
+        this.reservaTurnoEstudio$ = Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["createEffect"])(function () {
+            return _this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_6__["RESERVA_TURNOESTUDIO"]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["mergeMap"])(function (payload) { return _this.reservaService.reservaTurnoEstudio(payload.filter).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (reserva) {
                 return ({ type: _actions_reservacion_actions__WEBPACK_IMPORTED_MODULE_7__["SET_RESERVA"], reserva: reserva });
             }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (error) {
                 return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])({ type: _actions_error_actions__WEBPACK_IMPORTED_MODULE_5__["SHOW_ERROR"], error: error.message });
@@ -2238,6 +2331,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var initialState = {
     obrasSociales: [],
+    servicios: [],
     especialidades: [],
     profesionales: [],
     centrosDeAtencion: [],
@@ -2247,6 +2341,8 @@ var initialState = {
     especialidadSelected: undefined,
     profesionalSelected: undefined,
     centroDeAtencionSelected: undefined,
+    servicioSelected: undefined,
+    estudioSelected: undefined,
 };
 var _setObraSociales = function (state, obraSociales) {
     var stateNew = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state);
@@ -2284,6 +2380,11 @@ var _setCentrosDeAtencion = function (state, centrosDeAtencion) {
     stateNew.centrosDeAtencion = centrosDeAtencion;
     return stateNew;
 };
+var _setServicios = function (state, servicios) {
+    var stateNew = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state);
+    stateNew.servicios = servicios;
+    return stateNew;
+};
 var _setEspecialidadSelected = function (state, especialidadSelected) {
     var stateNew = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state);
     stateNew.especialidadSelected = especialidadSelected;
@@ -2297,6 +2398,16 @@ var _setProfesionalSelected = function (state, profesionalSelected) {
 var _setCentroDeAtencionSelected = function (state, centroDeAtencionSelected) {
     var stateNew = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state);
     stateNew.centroDeAtencionSelected = centroDeAtencionSelected;
+    return stateNew;
+};
+var _setServicioSelected = function (state, servicioSelected) {
+    var stateNew = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state);
+    stateNew.servicioSelected = servicioSelected;
+    return stateNew;
+};
+var _setEstudioSelected = function (state, estudioSelected) {
+    var stateNew = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state);
+    stateNew.estudioSelected = estudioSelected;
     return stateNew;
 };
 var _cleanParcial = function (state) {
@@ -2320,6 +2431,9 @@ var _formReducer = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["createReduce
 }), Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["on"])(_actions_form_actions__WEBPACK_IMPORTED_MODULE_2__["setProfesionales"], function (state, _a) {
     var profesionales = _a.profesionales;
     return _setProfesionales(state, profesionales);
+}), Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["on"])(_actions_form_actions__WEBPACK_IMPORTED_MODULE_2__["setServicios"], function (state, _a) {
+    var servicios = _a.servicios;
+    return _setServicios(state, servicios);
 }), Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["on"])(_actions_form_actions__WEBPACK_IMPORTED_MODULE_2__["setCentrosDeAtencion"], function (state, _a) {
     var centrosDeAtencion = _a.centrosDeAtencion;
     return _setCentrosDeAtencion(state, centrosDeAtencion);
@@ -2341,6 +2455,12 @@ var _formReducer = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["createReduce
 }), Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["on"])(_actions_form_actions__WEBPACK_IMPORTED_MODULE_2__["setCentroDeAtencionSelected"], function (state, _a) {
     var centroDeAtencionSelected = _a.centroDeAtencionSelected;
     return _setCentroDeAtencionSelected(state, centroDeAtencionSelected);
+}), Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["on"])(_actions_form_actions__WEBPACK_IMPORTED_MODULE_2__["setServicioSelected"], function (state, _a) {
+    var servicioSelected = _a.servicioSelected;
+    return _setServicioSelected(state, servicioSelected);
+}), Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["on"])(_actions_form_actions__WEBPACK_IMPORTED_MODULE_2__["setEstudioSelected"], function (state, _a) {
+    var estudioSelected = _a.estudioSelected;
+    return _setEstudioSelected(state, estudioSelected);
 }));
 function formReducer(state, action) {
     return _formReducer(state, action);
@@ -2523,7 +2643,7 @@ var getCountError = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelec
 /*!********************************************************!*\
   !*** ./src/app/core/store/selectors/form.selectors.ts ***!
   \********************************************************/
-/*! exports provided: selectFormulario, selectContexto, selectAllObrasSociales, selectAllProfesionales, selectAllEspecialidades, selectAllCentrosDeAtencion, selectObraSocialSelected, selectCodigoObraSocialPaciente, selectCodigoPlanPaciente, selectObraSocialPaciente, selectPlanes, selectPlanPaciente, selectPlanSelected, selectProfComboSelected, selectEspecialidadComboSelected, selectFechaNacimiento, selectBusqueda, selectBusquedaProfesionales, selectDatosFormulario */
+/*! exports provided: selectFormulario, selectContexto, selectAllObrasSociales, selectAllServicios, selectAllProfesionales, selectAllEspecialidades, selectAllCentrosDeAtencion, selectCentroAtencionSelected, selectObraSocialSelected, selectServicioSelected, selectCodigoObraSocialPaciente, selectCodigoPlanPaciente, selectObraSocialPaciente, selectPlanes, selectEstudios, selectEstudioSelected, selectPlanPaciente, selectPlanSelected, selectProfComboSelected, selectEspecialidadComboSelected, selectFechaNacimiento, selectBusqueda, selectBusquedaProfesionales, selectDatosFormulario */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2531,14 +2651,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectFormulario", function() { return selectFormulario; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectContexto", function() { return selectContexto; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAllObrasSociales", function() { return selectAllObrasSociales; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAllServicios", function() { return selectAllServicios; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAllProfesionales", function() { return selectAllProfesionales; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAllEspecialidades", function() { return selectAllEspecialidades; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAllCentrosDeAtencion", function() { return selectAllCentrosDeAtencion; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectCentroAtencionSelected", function() { return selectCentroAtencionSelected; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectObraSocialSelected", function() { return selectObraSocialSelected; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectServicioSelected", function() { return selectServicioSelected; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectCodigoObraSocialPaciente", function() { return selectCodigoObraSocialPaciente; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectCodigoPlanPaciente", function() { return selectCodigoPlanPaciente; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectObraSocialPaciente", function() { return selectObraSocialPaciente; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectPlanes", function() { return selectPlanes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectEstudios", function() { return selectEstudios; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectEstudioSelected", function() { return selectEstudioSelected; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectPlanPaciente", function() { return selectPlanPaciente; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectPlanSelected", function() { return selectPlanSelected; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectProfComboSelected", function() { return selectProfComboSelected; });
@@ -2556,6 +2681,7 @@ __webpack_require__.r(__webpack_exports__);
 var selectFormulario = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createFeatureSelector"])('formulario');
 var selectContexto = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createFeatureSelector"])('contexto');
 var selectAllObrasSociales = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.obrasSociales; });
+var selectAllServicios = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.servicios; });
 var selectAllProfesionales = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) {
     if (formulario.especialidadSelected != undefined && formulario.especialidadSelected.codigo != undefined) {
         return formulario.profesionales.filter(function (x) {
@@ -2566,7 +2692,9 @@ var selectAllProfesionales = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["cr
 });
 var selectAllEspecialidades = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.especialidades; });
 var selectAllCentrosDeAtencion = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.centrosDeAtencion; });
+var selectCentroAtencionSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.centroDeAtencionSelected; });
 var selectObraSocialSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.obraSocialSelected; });
+var selectServicioSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.servicioSelected; });
 var selectCodigoObraSocialPaciente = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectContexto, function (contexto) {
     if (contexto.pacienteSelected != undefined) {
         return contexto.pacienteSelected.codigoObraSocial;
@@ -2609,6 +2737,12 @@ var selectPlanes = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelect
         return obraSocial.plan;
     }
 });
+var selectEstudios = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectServicioSelected, function (servicio) {
+    if (servicio) {
+        return servicio.tipoEstudio;
+    }
+});
+var selectEstudioSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.estudioSelected; });
 var selectPlanPaciente = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])([selectCodigoPlanPaciente, selectObraSocialSelected], function (codigoPlan, os) {
     if (os != undefined && os.plan != undefined) {
         var list = os.plan.filter(function (x) { return x.codigo === codigoPlan; });
@@ -2639,6 +2773,9 @@ var selectBusquedaProfesionales = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0_
     if (formulario.planSelected != undefined) {
         request.codigoPlan = formulario.planSelected.codigo;
     }
+    if (formulario.estudioSelected != undefined) {
+        //          request.codigoEstudio = formulario.estudioSelected.codigo;
+    }
     if (formulario.especialidadSelected != undefined) {
         request.codigoEspecialidad = formulario.especialidadSelected.codigo;
     }
@@ -2668,13 +2805,14 @@ var selectDatosFormulario = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["cre
 /*!***********************************************************!*\
   !*** ./src/app/core/store/selectors/reserva.selectors.ts ***!
   \***********************************************************/
-/*! exports provided: selectFormulario, reservarTurno, getReserva, getTurnoSelected */
+/*! exports provided: selectFormulario, reservarTurno, reservarTurnoEstudio, getReserva, getTurnoSelected */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectFormulario", function() { return selectFormulario; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reservarTurno", function() { return reservarTurno; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reservarTurnoEstudio", function() { return reservarTurnoEstudio; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getReserva", function() { return getReserva; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTurnoSelected", function() { return getTurnoSelected; });
 /* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
@@ -2694,6 +2832,25 @@ var reservarTurno = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelec
     request.codigoPaciente = filter.codigoPaciente;
     request.codigoObraSocial = filter.paciente.codigoObraSocial;
     request.codigoEspecialidad = filter.paciente.codigoEspecialidad;
+    return request;
+});
+var reservarTurnoEstudio = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (filter) {
+    if (!filter || !filter.paciente || !filter.paciente.codigoEstudio) {
+        return;
+    }
+    var request = new _shared_models_request_models__WEBPACK_IMPORTED_MODULE_1__["ReservaTurnoEstudioRequest"]();
+    // anonimo
+    request.paciente = filter.paciente;
+    // logueado (user y pass lo agrega en el component)
+    request.codigoPaciente = filter.codigoPaciente;
+    request.codigoObraSocial = filter.paciente.codigoObraSocial;
+    request.codigoEspecialidad = filter.paciente.codigoEspecialidad;
+    request.codigoServicio = filter.paciente.codigoServicio;
+    request.codigoEstudio = filter.paciente.codigoEstudio;
+    request.diaSugerido = filter.paciente.diaSugerido;
+    request.credencial = filter.paciente.credencial;
+    request.pedidoMedico = filter.paciente.pedidoMedico;
+    request.varios = filter.paciente.varios;
     return request;
 });
 var getReserva = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (reservaSelected) {
@@ -3303,7 +3460,7 @@ var ErrorControlComponent = /** @class */ (function () {
 /*!***********************************************!*\
   !*** ./src/app/shared/models/datos.models.ts ***!
   \***********************************************/
-/*! exports provided: CodigoNombre, RespuestaDTO, Respuesta, ObraSocialRespuesta, ObraSocial, Plan, Especialidad, EspecialidadRespuesta, ProfesionalRespuesta, CentroAtencion, CentroAtencionRespuesta, Profesional, ProfesionalEspecialidad, Disponibilidad, TurnoLight, DisponibilidadRespuesta, Turno, DisponibilidadDias, DisponibilidadDiasRespuesta, HorariosRespuesta, DisponibilidadDiasStore, Reserva, ReservaRespuesta, TurnoRespuesta, Credencial, Contexto, Usuario, UsuarioRespuesta, Formulario, Calendario, ReservaFormulario, Paciente, Telefono, DatosReserva, Login, loginRespuesta, TurnoPaciente, TurnosFuturosRespuesta, LiberarTFRespuesta */
+/*! exports provided: CodigoNombre, RespuestaDTO, Respuesta, ObraSocialRespuesta, ObraSocial, Plan, Estudio, Servicio, Especialidad, EspecialidadRespuesta, ProfesionalRespuesta, CentroAtencion, CentroAtencionRespuesta, EstudioRespuesta, Profesional, ProfesionalEspecialidad, Disponibilidad, TurnoLight, DisponibilidadRespuesta, Turno, DisponibilidadDias, DisponibilidadDiasRespuesta, HorariosRespuesta, DisponibilidadDiasStore, Reserva, ReservaRespuesta, TurnoRespuesta, Credencial, Contexto, Usuario, UsuarioRespuesta, Formulario, Calendario, ReservaFormulario, Imagen, Paciente, Telefono, DatosReserva, Login, loginRespuesta, TurnoPaciente, TurnosFuturosRespuesta, LiberarTFRespuesta */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3314,11 +3471,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ObraSocialRespuesta", function() { return ObraSocialRespuesta; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ObraSocial", function() { return ObraSocial; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Plan", function() { return Plan; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Estudio", function() { return Estudio; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Servicio", function() { return Servicio; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Especialidad", function() { return Especialidad; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EspecialidadRespuesta", function() { return EspecialidadRespuesta; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProfesionalRespuesta", function() { return ProfesionalRespuesta; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CentroAtencion", function() { return CentroAtencion; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CentroAtencionRespuesta", function() { return CentroAtencionRespuesta; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EstudioRespuesta", function() { return EstudioRespuesta; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Profesional", function() { return Profesional; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProfesionalEspecialidad", function() { return ProfesionalEspecialidad; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Disponibilidad", function() { return Disponibilidad; });
@@ -3339,6 +3499,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Formulario", function() { return Formulario; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Calendario", function() { return Calendario; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReservaFormulario", function() { return ReservaFormulario; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Imagen", function() { return Imagen; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Paciente", function() { return Paciente; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Telefono", function() { return Telefono; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DatosReserva", function() { return DatosReserva; });
@@ -3391,6 +3552,22 @@ var Plan = /** @class */ (function (_super) {
     return Plan;
 }(CodigoNombre));
 
+var Estudio = /** @class */ (function (_super) {
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Estudio, _super);
+    function Estudio() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return Estudio;
+}(CodigoNombre));
+
+var Servicio = /** @class */ (function (_super) {
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Servicio, _super);
+    function Servicio() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return Servicio;
+}(CodigoNombre));
+
 var Especialidad = /** @class */ (function (_super) {
     tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Especialidad, _super);
     function Especialidad() {
@@ -3427,6 +3604,14 @@ var CentroAtencionRespuesta = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     return CentroAtencionRespuesta;
+}(Respuesta));
+
+var EstudioRespuesta = /** @class */ (function (_super) {
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](EstudioRespuesta, _super);
+    function EstudioRespuesta() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return EstudioRespuesta;
 }(Respuesta));
 
 var Profesional = /** @class */ (function () {
@@ -3564,6 +3749,12 @@ var ReservaFormulario = /** @class */ (function () {
     return ReservaFormulario;
 }());
 
+var Imagen = /** @class */ (function () {
+    function Imagen() {
+    }
+    return Imagen;
+}());
+
 var Paciente = /** @class */ (function () {
     function Paciente() {
     }
@@ -3624,7 +3815,7 @@ var LiberarTFRespuesta = /** @class */ (function (_super) {
 /*!*************************************************!*\
   !*** ./src/app/shared/models/request.models.ts ***!
   \*************************************************/
-/*! exports provided: DatosFormulario, BusquedaRequest, BusquedaProfesionalesRequest, BusquedaDiasDisponiblesRequest, BusquedaHorariosRequest, BusquedaTFRequest, ReservaTurnoRequest, ConfirmacionTurnoRequest, LiberarTFRequest */
+/*! exports provided: DatosFormulario, BusquedaRequest, BusquedaProfesionalesRequest, BusquedaDiasDisponiblesRequest, BusquedaHorariosRequest, BusquedaTFRequest, Imagen, ReservaTurnoEstudioRequest, ReservaTurnoRequest, ConfirmacionTurnoRequest, LiberarTFRequest */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3635,6 +3826,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BusquedaDiasDisponiblesRequest", function() { return BusquedaDiasDisponiblesRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BusquedaHorariosRequest", function() { return BusquedaHorariosRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BusquedaTFRequest", function() { return BusquedaTFRequest; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Imagen", function() { return Imagen; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReservaTurnoEstudioRequest", function() { return ReservaTurnoEstudioRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReservaTurnoRequest", function() { return ReservaTurnoRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ConfirmacionTurnoRequest", function() { return ConfirmacionTurnoRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LiberarTFRequest", function() { return LiberarTFRequest; });
@@ -3678,6 +3871,18 @@ var BusquedaTFRequest = /** @class */ (function () {
     function BusquedaTFRequest() {
     }
     return BusquedaTFRequest;
+}());
+
+var Imagen = /** @class */ (function () {
+    function Imagen() {
+    }
+    return Imagen;
+}());
+
+var ReservaTurnoEstudioRequest = /** @class */ (function () {
+    function ReservaTurnoEstudioRequest() {
+    }
+    return ReservaTurnoEstudioRequest;
 }());
 
 var ReservaTurnoRequest = /** @class */ (function () {
@@ -3773,7 +3978,7 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 var environment = {
     production: false,
-    //endpoint: 'http://appprohe.dynu.net:4777/api',
+    // endpoint: 'http://appprohe.dynu.net:4777/api',
     endpoint: 'https://hespanolserviciosweb.com.ar:5008/api',
     mockups: false,
     username: 'TURNOWEB',
