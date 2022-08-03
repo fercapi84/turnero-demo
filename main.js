@@ -2402,6 +2402,7 @@ var _setCentroDeAtencionSelected = function (state, centroDeAtencionSelected) {
 };
 var _setServicioSelected = function (state, servicioSelected) {
     var stateNew = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state);
+    console.log("set " + servicioSelected);
     stateNew.servicioSelected = servicioSelected;
     return stateNew;
 };
@@ -2694,7 +2695,10 @@ var selectAllEspecialidades = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["c
 var selectAllCentrosDeAtencion = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.centrosDeAtencion; });
 var selectCentroAtencionSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.centroDeAtencionSelected; });
 var selectObraSocialSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.obraSocialSelected; });
-var selectServicioSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.servicioSelected; });
+var selectServicioSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) {
+    console.log("select " + formulario.servicioSelected);
+    return formulario.servicioSelected;
+});
 var selectCodigoObraSocialPaciente = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectContexto, function (contexto) {
     if (contexto.pacienteSelected != undefined) {
         return contexto.pacienteSelected.codigoObraSocial;
@@ -3815,7 +3819,7 @@ var LiberarTFRespuesta = /** @class */ (function (_super) {
 /*!*************************************************!*\
   !*** ./src/app/shared/models/request.models.ts ***!
   \*************************************************/
-/*! exports provided: DatosFormulario, BusquedaRequest, BusquedaProfesionalesRequest, BusquedaDiasDisponiblesRequest, BusquedaHorariosRequest, BusquedaTFRequest, Imagen, ReservaTurnoEstudioRequest, ReservaTurnoRequest, ConfirmacionTurnoRequest, LiberarTFRequest */
+/*! exports provided: DatosFormulario, BusquedaRequest, BusquedaProfesionalesRequest, BusquedaDiasDisponiblesRequest, BusquedaHorariosRequest, BusquedaTFRequest, ReservaTurnoEstudioRequest, ReservaTurnoRequest, ConfirmacionTurnoRequest, LiberarTFRequest */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3826,7 +3830,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BusquedaDiasDisponiblesRequest", function() { return BusquedaDiasDisponiblesRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BusquedaHorariosRequest", function() { return BusquedaHorariosRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BusquedaTFRequest", function() { return BusquedaTFRequest; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Imagen", function() { return Imagen; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReservaTurnoEstudioRequest", function() { return ReservaTurnoEstudioRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReservaTurnoRequest", function() { return ReservaTurnoRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ConfirmacionTurnoRequest", function() { return ConfirmacionTurnoRequest; });
@@ -3871,12 +3874,6 @@ var BusquedaTFRequest = /** @class */ (function () {
     function BusquedaTFRequest() {
     }
     return BusquedaTFRequest;
-}());
-
-var Imagen = /** @class */ (function () {
-    function Imagen() {
-    }
-    return Imagen;
 }());
 
 var ReservaTurnoEstudioRequest = /** @class */ (function () {
