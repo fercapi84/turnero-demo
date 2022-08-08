@@ -25323,7 +25323,7 @@ var FormularioComponent = /** @class */ (function () {
                 _this.servicio.setValue(serv);
             }
         }).unsubscribe();
-        this.filteredObrasSociales$ = this.obrasSocial.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["startWith"])(''), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (value) { return typeof value === 'string' ? value : value.nombre; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["switchMap"])(function (x) { return _this.filterOs(x); }));
+        this.filteredObrasSociales$ = this.obrasSocial.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["startWith"])(''), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (value) { return typeof value === 'string' ? value : value != undefined ? value.nombre : ''; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["switchMap"])(function (x) { return _this.filterOs(x); }));
         this.filteredServicios$ = this.servicio.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["startWith"])(''), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (value) { return typeof value === 'string' ? value : value.nombre; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["switchMap"])(function (x) { return _this.filterServ(x); }));
         this.filteredEspecialidades$ = this.especialidad.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["startWith"])(''), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (value) { return typeof value === 'string' ? value : value.nombre; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["switchMap"])(function (x) { return _this.filterEsp(x); }));
         this.filteredProfesionales$ = this.profesional.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["startWith"])(''), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["filter"])(function (value) { return value !== undefined; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (value) { return typeof value === 'string' ? value : value.nombreApellido; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["switchMap"])(function (x) { return _this.filterProf(x); }));
@@ -25879,6 +25879,173 @@ var ObservationDialogComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/modules/home/components/reserva-contacto-dialog/reserva-contacto-dialog.component.css":
+/*!*******************************************************************************************************!*\
+  !*** ./src/app/modules/home/components/reserva-contacto-dialog/reserva-contacto-dialog.component.css ***!
+  \*******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvaG9tZS9jb21wb25lbnRzL3Jlc2VydmEtY29udGFjdG8tZGlhbG9nL3Jlc2VydmEtY29udGFjdG8tZGlhbG9nLmNvbXBvbmVudC5jc3MifQ== */"
+
+/***/ }),
+
+/***/ "./src/app/modules/home/components/reserva-contacto-dialog/reserva-contacto-dialog.component.html":
+/*!********************************************************************************************************!*\
+  !*** ./src/app/modules/home/components/reserva-contacto-dialog/reserva-contacto-dialog.component.html ***!
+  \********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<h1 mat-dialog-title>Solicitud de turno</h1>\r\n\r\n<mat-dialog-content class=\"mat-typography\">\r\n  <p *ngIf=\"data?.datosReserva?.paciente\">\r\n    Su solicitud ha sido registrada. Nos contactaremos a la brevedad para completar el proceso de solicitud de turno.\r\n  </p>\r\n</mat-dialog-content>\r\n\r\n<div mat-dialog-actions align=\"center\">\r\n  <button mat-flat-button class=\"button\" [mat-dialog-close]=\"true\" cdkFocusInitial>ACEPTAR</button>\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/modules/home/components/reserva-contacto-dialog/reserva-contacto-dialog.component.ts":
+/*!******************************************************************************************************!*\
+  !*** ./src/app/modules/home/components/reserva-contacto-dialog/reserva-contacto-dialog.component.ts ***!
+  \******************************************************************************************************/
+/*! exports provided: ReservaContactoDialogComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReservaContactoDialogComponent", function() { return ReservaContactoDialogComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+
+
+
+var ReservaContactoDialogComponent = /** @class */ (function () {
+    function ReservaContactoDialogComponent(dialogRef, data) {
+        this.dialogRef = dialogRef;
+        this.data = data;
+    }
+    ReservaContactoDialogComponent.prototype.ngOnInit = function () {
+    };
+    ReservaContactoDialogComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-reserva-contacto-dialog',
+            template: __webpack_require__(/*! ./reserva-contacto-dialog.component.html */ "./src/app/modules/home/components/reserva-contacto-dialog/reserva-contacto-dialog.component.html"),
+            styles: [__webpack_require__(/*! ./reserva-contacto-dialog.component.css */ "./src/app/modules/home/components/reserva-contacto-dialog/reserva-contacto-dialog.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](1, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_angular_material__WEBPACK_IMPORTED_MODULE_2__["MAT_DIALOG_DATA"])),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialogRef"], Object])
+    ], ReservaContactoDialogComponent);
+    return ReservaContactoDialogComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/modules/home/components/reserva-contacto/reserva-contacto.component.css":
+/*!*****************************************************************************************!*\
+  !*** ./src/app/modules/home/components/reserva-contacto/reserva-contacto.component.css ***!
+  \*****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvaG9tZS9jb21wb25lbnRzL3Jlc2VydmEtY29udGFjdG8vcmVzZXJ2YS1jb250YWN0by5jb21wb25lbnQuY3NzIn0= */"
+
+/***/ }),
+
+/***/ "./src/app/modules/home/components/reserva-contacto/reserva-contacto.component.html":
+/*!******************************************************************************************!*\
+  !*** ./src/app/modules/home/components/reserva-contacto/reserva-contacto.component.html ***!
+  \******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/modules/home/components/reserva-contacto/reserva-contacto.component.ts":
+/*!****************************************************************************************!*\
+  !*** ./src/app/modules/home/components/reserva-contacto/reserva-contacto.component.ts ***!
+  \****************************************************************************************/
+/*! exports provided: ReservaContactoComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReservaContactoComponent", function() { return ReservaContactoComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../core/store/actions/contexto.actions */ "./src/app/core/store/actions/contexto.actions.ts");
+/* harmony import */ var _core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../core/store/actions/form.actions */ "./src/app/core/store/actions/form.actions.ts");
+/* harmony import */ var _core_store_actions_calendar_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../core/store/actions/calendar.actions */ "./src/app/core/store/actions/calendar.actions.ts");
+/* harmony import */ var _core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../core/store/actions/reserva.actions */ "./src/app/core/store/actions/reserva.actions.ts");
+/* harmony import */ var _core_store_actions_reservacion_actions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../core/store/actions/reservacion.actions */ "./src/app/core/store/actions/reservacion.actions.ts");
+/* harmony import */ var _core_store_selectors_reserva_selectors__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../core/store/selectors/reserva.selectors */ "./src/app/core/store/selectors/reserva.selectors.ts");
+/* harmony import */ var _core_store_selectors_reservacion_selectors__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../core/store/selectors/reservacion.selectors */ "./src/app/core/store/selectors/reservacion.selectors.ts");
+/* harmony import */ var _shared_models_datos_models__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../../shared/models/datos.models */ "./src/app/shared/models/datos.models.ts");
+/* harmony import */ var _reserva_contacto_dialog_reserva_contacto_dialog_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../reserva-contacto-dialog/reserva-contacto-dialog.component */ "./src/app/modules/home/components/reserva-contacto-dialog/reserva-contacto-dialog.component.ts");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var ReservaContactoComponent = /** @class */ (function () {
+    function ReservaContactoComponent(dialog, store) {
+        this.dialog = dialog;
+        this.store = store;
+    }
+    ReservaContactoComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.datosReserva = new _shared_models_datos_models__WEBPACK_IMPORTED_MODULE_12__["DatosReserva"]();
+        this.subscription = this.store.select(_core_store_selectors_reservacion_selectors__WEBPACK_IMPORTED_MODULE_11__["getReserva"]).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["filter"])(function (x) { return x != undefined && x.codigo != undefined; })).subscribe(function (x) {
+            _this.reserva$ = _this.store.select(_core_store_selectors_reserva_selectors__WEBPACK_IMPORTED_MODULE_10__["getReserva"]);
+            _this.reserva$.subscribe(function (reserva) { return _this.datosReserva.paciente = reserva.paciente; });
+            _this.datosReserva.reserva = x;
+            _this.openDialog(_this.datosReserva);
+        });
+    };
+    ReservaContactoComponent.prototype.ngOnDestroy = function () {
+        this.subscription.unsubscribe();
+    };
+    ReservaContactoComponent.prototype.openDialog = function (datosReserva) {
+        var _this = this;
+        this.dialog.open(_reserva_contacto_dialog_reserva_contacto_dialog_component__WEBPACK_IMPORTED_MODULE_13__["ReservaContactoDialogComponent"], { data: { datosReserva: datosReserva } })
+            .afterClosed().subscribe(function () {
+            //this.store.dispatch(ContextoActions.cleanStore());
+            _this.store.dispatch(_core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_5__["cleanStoreParcialMin"]());
+            _this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_6__["cleanStoreParcial"]());
+            _this.store.dispatch(_core_store_actions_calendar_actions__WEBPACK_IMPORTED_MODULE_7__["cleanStore"]());
+            _this.store.dispatch(_core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_8__["cleanStore"]());
+            _this.store.dispatch(_core_store_actions_reservacion_actions__WEBPACK_IMPORTED_MODULE_9__["cleanStore"]());
+        });
+    };
+    ReservaContactoComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-reserva-contacto',
+            template: __webpack_require__(/*! ./reserva-contacto.component.html */ "./src/app/modules/home/components/reserva-contacto/reserva-contacto.component.html"),
+            styles: [__webpack_require__(/*! ./reserva-contacto.component.css */ "./src/app/modules/home/components/reserva-contacto/reserva-contacto.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialog"],
+            _ngrx_store__WEBPACK_IMPORTED_MODULE_3__["Store"]])
+    ], ReservaContactoComponent);
+    return ReservaContactoComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/modules/home/components/reserva-email-dialog/reserva-email-dialog.component.css":
 /*!*************************************************************************************************!*\
   !*** ./src/app/modules/home/components/reserva-email-dialog/reserva-email-dialog.component.css ***!
@@ -25897,7 +26064,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"data?.datosReserva?.paciente?.codigoEstudio == undefined\">\r\n  <h1 mat-dialog-title>Reserva de turno</h1>\r\n\r\n  <mat-dialog-content class=\"mat-typography\">\r\n    <p *ngIf=\"data?.datosReserva?.paciente\">\r\n      Se le ha enviado un mail a la dirección {{ data.datosReserva.paciente.email}} con un enlace para completar el proceso de solicitud de turno.\r\n    </p>\r\n    <p *ngIf=\"data?.datosReserva?.reserva?.vencimiento\">\r\n      <!--Tiene tiempo hasta el día \r\n      {{ data.datosReserva.reserva.vencimiento | date:'dd/MM/yyyy'}}\r\n      para confirmarlo.-->\r\n      De no ser confirmada durante el transcurso del día, la reserva de turno será cancelada de forma automática.\r\n    </p>\r\n  </mat-dialog-content>\r\n\r\n  <div mat-dialog-actions align=\"center\">\r\n    <button mat-flat-button class=\"button\" [mat-dialog-close]=\"true\" cdkFocusInitial>ACEPTAR</button>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"data?.datosReserva?.paciente?.codigoEstudio\">\r\n  <h1 mat-dialog-title>Solicitud de turno</h1>\r\n\r\n  <mat-dialog-content class=\"mat-typography\">\r\n    <p *ngIf=\"data?.datosReserva?.paciente\">\r\n      Su solicitud ha sido registrada. Nos contactaremos a la brevedad para completar el proceso de solicitud de turno.\r\n    </p>\r\n  </mat-dialog-content>\r\n\r\n  <div mat-dialog-actions align=\"center\">\r\n    <button mat-flat-button class=\"button\" [mat-dialog-close]=\"true\" cdkFocusInitial>ACEPTAR</button>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<h1 mat-dialog-title>Reserva de turno</h1>\r\n\r\n<mat-dialog-content class=\"mat-typography\">\r\n  <p *ngIf=\"data?.datosReserva?.paciente\">\r\n    Se le ha enviado un mail a la dirección {{ data.datosReserva.paciente.email}} con un enlace para completar el proceso de solicitud de turno.\r\n  </p>\r\n  <p *ngIf=\"data?.datosReserva?.reserva?.vencimiento\">\r\n    <!--Tiene tiempo hasta el día \r\n    {{ data.datosReserva.reserva.vencimiento | date:'dd/MM/yyyy'}}\r\n    para confirmarlo.-->\r\n    De no ser confirmada durante el transcurso del día, la reserva de turno será cancelada de forma automática.\r\n  </p>\r\n</mat-dialog-content>\r\n\r\n<div mat-dialog-actions align=\"center\">\r\n  <button mat-flat-button class=\"button\" [mat-dialog-close]=\"true\" cdkFocusInitial>ACEPTAR</button>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -25978,13 +26145,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 /* harmony import */ var _core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../core/store/actions/contexto.actions */ "./src/app/core/store/actions/contexto.actions.ts");
-/* harmony import */ var _core_store_actions_calendar_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../core/store/actions/calendar.actions */ "./src/app/core/store/actions/calendar.actions.ts");
-/* harmony import */ var _core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../core/store/actions/reserva.actions */ "./src/app/core/store/actions/reserva.actions.ts");
-/* harmony import */ var _core_store_actions_reservacion_actions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../core/store/actions/reservacion.actions */ "./src/app/core/store/actions/reservacion.actions.ts");
-/* harmony import */ var _core_store_selectors_reserva_selectors__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../core/store/selectors/reserva.selectors */ "./src/app/core/store/selectors/reserva.selectors.ts");
-/* harmony import */ var _core_store_selectors_reservacion_selectors__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../core/store/selectors/reservacion.selectors */ "./src/app/core/store/selectors/reservacion.selectors.ts");
-/* harmony import */ var _shared_models_datos_models__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../shared/models/datos.models */ "./src/app/shared/models/datos.models.ts");
-/* harmony import */ var _reserva_email_dialog_reserva_email_dialog_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../reserva-email-dialog/reserva-email-dialog.component */ "./src/app/modules/home/components/reserva-email-dialog/reserva-email-dialog.component.ts");
+/* harmony import */ var _core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../core/store/actions/form.actions */ "./src/app/core/store/actions/form.actions.ts");
+/* harmony import */ var _core_store_actions_calendar_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../core/store/actions/calendar.actions */ "./src/app/core/store/actions/calendar.actions.ts");
+/* harmony import */ var _core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../core/store/actions/reserva.actions */ "./src/app/core/store/actions/reserva.actions.ts");
+/* harmony import */ var _core_store_actions_reservacion_actions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../core/store/actions/reservacion.actions */ "./src/app/core/store/actions/reservacion.actions.ts");
+/* harmony import */ var _core_store_selectors_reserva_selectors__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../core/store/selectors/reserva.selectors */ "./src/app/core/store/selectors/reserva.selectors.ts");
+/* harmony import */ var _core_store_selectors_reservacion_selectors__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../core/store/selectors/reservacion.selectors */ "./src/app/core/store/selectors/reservacion.selectors.ts");
+/* harmony import */ var _shared_models_datos_models__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../../shared/models/datos.models */ "./src/app/shared/models/datos.models.ts");
+/* harmony import */ var _reserva_email_dialog_reserva_email_dialog_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../reserva-email-dialog/reserva-email-dialog.component */ "./src/app/modules/home/components/reserva-email-dialog/reserva-email-dialog.component.ts");
+
 
 
 
@@ -26005,9 +26174,9 @@ var ReservaEmailComponent = /** @class */ (function () {
     }
     ReservaEmailComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.datosReserva = new _shared_models_datos_models__WEBPACK_IMPORTED_MODULE_11__["DatosReserva"]();
-        this.subscription = this.store.select(_core_store_selectors_reservacion_selectors__WEBPACK_IMPORTED_MODULE_10__["getReserva"]).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["filter"])(function (x) { return x != undefined && x.codigo != undefined; })).subscribe(function (x) {
-            _this.reserva$ = _this.store.select(_core_store_selectors_reserva_selectors__WEBPACK_IMPORTED_MODULE_9__["getReserva"]);
+        this.datosReserva = new _shared_models_datos_models__WEBPACK_IMPORTED_MODULE_12__["DatosReserva"]();
+        this.subscription = this.store.select(_core_store_selectors_reservacion_selectors__WEBPACK_IMPORTED_MODULE_11__["getReserva"]).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["filter"])(function (x) { return x != undefined && x.codigo != undefined; })).subscribe(function (x) {
+            _this.reserva$ = _this.store.select(_core_store_selectors_reserva_selectors__WEBPACK_IMPORTED_MODULE_10__["getReserva"]);
             _this.reserva$.subscribe(function (reserva) { return _this.datosReserva.paciente = reserva.paciente; });
             _this.datosReserva.reserva = x;
             _this.openDialog(_this.datosReserva);
@@ -26018,13 +26187,14 @@ var ReservaEmailComponent = /** @class */ (function () {
     };
     ReservaEmailComponent.prototype.openDialog = function (datosReserva) {
         var _this = this;
-        this.dialog.open(_reserva_email_dialog_reserva_email_dialog_component__WEBPACK_IMPORTED_MODULE_12__["ReservaEmailDialogComponent"], { data: { datosReserva: datosReserva } })
+        this.dialog.open(_reserva_email_dialog_reserva_email_dialog_component__WEBPACK_IMPORTED_MODULE_13__["ReservaEmailDialogComponent"], { data: { datosReserva: datosReserva } })
             .afterClosed().subscribe(function () {
             //this.store.dispatch(ContextoActions.cleanStore());
             _this.store.dispatch(_core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_5__["cleanStoreParcialMin"]());
-            _this.store.dispatch(_core_store_actions_calendar_actions__WEBPACK_IMPORTED_MODULE_6__["cleanStore"]());
-            _this.store.dispatch(_core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_7__["cleanStore"]());
-            _this.store.dispatch(_core_store_actions_reservacion_actions__WEBPACK_IMPORTED_MODULE_8__["cleanStore"]());
+            _this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_6__["cleanStoreParcial"]());
+            _this.store.dispatch(_core_store_actions_calendar_actions__WEBPACK_IMPORTED_MODULE_7__["cleanStore"]());
+            _this.store.dispatch(_core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_8__["cleanStore"]());
+            _this.store.dispatch(_core_store_actions_reservacion_actions__WEBPACK_IMPORTED_MODULE_9__["cleanStore"]());
         });
     };
     ReservaEmailComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -26146,7 +26316,7 @@ var ReservaComponent = /** @class */ (function () {
             _this.turnoSelected = turno;
             if (!turno) {
                 if (!_this.anonimo) {
-                    _this.router.navigate(['login']); // pueda ver su turno
+                    _this.router.navigate(['/login']); // pueda ver su turno
                 }
                 else {
                     _this.router.navigate(['/home']); // sel de turno
@@ -26155,6 +26325,14 @@ var ReservaComponent = /** @class */ (function () {
         });
         this.obraSocialSelected$.subscribe(function (obraSocial) { return _this.obraSocialSelected = obraSocial; });
         this.planSelected$.subscribe(function (plan) { return _this.planSelected = plan; });
+        this.pacienteSelected$.subscribe(function (pac) {
+            if (pac != undefined) {
+                _this.anonimo = false;
+            }
+            else {
+                _this.anonimo = true;
+            }
+        }).unsubscribe();
         this.pacienteSelected$.subscribe(function (pac) {
             if (pac != undefined) {
                 _this.store.dispatch(_core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_8__["setCodigoPaciente"]({ codigoPaciente: pac.codigo }));
@@ -26174,7 +26352,6 @@ var ReservaComponent = /** @class */ (function () {
                 //this.telefonoArea.disable();
                 //this.telefonoNumero.disable();
                 _this.mail.disable();
-                _this.anonimo = false;
             }
             else {
                 _this.store.dispatch(_core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_8__["setCodigoPaciente"]({ codigoPaciente: undefined }));
@@ -26184,7 +26361,6 @@ var ReservaComponent = /** @class */ (function () {
                 _this.telefonoArea.enable();
                 _this.telefonoNumero.enable();
                 _this.mail.enable();
-                _this.anonimo = true;
             }
         });
         this.errorBackend$.subscribe(function () {
@@ -26321,7 +26497,7 @@ module.exports = ".material-icons{\r\n    display: inline-flex;\r\n    vertical-
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"cuadro-formulario\" *ngIf=\"(estudioSelected$ | async)\">\r\n    <div class=\"overlay\" *ngIf=\"loading\">\r\n        <div class=\"center\" style=\"top: 40%\">\r\n            <mat-spinner ></mat-spinner>\r\n        </div>\r\n    </div>\r\n    <div class=\"row clearfix\">\r\n        <p>\r\n          Estudio seleccionado:\r\n        </p>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <div class=\"col-md-6 texto\">\r\n            <span class=\"material-icons icon-image-preview\">label</span>\r\n            Estudio: {{ servicioSelected?.nombre }} - {{ estudioSelected?.nombre }}\r\n        </div>\r\n        <div class=\"col-md-6 texto\">\r\n            <span class=\"material-icons icon-image-preview\">local_hospital</span>\r\n            Centro Médico: {{ turnoSelected?.centroAtencion.nombre }} \r\n        </div>\r\n        <div class=\"col-md-6 texto\">\r\n            <span class=\"material-icons icon-image-preview\">security</span>\r\n            Obra Social: {{ obraSocialSelected?.nombre }} {{ planSelected?.nombre }} \r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\"></div>\r\n    <div class=\"row clearfix\">\r\n        <p>\r\n            Ingrese los siguientes datos para finalizar la reserva y nos contactaremos con usted\r\n        </p>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <mat-form-field style=\"width: 55%; padding-right: 10%;\">\r\n            <mat-label>DNI</mat-label>\r\n            <input matInput [formControl]=\"dni\" \r\n                   placeholder=\"Ingrese su DNI\" (keyup.enter)=\"onEnterE($event, 'sexoSel')\"\r\n                   (keyup)=\"onEnterE2($event, 'sexoSel')\">\r\n            <mat-error *ngIf=\"dni.invalid\">\r\n                Ingrese su DNI\r\n            </mat-error>\r\n        </mat-form-field>\r\n        <mat-form-field style=\"width: 45%;\">\r\n            <mat-label>Sexo</mat-label>\r\n            <mat-select [formControl]=\"sexo\" name=\"sexoSel\" (selectionChange)=\"onEnterE($event, 'nombreapellidoField')\">\r\n                <mat-option *ngFor=\"let sexo of sexo$\" [value]=\"sexo\">\r\n                    {{sexo}}\r\n                </mat-option>\r\n            </mat-select>\r\n            <mat-error *ngIf=\"sexo.invalid\">Ingrese su sexo</mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <mat-form-field style=\"width: 100%;\">\r\n            <mat-label>Nombre y Apellido</mat-label>\r\n            <input matInput [formControl]=\"nombreapellido\" name=\"nombreapellidoField\"\r\n                   placeholder=\"Ingrese su nombre y apellido\" (keyup.enter)=\"onEnterE($event, 'areaCodeField')\"\r\n                   (keyup)=\"onEnterE2($event, 'nombreapellidoField')\">\r\n            <mat-error *ngIf=\"nombreapellido.invalid\">\r\n                Ingrese su nombre y apellido\r\n            </mat-error>\r\n        </mat-form-field>         \r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <mat-form-field style=\"width: 35%; padding-right: 10%;\">\r\n            <mat-label>Nro Área</mat-label>\r\n            <span matPrefix>0 &nbsp;</span>\r\n            <input matInput [formControl]=\"telefonoArea\" name=\"areaCodeField\" (keyup.enter)=\"onEnterE($event, 'nroTelField')\" \r\n                (keyup)=\"onEnterE2($event, 'nroTelField')\" placeholder=\"Ingrese Nro de Área sin el 0\">\r\n            <mat-error *ngIf=\"telefonoArea.invalid\">\r\n                Ingrese Nro de Área sin el 0\r\n            </mat-error>\r\n        </mat-form-field>\r\n        <mat-form-field style=\"width: 65%;\">\r\n            <mat-label>Nro de Teléfono</mat-label>\r\n            <span matPrefix>15 &nbsp;</span>\r\n            <input matInput [formControl]=\"telefonoNumero\" name=\"nroTelField\" (keyup.enter)=\"onEnterE($event, 'mailField')\" \r\n                (keyup)=\"onEnterE2($event, 'mailField')\" placeholder=\"Ingrese su Teléfono sin el 15\">\r\n            <mat-error *ngIf=\"telefonoNumero.invalid\">\r\n                Ingrese su Teléfono sin el 15\r\n            </mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n    <div class=\"row clearfix\">\r\n        <mat-form-field style=\"width: 100%;\">\r\n            <mat-label>Mail</mat-label>\r\n            <input matInput [formControl]=\"mail\" \r\n                   placeholder=\"Ingrese su mail\" name=\"mailField\">\r\n            <mat-error *ngIf=\"mail.invalid\">\r\n                Ingrese un mail válido\r\n            </mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <mat-form-field style=\"width: 100%;\">\r\n            <mat-label>Días y horarios de preferencia</mat-label>\r\n            <input matInput [formControl]=\"horario\" \r\n                   placeholder=\"Por ejemplo lunes entre las 15 y 18hs\" name=\"horarioField\">\r\n            <mat-error *ngIf=\"horario.invalid\">\r\n                Ingrese los días y horario de preferencia\r\n            </mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <p>\r\n            Adjunte una fotografía de la credencial de la obra social\r\n        </p>\r\n    </div>\r\n\r\n    <div>\r\n        <div class=\"custom-file-upload-container\" (click)=\"uploader1.click()\">\r\n            <svg *ngIf=\"!previewImageC\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"\r\n                fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\r\n                class=\"feather feather-plus-circle\">\r\n                <circle cx=\"12\" cy=\"12\" r=\"10\"></circle>\r\n                <line x1=\"12\" y1=\"8\" x2=\"12\" y2=\"16\"></line>\r\n                <line x1=\"8\" y1=\"12\" x2=\"16\" y2=\"12\"></line>\r\n            </svg>\r\n            <div *ngIf=\"previewImageC\" style=\"padding: 0 0 10px 10px; display: flex;\">\r\n                <img [src]=\"previewImageC\" alt=\"preview\" width=\"30%\" style=\"margin: auto;\">\r\n            </div>\r\n            <label>\r\n                Click aquí para buscar la imagen de la credencial\r\n                <input autofocus #uploader1 type=\"file\" [name]=\"credencial\" [placeholder]=\"credencial\" \r\n                    required accept=\"image/png, image/jpeg, application/pdf\" (change)=\"onChooseImgC($event)\">\r\n            </label>\r\n            <p *ngIf=\"loadedImageC\" class=\"selected-file\" style=\"display: block; color: blue\">{{ loadedImageC }}\r\n                <strong>cargado con exito</strong>\r\n            </p>\r\n\r\n        </div>\r\n        <small class=\"nota\">Los formatos de archivos permitidos son PNG, JPEG o PDF. El\r\n            tamaño máximo permitido es de {{MAXIMO_TAMANIO_IMAGEN/1000000}} MB.</small>\r\n        <p *ngIf=\"!loadedImageC\" style=\"color: red; display: flex; margin-top: 0; padding-left: 10px;\">\r\n            <small> La imagen es requerida </small>\r\n        </p>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <p>\r\n            Adjunte una fotografía del pedido médico\r\n        </p>\r\n        <small class=\"nota\">Los formatos de archivos permitidos son PNG, JPEG o PDF. El\r\n            tamaño máximo permitido es de {{MAXIMO_TAMANIO_IMAGEN/1000000}} MB.</small>\r\n    </div>\r\n\r\n    <div>\r\n        <div class=\"custom-file-upload-container\" (click)=\"uploader2.click()\">\r\n            <svg *ngIf=\"!previewImageP\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"\r\n                fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\r\n                class=\"feather feather-plus-circle\">\r\n                <circle cx=\"12\" cy=\"12\" r=\"10\"></circle>\r\n                <line x1=\"12\" y1=\"8\" x2=\"12\" y2=\"16\"></line>\r\n                <line x1=\"8\" y1=\"12\" x2=\"16\" y2=\"12\"></line>\r\n            </svg>\r\n            <div *ngIf=\"previewImageP\" style=\"padding: 0 0 10px 10px; display: flex;\">\r\n                <img [src]=\"previewImageP\" alt=\"preview\" width=\"30%\" style=\"margin: auto;\">\r\n            </div>\r\n            <label>\r\n                Click aquí para buscar la imagen el pedido médico\r\n                <input autofocus #uploader2 type=\"file\" [name]=\"pedidoMedico\" [placeholder]=\"pedidoMedico\" \r\n                    required accept=\"image/png, image/jpeg, application/pdf\" (change)=\"onChooseImgP($event)\">\r\n            </label>\r\n            <p *ngIf=\"loadedImageP\" class=\"selected-file\" style=\"display: block; color: blue\">{{ loadedImageP }}\r\n                <strong>cargado con exito</strong>\r\n            </p>\r\n\r\n        </div>\r\n        <small class=\"nota\">Los formatos de archivos permitidos son PNG, JPEG o PDF. El\r\n            tamaño máximo permitido es de {{MAXIMO_TAMANIO_IMAGEN/1000000}} MB.</small>\r\n        <p *ngIf=\"!loadedImageP\" style=\"color: red; display: flex; margin-top: 0; padding-left: 10px;\">\r\n            <small> La imagen es requerida </small>\r\n        </p>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <p>\r\n            Si necesita puede subir otros documentos anexos. \r\n        </p>\r\n    </div>\r\n\r\n    <div>\r\n        <div class=\"custom-file-upload-container\" (click)=\"uploader3.click()\">\r\n            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"\r\n                fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\r\n                class=\"feather feather-plus-circle\">\r\n                <circle cx=\"12\" cy=\"12\" r=\"10\"></circle>\r\n                <line x1=\"12\" y1=\"8\" x2=\"12\" y2=\"16\"></line>\r\n                <line x1=\"8\" y1=\"12\" x2=\"16\" y2=\"12\"></line>\r\n            </svg>\r\n            <label>\r\n                Click aquí para subir otra imagen\r\n                <input autofocus #uploader3 type=\"file\" [name]=\"anexo\" [placeholder]=\"anexo\" \r\n                    accept=\"image/png, image/jpeg, application/pdf\" (change)=\"onChooseImgA($event)\">\r\n            </label>\r\n            <p  *ngFor=\"let upAnexo of anexos$\" class=\"selected-file\" style=\"display: block; color: blue\">\r\n                {{upAnexo.name}} <strong>cargado con exito</strong>\r\n            </p>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <button style=\"width: 50%;\" class=\"button-default\" mat-flat-button (click)=\"volverASeleccionDeTurno()\">\r\n            VOLVER\r\n        </button>\r\n        <button style=\"width: 50%;\" class=\"button\" mat-flat-button [disabled]=\"!isValid()\" (click)=\"reservar()\">\r\n            RESERVAR\r\n        </button>\r\n    </div>\r\n    <app-reserva-email></app-reserva-email>\r\n</div>\r\n"
+module.exports = "<div class=\"cuadro-formulario\" *ngIf=\"(estudioSelected$ | async)\">\r\n    <div class=\"overlay\" *ngIf=\"loading\">\r\n        <div class=\"center\" style=\"top: 40%\">\r\n            <mat-spinner ></mat-spinner>\r\n        </div>\r\n    </div>\r\n    <div class=\"row clearfix\">\r\n        <p>\r\n          Estudio seleccionado:\r\n        </p>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <div class=\"col-md-6 texto\">\r\n            <span class=\"material-icons icon-image-preview\">label</span>\r\n            Estudio: {{ servicioSelected?.nombre }} - {{ estudioSelected?.nombre }}\r\n        </div>\r\n        <div class=\"col-md-6 texto\">\r\n            <span class=\"material-icons icon-image-preview\">local_hospital</span>\r\n            Centro Médico: {{ turnoSelected?.centroAtencion.nombre }} \r\n        </div>\r\n        <div class=\"col-md-6 texto\">\r\n            <span class=\"material-icons icon-image-preview\">security</span>\r\n            Obra Social: {{ obraSocialSelected?.nombre }} {{ planSelected?.nombre }} \r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\"></div>\r\n    <div class=\"row clearfix\">\r\n        <p>\r\n            Ingrese los siguientes datos para finalizar la reserva y nos contactaremos con usted\r\n        </p>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <mat-form-field style=\"width: 55%; padding-right: 10%;\">\r\n            <mat-label>DNI</mat-label>\r\n            <input matInput [formControl]=\"dni\" \r\n                   placeholder=\"Ingrese su DNI\" (keyup.enter)=\"onEnterE($event, 'sexoSel')\"\r\n                   (keyup)=\"onEnterE2($event, 'sexoSel')\">\r\n            <mat-error *ngIf=\"dni.invalid\">\r\n                Ingrese su DNI\r\n            </mat-error>\r\n        </mat-form-field>\r\n        <mat-form-field style=\"width: 45%;\">\r\n            <mat-label>Sexo</mat-label>\r\n            <mat-select [formControl]=\"sexo\" name=\"sexoSel\" (selectionChange)=\"onEnterE($event, 'nombreapellidoField')\">\r\n                <mat-option *ngFor=\"let sexo of sexo$\" [value]=\"sexo\">\r\n                    {{sexo}}\r\n                </mat-option>\r\n            </mat-select>\r\n            <mat-error *ngIf=\"sexo.invalid\">Ingrese su sexo</mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <mat-form-field style=\"width: 100%;\">\r\n            <mat-label>Nombre y Apellido</mat-label>\r\n            <input matInput [formControl]=\"nombreapellido\" name=\"nombreapellidoField\"\r\n                   placeholder=\"Ingrese su nombre y apellido\" (keyup.enter)=\"onEnterE($event, 'areaCodeField')\"\r\n                   (keyup)=\"onEnterE2($event, 'nombreapellidoField')\">\r\n            <mat-error *ngIf=\"nombreapellido.invalid\">\r\n                Ingrese su nombre y apellido\r\n            </mat-error>\r\n        </mat-form-field>         \r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <mat-form-field style=\"width: 35%; padding-right: 10%;\">\r\n            <mat-label>Nro Área</mat-label>\r\n            <span matPrefix>0 &nbsp;</span>\r\n            <input matInput [formControl]=\"telefonoArea\" name=\"areaCodeField\" (keyup.enter)=\"onEnterE($event, 'nroTelField')\" \r\n                (keyup)=\"onEnterE2($event, 'nroTelField')\" placeholder=\"Ingrese Nro de Área sin el 0\">\r\n            <mat-error *ngIf=\"telefonoArea.invalid\">\r\n                Ingrese Nro de Área sin el 0\r\n            </mat-error>\r\n        </mat-form-field>\r\n        <mat-form-field style=\"width: 65%;\">\r\n            <mat-label>Nro de Teléfono</mat-label>\r\n            <span matPrefix>15 &nbsp;</span>\r\n            <input matInput [formControl]=\"telefonoNumero\" name=\"nroTelField\" (keyup.enter)=\"onEnterE($event, 'mailField')\" \r\n                (keyup)=\"onEnterE2($event, 'mailField')\" placeholder=\"Ingrese su Teléfono sin el 15\">\r\n            <mat-error *ngIf=\"telefonoNumero.invalid\">\r\n                Ingrese su Teléfono sin el 15\r\n            </mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n    <div class=\"row clearfix\">\r\n        <mat-form-field style=\"width: 100%;\">\r\n            <mat-label>Mail</mat-label>\r\n            <input matInput [formControl]=\"mail\" \r\n                   placeholder=\"Ingrese su mail\" name=\"mailField\">\r\n            <mat-error *ngIf=\"mail.invalid\">\r\n                Ingrese un mail válido\r\n            </mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <mat-form-field style=\"width: 100%;\">\r\n            <mat-label>Días y horarios de preferencia</mat-label>\r\n            <input matInput [formControl]=\"horario\" \r\n                   placeholder=\"Por ejemplo lunes entre las 15 y 18hs\" name=\"horarioField\">\r\n            <mat-error *ngIf=\"horario.invalid\">\r\n                Ingrese los días y horario de preferencia\r\n            </mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <p>\r\n            Adjunte una fotografía de la credencial de la obra social\r\n        </p>\r\n    </div>\r\n\r\n    <div>\r\n        <div class=\"custom-file-upload-container\" (click)=\"uploader1.click()\">\r\n            <svg *ngIf=\"!previewImageC\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"\r\n                fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\r\n                class=\"feather feather-plus-circle\">\r\n                <circle cx=\"12\" cy=\"12\" r=\"10\"></circle>\r\n                <line x1=\"12\" y1=\"8\" x2=\"12\" y2=\"16\"></line>\r\n                <line x1=\"8\" y1=\"12\" x2=\"16\" y2=\"12\"></line>\r\n            </svg>\r\n            <div *ngIf=\"previewImageC\" style=\"padding: 0 0 10px 10px; display: flex;\">\r\n                <img [src]=\"previewImageC\" alt=\"preview\" width=\"30%\" style=\"margin: auto;\">\r\n            </div>\r\n            <label>\r\n                Click aquí para buscar la imagen de la credencial\r\n                <input autofocus #uploader1 type=\"file\" [name]=\"credencial\" [placeholder]=\"credencial\" \r\n                    required accept=\"image/png, image/jpeg, application/pdf\" (change)=\"onChooseImgC($event)\">\r\n            </label>\r\n            <p *ngIf=\"loadedImageC\" class=\"selected-file\" style=\"display: block; color: blue\">{{ loadedImageC }}\r\n                <strong>cargado con exito</strong>\r\n            </p>\r\n\r\n        </div>\r\n        <small class=\"nota\">Los formatos de archivos permitidos son PNG, JPEG o PDF. El\r\n            tamaño máximo permitido es de {{MAXIMO_TAMANIO_IMAGEN/1000000}} MB.</small>\r\n        <p *ngIf=\"!loadedImageC\" style=\"color: red; display: flex; margin-top: 0; padding-left: 10px;\">\r\n            <small> La imagen es requerida </small>\r\n        </p>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <p>\r\n            Adjunte una fotografía del pedido médico\r\n        </p>\r\n        <small class=\"nota\">Los formatos de archivos permitidos son PNG, JPEG o PDF. El\r\n            tamaño máximo permitido es de {{MAXIMO_TAMANIO_IMAGEN/1000000}} MB.</small>\r\n    </div>\r\n\r\n    <div>\r\n        <div class=\"custom-file-upload-container\" (click)=\"uploader2.click()\">\r\n            <svg *ngIf=\"!previewImageP\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"\r\n                fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\r\n                class=\"feather feather-plus-circle\">\r\n                <circle cx=\"12\" cy=\"12\" r=\"10\"></circle>\r\n                <line x1=\"12\" y1=\"8\" x2=\"12\" y2=\"16\"></line>\r\n                <line x1=\"8\" y1=\"12\" x2=\"16\" y2=\"12\"></line>\r\n            </svg>\r\n            <div *ngIf=\"previewImageP\" style=\"padding: 0 0 10px 10px; display: flex;\">\r\n                <img [src]=\"previewImageP\" alt=\"preview\" width=\"30%\" style=\"margin: auto;\">\r\n            </div>\r\n            <label>\r\n                Click aquí para buscar la imagen el pedido médico\r\n                <input autofocus #uploader2 type=\"file\" [name]=\"pedidoMedico\" [placeholder]=\"pedidoMedico\" \r\n                    required accept=\"image/png, image/jpeg, application/pdf\" (change)=\"onChooseImgP($event)\">\r\n            </label>\r\n            <p *ngIf=\"loadedImageP\" class=\"selected-file\" style=\"display: block; color: blue\">{{ loadedImageP }}\r\n                <strong>cargado con exito</strong>\r\n            </p>\r\n\r\n        </div>\r\n        <small class=\"nota\">Los formatos de archivos permitidos son PNG, JPEG o PDF. El\r\n            tamaño máximo permitido es de {{MAXIMO_TAMANIO_IMAGEN/1000000}} MB.</small>\r\n        <p *ngIf=\"!loadedImageP\" style=\"color: red; display: flex; margin-top: 0; padding-left: 10px;\">\r\n            <small> La imagen es requerida </small>\r\n        </p>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <p>\r\n            Si necesita puede subir otros documentos anexos. \r\n        </p>\r\n    </div>\r\n\r\n    <div>\r\n        <div class=\"custom-file-upload-container\" (click)=\"uploader3.click()\">\r\n            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"\r\n                fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\r\n                class=\"feather feather-plus-circle\">\r\n                <circle cx=\"12\" cy=\"12\" r=\"10\"></circle>\r\n                <line x1=\"12\" y1=\"8\" x2=\"12\" y2=\"16\"></line>\r\n                <line x1=\"8\" y1=\"12\" x2=\"16\" y2=\"12\"></line>\r\n            </svg>\r\n            <label>\r\n                Click aquí para subir otra imagen\r\n                <input autofocus #uploader3 type=\"file\" [name]=\"anexo\" [placeholder]=\"anexo\" \r\n                    accept=\"image/png, image/jpeg, application/pdf\" (change)=\"onChooseImgA($event)\">\r\n            </label>\r\n            <p  *ngFor=\"let upAnexo of anexos$\" class=\"selected-file\" style=\"display: block; color: blue\">\r\n                {{upAnexo.name}} <strong>cargado con exito</strong>\r\n            </p>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <button style=\"width: 50%;\" class=\"button-default\" mat-flat-button (click)=\"volverASeleccionDeTurno()\">\r\n            VOLVER\r\n        </button>\r\n        <button style=\"width: 50%;\" class=\"button\" mat-flat-button [disabled]=\"!isValid()\" (click)=\"reservar()\">\r\n            RESERVAR\r\n        </button>\r\n    </div>\r\n    <app-reserva-contacto></app-reserva-contacto>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -26406,9 +26582,9 @@ var ReservaEstudioComponent = /** @class */ (function () {
         var _this = this;
         this.estudioSelected$.subscribe(function (estudio) {
             _this.estudioSelected = estudio;
-            if (!estudio) {
+            if (!estudio || !estudio.codigo) {
                 if (!_this.anonimo) {
-                    _this.router.navigate(['login']); // pueda ver su turno
+                    _this.router.navigate(['/login']); // pueda ver su turno
                 }
                 else {
                     _this.router.navigate(['/home']); // sel de turno
@@ -26418,6 +26594,14 @@ var ReservaEstudioComponent = /** @class */ (function () {
         this.obraSocialSelected$.subscribe(function (obraSocial) { return _this.obraSocialSelected = obraSocial; });
         this.planSelected$.subscribe(function (plan) { return _this.planSelected = plan; });
         this.servicioSelected$.subscribe(function (servicio) { return _this.servicioSelected = servicio; });
+        this.pacienteSelected$.subscribe(function (pac) {
+            if (pac != undefined) {
+                _this.anonimo = false;
+            }
+            else {
+                _this.anonimo = true;
+            }
+        }).unsubscribe();
         this.pacienteSelected$.subscribe(function (pac) {
             if (pac != undefined) {
                 _this.store.dispatch(_core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_6__["setCodigoPaciente"]({ codigoPaciente: pac.codigo }));
@@ -26437,7 +26621,6 @@ var ReservaEstudioComponent = /** @class */ (function () {
                 //this.telefonoArea.disable();
                 //this.telefonoNumero.disable();
                 _this.mail.disable();
-                _this.anonimo = false;
             }
             else {
                 _this.store.dispatch(_core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_6__["setCodigoPaciente"]({ codigoPaciente: undefined }));
@@ -26447,7 +26630,6 @@ var ReservaEstudioComponent = /** @class */ (function () {
                 _this.telefonoArea.enable();
                 _this.telefonoNumero.enable();
                 _this.mail.enable();
-                _this.anonimo = true;
             }
         });
         this.errorBackend$.subscribe(function () {
@@ -26505,6 +26687,10 @@ var ReservaEstudioComponent = /** @class */ (function () {
         }
     };
     ReservaEstudioComponent.prototype.isValid = function () {
+        if (!this.horario.valid //|| !this.pedidoMedico.valid || !this.credencial.valid
+        ) {
+            return false;
+        }
         if (!this.anonimo) {
             return true;
         }
@@ -27108,9 +27294,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_observation_dialog_observation_dialog_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/observation-dialog/observation-dialog.component */ "./src/app/modules/home/components/observation-dialog/observation-dialog.component.ts");
 /* harmony import */ var _pages_reserva_estudio_page_reserva_estudio_page_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./pages/reserva-estudio-page/reserva-estudio-page.component */ "./src/app/modules/home/pages/reserva-estudio-page/reserva-estudio-page.component.ts");
 /* harmony import */ var _components_reservaEstudio_reservaEstudio_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/reservaEstudio/reservaEstudio.component */ "./src/app/modules/home/components/reservaEstudio/reservaEstudio.component.ts");
+/* harmony import */ var _components_reserva_contacto_dialog_reserva_contacto_dialog_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./components/reserva-contacto-dialog/reserva-contacto-dialog.component */ "./src/app/modules/home/components/reserva-contacto-dialog/reserva-contacto-dialog.component.ts");
+/* harmony import */ var _components_reserva_contacto_reserva_contacto_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/reserva-contacto/reserva-contacto.component */ "./src/app/modules/home/components/reserva-contacto/reserva-contacto.component.ts");
 
 
  // to register spanish
+
+
 
 
 
@@ -27150,6 +27340,8 @@ var HomeModule = /** @class */ (function () {
                 _components_reservaEstudio_reservaEstudio_component__WEBPACK_IMPORTED_MODULE_21__["ReservaEstudioComponent"],
                 _components_reserva_email_reserva_email_component__WEBPACK_IMPORTED_MODULE_11__["ReservaEmailComponent"],
                 _components_reserva_email_dialog_reserva_email_dialog_component__WEBPACK_IMPORTED_MODULE_10__["ReservaEmailDialogComponent"],
+                _components_reserva_contacto_reserva_contacto_component__WEBPACK_IMPORTED_MODULE_23__["ReservaContactoComponent"],
+                _components_reserva_contacto_dialog_reserva_contacto_dialog_component__WEBPACK_IMPORTED_MODULE_22__["ReservaContactoDialogComponent"],
                 _components_observation_dialog_observation_dialog_component__WEBPACK_IMPORTED_MODULE_19__["ObservationDialogComponent"],
             ],
             imports: [
@@ -27161,6 +27353,7 @@ var HomeModule = /** @class */ (function () {
             entryComponents: [
                 _components_confirmation_dialog_confirmation_dialog_component__WEBPACK_IMPORTED_MODULE_6__["ConfirmationDialogComponent"],
                 _components_reserva_email_dialog_reserva_email_dialog_component__WEBPACK_IMPORTED_MODULE_10__["ReservaEmailDialogComponent"],
+                _components_reserva_contacto_dialog_reserva_contacto_dialog_component__WEBPACK_IMPORTED_MODULE_22__["ReservaContactoDialogComponent"],
                 _components_observation_dialog_observation_dialog_component__WEBPACK_IMPORTED_MODULE_19__["ObservationDialogComponent"],
             ]
         })

@@ -189,6 +189,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _modules_home_pages_login_page_login_page_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./modules/home/pages/login-page/login-page.component */ "./src/app/modules/home/pages/login-page/login-page.component.ts");
 /* harmony import */ var _modules_home_material_module__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./modules/home/material.module */ "./src/app/modules/home/material.module.ts");
+/* harmony import */ var _modules_home_components_cancelar_dialog_cancelar_dialog_component__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./modules/home/components/cancelar-dialog/cancelar-dialog.component */ "./src/app/modules/home/components/cancelar-dialog/cancelar-dialog.component.ts");
+
 
 
 
@@ -233,6 +235,7 @@ var AppModule = /** @class */ (function () {
             declarations: [
                 _app_component__WEBPACK_IMPORTED_MODULE_12__["AppComponent"],
                 _modules_home_components_confirmation_reserva_confirmation_reserva_component__WEBPACK_IMPORTED_MODULE_23__["ConfirmationReservaComponent"],
+                _modules_home_components_cancelar_dialog_cancelar_dialog_component__WEBPACK_IMPORTED_MODULE_35__["CancelarDialogComponent"],
                 _modules_home_pages_login_page_login_page_component__WEBPACK_IMPORTED_MODULE_33__["LoginPageComponent"]
             ],
             imports: [
@@ -279,6 +282,9 @@ var AppModule = /** @class */ (function () {
                 _shared_shared_module__WEBPACK_IMPORTED_MODULE_17__["SharedModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_24__["MatProgressSpinnerModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_24__["MatRadioModule"]
+            ],
+            entryComponents: [
+                _modules_home_components_cancelar_dialog_cancelar_dialog_component__WEBPACK_IMPORTED_MODULE_35__["CancelarDialogComponent"],
             ],
             providers: [
                 {
@@ -1337,6 +1343,13 @@ var ServiceService = /** @class */ (function () {
             };
             return this.http.post(this.endpoint_infoUsuario, req)
                 .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
+                res.usuario.pacientes.forEach(function (element) {
+                    if (element.fechaNacimiento != undefined) {
+                        var t = element.fechaNacimiento.toString().split(/[- T :]/);
+                        var fd = new Date(Number(t[0]), Number(t[1]) - 1, Number(t[2]));
+                        element.fechaNacimiento = fd;
+                    }
+                });
                 Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["throwErrorIfBadCode"])(res);
                 return res.usuario;
             }));
@@ -2190,7 +2203,7 @@ var _cleanParcial = function (state) {
     //esAnonimo: true,
     //credencial: undefined,
     //infoUsuario: undefined,
-    //stateNew.pacienteSelected = undefined;
+    stateNew.pacienteSelected = undefined;
     stateNew.turnosFuturos = undefined;
     stateNew.codigoTurnoLiberar = undefined;
     return stateNew;
@@ -2201,7 +2214,7 @@ var _cleanParcialMin = function (state) {
     //esAnonimo: true,
     //credencial: undefined,
     //infoUsuario: undefined,
-    //stateNew.pacienteSelected = undefined;
+    stateNew.pacienteSelected = undefined;
     stateNew.turnosFuturos = undefined;
     stateNew.codigoTurnoLiberar = undefined;
     return stateNew;
@@ -2402,7 +2415,6 @@ var _setCentroDeAtencionSelected = function (state, centroDeAtencionSelected) {
 };
 var _setServicioSelected = function (state, servicioSelected) {
     var stateNew = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state);
-    console.log("set " + servicioSelected);
     stateNew.servicioSelected = servicioSelected;
     return stateNew;
 };
@@ -2417,6 +2429,8 @@ var _cleanParcial = function (state) {
     stateNew.planSelected = undefined;
     stateNew.fechaNacimiento = undefined;
     stateNew.profesionalSelected = undefined;
+    stateNew.servicioSelected = undefined;
+    stateNew.estudioSelected = undefined;
     stateNew.especialidadSelected = undefined;
     stateNew.centroDeAtencionSelected = undefined;
     return stateNew;
@@ -2696,7 +2710,6 @@ var selectAllCentrosDeAtencion = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__
 var selectCentroAtencionSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.centroDeAtencionSelected; });
 var selectObraSocialSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.obraSocialSelected; });
 var selectServicioSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) {
-    console.log("select " + formulario.servicioSelected);
     return formulario.servicioSelected;
 });
 var selectCodigoObraSocialPaciente = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectContexto, function (contexto) {
@@ -2746,7 +2759,9 @@ var selectEstudios = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSele
         return servicio.tipoEstudio;
     }
 });
-var selectEstudioSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.estudioSelected; });
+var selectEstudioSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) {
+    return formulario.estudioSelected;
+});
 var selectPlanPaciente = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])([selectCodigoPlanPaciente, selectObraSocialSelected], function (codigoPlan, os) {
     if (os != undefined && os.plan != undefined) {
         var list = os.plan.filter(function (x) { return x.codigo === codigoPlan; });
@@ -2965,6 +2980,72 @@ function throwErrorIfBadCode(res) {
 
 /***/ }),
 
+/***/ "./src/app/modules/home/components/cancelar-dialog/cancelar-dialog.component.css":
+/*!***************************************************************************************!*\
+  !*** ./src/app/modules/home/components/cancelar-dialog/cancelar-dialog.component.css ***!
+  \***************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvaG9tZS9jb21wb25lbnRzL2NhbmNlbGFyLWRpYWxvZy9jYW5jZWxhci1kaWFsb2cuY29tcG9uZW50LmNzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/modules/home/components/cancelar-dialog/cancelar-dialog.component.html":
+/*!****************************************************************************************!*\
+  !*** ./src/app/modules/home/components/cancelar-dialog/cancelar-dialog.component.html ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<h1 mat-dialog-title>Cancelar turno</h1>\r\n\r\n<mat-dialog-content class=\"mat-typography\">\r\n  <p *ngIf=\"data?.turno\">\r\n    Usted tiene agendado un turno \r\n    <span *ngIf=\"data.turno.profesionalEspecialidad?.nombreApellido\">\r\n      con el/la Dr./a. {{ data.turno.profesionalEspecialidad?.nombreApellido}}\r\n    </span>\r\n    el día {{ fecha | date:'dd/MM/yyyy' }} a las {{ data.turno.hora }}      \r\n    en {{ data.turno.centroAtencion?.nombre }}.\r\n  </p>\r\n\r\n  <p>¿Está seguro que desea cancelar este turno?</p>\r\n</mat-dialog-content>\r\n\r\n<div mat-dialog-actions align=\"center\">\r\n  <button mat-flat-button class=\"button-default\" (click)=\"onNoClick()\">NO</button>  \r\n  <button mat-flat-button class=\"button\" [mat-dialog-close]=\"true\" cdkFocusInitial>SI</button>\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/modules/home/components/cancelar-dialog/cancelar-dialog.component.ts":
+/*!**************************************************************************************!*\
+  !*** ./src/app/modules/home/components/cancelar-dialog/cancelar-dialog.component.ts ***!
+  \**************************************************************************************/
+/*! exports provided: CancelarDialogComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CancelarDialogComponent", function() { return CancelarDialogComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+
+
+
+var CancelarDialogComponent = /** @class */ (function () {
+    function CancelarDialogComponent(dialogRef, data) {
+        this.dialogRef = dialogRef;
+        this.data = data;
+        this.fecha = null;
+    }
+    CancelarDialogComponent.prototype.ngOnInit = function () {
+        this.fecha = this.data.turno.fecha;
+    };
+    CancelarDialogComponent.prototype.onNoClick = function () {
+        this.dialogRef.close();
+    };
+    CancelarDialogComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-cancelar-dialog',
+            template: __webpack_require__(/*! ./cancelar-dialog.component.html */ "./src/app/modules/home/components/cancelar-dialog/cancelar-dialog.component.html"),
+            styles: [__webpack_require__(/*! ./cancelar-dialog.component.css */ "./src/app/modules/home/components/cancelar-dialog/cancelar-dialog.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](1, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_angular_material__WEBPACK_IMPORTED_MODULE_2__["MAT_DIALOG_DATA"])),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialogRef"], Object])
+    ], CancelarDialogComponent);
+    return CancelarDialogComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/modules/home/components/confirmation-reserva/confirmation-reserva.component.css":
 /*!*************************************************************************************************!*\
   !*** ./src/app/modules/home/components/confirmation-reserva/confirmation-reserva.component.css ***!
@@ -3172,7 +3253,7 @@ module.exports = ".mat-option {\r\n    margin: 1rem 0;\r\n    overflow: visible;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row clearfix\"  *ngIf=\"(esAnonimo$ | async)\" >\r\n    <div class=\"my-col-30\"></div>\r\n    <div class=\"my-col-40\">\r\n        <div class=\"cuadro-formulario\">\r\n\r\n            <div class=\"row clearfix\">\r\n                <span>\r\n                    Ingrese el usuario y contraseña que le hayan brindado en el centro médico.\r\n                </span>\r\n            </div>\r\n\r\n            <div class=\"row clearfix\">\r\n                <mat-form-field style=\"width: 100%;\">\r\n                    <mat-label>Usuario</mat-label>\r\n                    <input matInput [formControl]=\"username\" name=\"usernameField\"\r\n                        placeholder=\"Ingrese su email\" >\r\n                    <mat-error *ngIf=\"username.invalid\">\r\n                        Usuario inválido\r\n                    </mat-error>\r\n                </mat-form-field>\r\n            </div>\r\n\r\n            <div class=\"row clearfix\">\r\n                <mat-form-field style=\"width: 100%;\">\r\n                    <mat-label>Contraseña</mat-label>\r\n                    <input matInput [formControl]=\"password\" name=\"passwordField\"\r\n                        placeholder=\"Ingrese su password\" type=\"password\">\r\n                    <mat-error *ngIf=\"password.invalid\">\r\n                        Contraseña inválida\r\n                    </mat-error>\r\n                </mat-form-field>\r\n            </div>\r\n\r\n            <div class=\"content\" *ngIf=\"(esAnonimo$ | async)\" >\r\n                <div class=\"row clearfix\">\r\n                    <button class=\"button two-button\" mat-flat-button (click)=\"onCancelar()\">\r\n                        Cancelar\r\n                    </button>                    \r\n                    <button class=\"button two-button\" mat-flat-button (click)=\"onSubmit()\">\r\n                        Ingresar\r\n                    </button>\r\n                </div>\r\n                <div class=\"my-col-60\"><span> </span></div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<div class=\"content\"  *ngIf=\"!(esAnonimo$ | async)\" >\r\n    <div class=\"my-col-40\">\r\n        <button class=\"button one-button\" mat-flat-button (click)=\"logoutAndRedirect()\">\r\n        Cerrar Sesión\r\n        </button>\r\n    </div>\r\n    <div class=\"my-col-60\"><span> </span></div>\r\n</div>\r\n\r\n<div class=\"content\" *ngIf=\"!(esAnonimo$ | async)\">\r\n    <div class=\"my-col-40\">\r\n        <div class=\"cuadro-formulario\">\r\n            <div class=\"row clearfix\">\r\n                <p>\r\n                    PACIENTES \r\n                </p>\r\n                <table mat-table [dataSource]=\"pacientes$ | async\">\r\n\r\n                    <ng-container matColumnDef=\"acciones\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 20%;\">\r\n                        </th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                          <span>\r\n                            <button mat-icon-button matSuffi (click)=\"seleccionar(row)\" ><mat-icon>perm_contact_calendar</mat-icon></button>                              \r\n                        </span>\r\n                            <span>                            \r\n                            <button mat-icon-button matSuffix (click)=\"redirectToTurnos(row)\" ><mat-icon>event_available</mat-icon></button>                              \r\n                          </span>\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <ng-container matColumnDef=\"nombre\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 35%;\">Nombre</th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                            {{row.nombreApellido}}\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <ng-container matColumnDef=\"documento\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 20%;\">Documento</th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                            {{row.dni}}\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <ng-container matColumnDef=\"fecha\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 20%;\">F. Nacimiento</th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                            {{row.fechaNacimiento | date: 'dd/MM/yyyy'}}\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n                    <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\" ></tr>\r\n                </table>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"my-col-60\">\r\n        <div class=\"cuadro-formulario\">\r\n            <div class=\"row clearfix\" *ngIf=\"!((pacienteSelected$ | async) == undefined ||\r\n                    (pacienteSelected$ | async).nombreApellido == undefined)\">\r\n                <p>\r\n                    PRÓXIMOS TURNOS DEL PACIENTE {{ (pacienteSelected$ | async).nombreApellido }}\r\n                </p>\r\n                <table mat-table [dataSource]=\"turnosFuturos$ | async\">\r\n\r\n                    <ng-container matColumnDef=\"acciones\" >\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 5%;\">\r\n                        </th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                          <span>\r\n                            <button mat-icon-button matSuffix (click)=\"cancelarTurno(row)\" ><mat-icon>event_busy</mat-icon></button>                              \r\n                          </span>\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <ng-container matColumnDef=\"fecha\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 10%;\">Fecha</th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                            {{row.fecha | date: 'dd/MM/yyyy'}}\r\n                            {{row.hora}}\r\n                        </td>\r\n                    </ng-container>\r\n                    \r\n                    <ng-container matColumnDef=\"especialidad\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 60%;\">Especialidad</th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                            {{row.profesionalEspecialidad.nombreApellido}} - \r\n                            {{row.profesionalEspecialidad.especialidad?.nombre}}\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <ng-container matColumnDef=\"profesional\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 30%;\">Profesional</th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                            {{row.profesionalEspecialidad.nombreApellido}}\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <ng-container matColumnDef=\"lugar\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 25%;\">Centro de atención</th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                            {{row.centroAtencion.nombre}}\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <tr mat-header-row *matHeaderRowDef=\"displayedColumnsT\"></tr>\r\n                    <tr mat-row *matRowDef=\"let row; columns: displayedColumnsT;\" ></tr>\r\n                </table>                \r\n            </div>\r\n        </div>\r\n    </div>    \r\n</div>\r\n\r\n\r\n\r\n<span  style=\"border: 2px solid transparent;\" #footer autofocus></span>"
+module.exports = "<div class=\"row clearfix\"  *ngIf=\"(esAnonimo$ | async)\" >\r\n    <div class=\"my-col-30\"></div>\r\n    <div class=\"my-col-40\">\r\n        <div class=\"cuadro-formulario\">\r\n\r\n            <div class=\"row clearfix\">\r\n                <span>\r\n                    Ingrese el usuario y contraseña que le hayan brindado en el centro médico.\r\n                </span>\r\n            </div>\r\n\r\n            <div class=\"row clearfix\">\r\n                <mat-form-field style=\"width: 100%;\">\r\n                    <mat-label>Usuario</mat-label>\r\n                    <input matInput [formControl]=\"username\" name=\"usernameField\"\r\n                        placeholder=\"Ingrese su email\" >\r\n                    <mat-error *ngIf=\"username.invalid\">\r\n                        Usuario inválido\r\n                    </mat-error>\r\n                </mat-form-field>\r\n            </div>\r\n\r\n            <div class=\"row clearfix\">\r\n                <mat-form-field style=\"width: 100%;\">\r\n                    <mat-label>Contraseña</mat-label>\r\n                    <input matInput [formControl]=\"password\" name=\"passwordField\"\r\n                        placeholder=\"Ingrese su password\" type=\"password\">\r\n                    <mat-error *ngIf=\"password.invalid\">\r\n                        Contraseña inválida\r\n                    </mat-error>\r\n                </mat-form-field>\r\n            </div>\r\n\r\n            <div class=\"content\" *ngIf=\"(esAnonimo$ | async)\" >\r\n                <div class=\"row clearfix\">\r\n                    <button class=\"button two-button\" mat-flat-button (click)=\"onCancelar()\">\r\n                        Cancelar\r\n                    </button>                    \r\n                    <button class=\"button two-button\" mat-flat-button (click)=\"onSubmit()\">\r\n                        Ingresar\r\n                    </button>\r\n                </div>\r\n                <div class=\"my-col-60\"><span> </span></div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<div class=\"content\"  *ngIf=\"!(esAnonimo$ | async)\" >\r\n    <div class=\"my-col-40\">\r\n        <button class=\"button one-button\" mat-flat-button (click)=\"logoutAndRedirect()\">\r\n        Cerrar Sesión\r\n        </button>\r\n    </div>\r\n    <div class=\"my-col-60\"><span> </span></div>\r\n</div>\r\n\r\n<div class=\"content\" *ngIf=\"!(esAnonimo$ | async)\">\r\n    <div class=\"my-col-40\">\r\n        <div class=\"cuadro-formulario\">\r\n            <div class=\"row clearfix\">\r\n                <p>\r\n                    PACIENTES \r\n                </p>\r\n                <table mat-table [dataSource]=\"pacientes$ | async\">\r\n\r\n                    <ng-container matColumnDef=\"acciones\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 20%;\">\r\n                        </th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                          <span>\r\n                            <button mat-icon-button matSuffi (click)=\"seleccionar(row)\" #tooltip=\"matTooltip\" matTooltip=\"Ver\">\r\n                                <mat-icon>perm_contact_calendar</mat-icon>\r\n                            </button>                              \r\n                        </span>\r\n                            <span>                            \r\n                            <button mat-icon-button matSuffix (click)=\"redirectToTurnos(row)\" #tooltip=\"matTooltip\" matTooltip=\"Reservar turno\">\r\n                                <mat-icon>event_available</mat-icon>\r\n                            </button>                              \r\n                          </span>\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <ng-container matColumnDef=\"nombre\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 35%;\">Nombre</th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                            {{row.nombreApellido}}\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <ng-container matColumnDef=\"documento\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 20%;\">Documento</th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                            {{row.dni}}\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <ng-container matColumnDef=\"fecha\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 20%;\">F. Nacimiento</th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                            {{row.fechaNacimiento | date: 'dd/MM/yyyy'}}\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n                    <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\" ></tr>\r\n                </table>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"my-col-60\">\r\n        <div class=\"cuadro-formulario\">\r\n            <div class=\"row clearfix\" *ngIf=\"!((pacienteSelected$ | async) == undefined ||\r\n                    (pacienteSelected$ | async).nombreApellido == undefined)\">\r\n                <p>\r\n                    PRÓXIMOS TURNOS DEL PACIENTE {{ (pacienteSelected$ | async).nombreApellido }}\r\n                </p>\r\n                <table mat-table [dataSource]=\"turnosFuturos$ | async\">\r\n\r\n                    <ng-container matColumnDef=\"acciones\" >\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 5%;\">\r\n                        </th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                          <span>\r\n                            <button mat-icon-button matSuffix (click)=\"cancelarTurno(row)\" #tooltip=\"matTooltip\" matTooltip=\"Cancelar turno\">\r\n                                <mat-icon>close</mat-icon>\r\n                            </button>                              \r\n                          </span>\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <ng-container matColumnDef=\"fecha\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 10%;\">Fecha</th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                            {{row.fecha | date: 'dd/MM/yyyy'}}\r\n                            {{row.hora}}\r\n                        </td>\r\n                    </ng-container>\r\n                    \r\n                    <ng-container matColumnDef=\"especialidad\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 60%;\">Especialidad</th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                            {{row.profesionalEspecialidad.nombreApellido}} - \r\n                            {{row.profesionalEspecialidad.especialidad?.nombre}}\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <ng-container matColumnDef=\"profesional\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 30%;\">Profesional</th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                            {{row.profesionalEspecialidad.nombreApellido}}\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <ng-container matColumnDef=\"lugar\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 25%;\">Centro de atención</th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                            {{row.centroAtencion.nombre}}\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <tr mat-header-row *matHeaderRowDef=\"displayedColumnsT\"></tr>\r\n                    <tr mat-row *matRowDef=\"let row; columns: displayedColumnsT;\" ></tr>\r\n                </table>                \r\n            </div>\r\n        </div>\r\n    </div>    \r\n</div>\r\n\r\n\r\n\r\n<span  style=\"border: 2px solid transparent;\" #footer autofocus></span>"
 
 /***/ }),
 
@@ -3201,6 +3282,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_models_datos_models__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../../shared/models/datos.models */ "./src/app/shared/models/datos.models.ts");
 /* harmony import */ var _core_store_selectors_form_selectors__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../../core/store/selectors/form.selectors */ "./src/app/core/store/selectors/form.selectors.ts");
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../../../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _components_cancelar_dialog_cancelar_dialog_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../components/cancelar-dialog/cancelar-dialog.component */ "./src/app/modules/home/components/cancelar-dialog/cancelar-dialog.component.ts");
+
+
 
 
 
@@ -3217,8 +3302,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var LoginPageComponent = /** @class */ (function () {
-    function LoginPageComponent(store, router) {
+    function LoginPageComponent(dialog, store, router) {
         var _this = this;
+        this.dialog = dialog;
         this.store = store;
         this.router = router;
         this.username = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]);
@@ -3297,22 +3383,29 @@ var LoginPageComponent = /** @class */ (function () {
     };
     LoginPageComponent.prototype.cancelarTurno = function (turno) {
         var _this = this;
-        this.store.select(_core_store_selectors_contexto_selectors__WEBPACK_IMPORTED_MODULE_11__["getCredencial"]).subscribe(function (c) {
-            if (c != undefined) {
-                var req = {
-                    usuario: c.idUsuario,
-                    password: c.passUsurio,
-                    codigoPaciente: undefined,
-                    codigoTurno: turno.codigo
-                };
-                _this.store.select(_core_store_selectors_contexto_selectors__WEBPACK_IMPORTED_MODULE_11__["getPacienteSelected"]).subscribe(function (p) {
-                    if (p != undefined) {
-                        req.codigoPaciente = p.codigo;
+        this.dialog.open(_components_cancelar_dialog_cancelar_dialog_component__WEBPACK_IMPORTED_MODULE_16__["CancelarDialogComponent"], { data: { turno: turno } })
+            .afterClosed().subscribe(function (result) {
+            if (result) {
+                _this.store.select(_core_store_selectors_contexto_selectors__WEBPACK_IMPORTED_MODULE_11__["getCredencial"]).subscribe(function (c) {
+                    if (c != undefined) {
+                        var req = {
+                            usuario: c.idUsuario,
+                            password: c.passUsurio,
+                            codigoPaciente: undefined,
+                            codigoTurno: turno.codigo
+                        };
+                        _this.store.select(_core_store_selectors_contexto_selectors__WEBPACK_IMPORTED_MODULE_11__["getPacienteSelected"]).subscribe(function (p) {
+                            if (p != undefined) {
+                                req.codigoPaciente = p.codigo;
+                            }
+                            _this.store.dispatch(_core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_7__["setTurnoLiberar"]({ req: req }));
+                        }).unsubscribe();
                     }
-                    _this.store.dispatch(_core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_7__["setTurnoLiberar"]({ req: req }));
                 }).unsubscribe();
             }
-        }).unsubscribe();
+            else {
+            }
+        });
     };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('footer'),
@@ -3324,7 +3417,8 @@ var LoginPageComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./login-page.component.html */ "./src/app/modules/home/pages/login-page/login-page.component.html"),
             styles: [__webpack_require__(/*! ./login-page.component.css */ "./src/app/modules/home/pages/login-page/login-page.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ngrx_store__WEBPACK_IMPORTED_MODULE_4__["Store"],
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_15__["MatDialog"],
+            _ngrx_store__WEBPACK_IMPORTED_MODULE_4__["Store"],
             _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
     ], LoginPageComponent);
     return LoginPageComponent;
