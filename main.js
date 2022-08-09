@@ -2707,7 +2707,10 @@ var selectAllProfesionales = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["cr
 });
 var selectAllEspecialidades = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.especialidades; });
 var selectAllCentrosDeAtencion = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.centrosDeAtencion; });
-var selectCentroAtencionSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.centroDeAtencionSelected; });
+var selectCentroAtencionSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) {
+    console.log(formulario.centroDeAtencionSelected);
+    return formulario.centroDeAtencionSelected;
+});
 var selectObraSocialSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.obraSocialSelected; });
 var selectServicioSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) {
     return formulario.servicioSelected;
