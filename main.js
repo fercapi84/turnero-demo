@@ -190,6 +190,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_home_pages_login_page_login_page_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./modules/home/pages/login-page/login-page.component */ "./src/app/modules/home/pages/login-page/login-page.component.ts");
 /* harmony import */ var _modules_home_material_module__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./modules/home/material.module */ "./src/app/modules/home/material.module.ts");
 /* harmony import */ var _modules_home_components_cancelar_dialog_cancelar_dialog_component__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./modules/home/components/cancelar-dialog/cancelar-dialog.component */ "./src/app/modules/home/components/cancelar-dialog/cancelar-dialog.component.ts");
+/* harmony import */ var _modules_home_components_recuperar_pass_dialog_recuperar_pass_dialog_component__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./modules/home/components/recuperar-pass-dialog/recuperar-pass-dialog.component */ "./src/app/modules/home/components/recuperar-pass-dialog/recuperar-pass-dialog.component.ts");
+
 
 
 
@@ -236,6 +238,7 @@ var AppModule = /** @class */ (function () {
                 _app_component__WEBPACK_IMPORTED_MODULE_12__["AppComponent"],
                 _modules_home_components_confirmation_reserva_confirmation_reserva_component__WEBPACK_IMPORTED_MODULE_23__["ConfirmationReservaComponent"],
                 _modules_home_components_cancelar_dialog_cancelar_dialog_component__WEBPACK_IMPORTED_MODULE_35__["CancelarDialogComponent"],
+                _modules_home_components_recuperar_pass_dialog_recuperar_pass_dialog_component__WEBPACK_IMPORTED_MODULE_36__["RecuperarPassDialogComponent"],
                 _modules_home_pages_login_page_login_page_component__WEBPACK_IMPORTED_MODULE_33__["LoginPageComponent"]
             ],
             imports: [
@@ -285,6 +288,7 @@ var AppModule = /** @class */ (function () {
             ],
             entryComponents: [
                 _modules_home_components_cancelar_dialog_cancelar_dialog_component__WEBPACK_IMPORTED_MODULE_35__["CancelarDialogComponent"],
+                _modules_home_components_recuperar_pass_dialog_recuperar_pass_dialog_component__WEBPACK_IMPORTED_MODULE_36__["RecuperarPassDialogComponent"]
             ],
             providers: [
                 {
@@ -633,7 +637,7 @@ var TokenInterceptor = /** @class */ (function () {
 /*!*************************************!*\
   !*** ./src/app/core/mocks/mocks.ts ***!
   \*************************************/
-/*! exports provided: planMock1, planMock2, planMock3, planMock4, obraSocialMock1, obraSocialMock2, obrasSocialesMocks, especialidadesMocks, centroAtencionMock, estudioMock, estudioMock2, servicio, servicios, centroAtencionesMocks, estudiosMocks, profesionalesDisponibilidadMocks, profesionalesMocks, diasDisponiblesMock, horariosMock, horariosMock2, reservaTurnoMock, turnoMock, tokenMock, pacientes, infoUsuario, turnosFuturosMOCK */
+/*! exports provided: planMock1, planMock2, planMock3, planMock4, obraSocialMock1, obraSocialMock2, obrasSocialesMocks, especialidadesMocks, centroAtencionMock, estudioMock, estudioMock2, servicio, servicios, centroAtencionesMocks, estudiosMocks, profesionalesDisponibilidadMocks, profesionalesMocks, diasDisponiblesMock, horariosMock, horariosMock2, reservaTurnoMock, turnoMock, tokenMock, emptyMock, pacientes, infoUsuario, turnosFuturosMOCK */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -661,6 +665,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reservaTurnoMock", function() { return reservaTurnoMock; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "turnoMock", function() { return turnoMock; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tokenMock", function() { return tokenMock; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "emptyMock", function() { return emptyMock; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pacientes", function() { return pacientes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "infoUsuario", function() { return infoUsuario; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "turnosFuturosMOCK", function() { return turnosFuturosMOCK; });
@@ -869,6 +874,7 @@ var reservaTurnoMock = {
 var turnoMock = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, turno1, { codigoEstudio: 1, profesional: profesionalE1 });
 // tslint:disable-next-line: max-line-length
 var tokenMock = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VybmFtZSI6IlNPUE9SVEVJVCIsIlNlc3Npb25JZCI6IjExYTEzYTljLTc3NmQtNGM3Ni05YjUwLThjZDM0YWIwZThiNCIsImV4cCI6MTU4NzkwMDMxOSwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzNzMvIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzNzMvIn0.n5SJmebQ5BzAwRrWt0JCDoD5qW7rVr7aXVGcGJSk7eY';
+var emptyMock = 'OK';
 var pacientes = [
     {
         codigo: 1,
@@ -992,6 +998,7 @@ var ServiceService = /** @class */ (function () {
         this.endpoint_confirmacionTurno = this.endpointC + '/confirmacionTurno';
         this.endpoint_reservaTurnoEstudio = this.endpointC + '/reservaTurnoEstudio';
         this.endpoint_infoUsuario = this.endpointC + '/InfoUsuario';
+        this.endpoint_recuperarPassword = this.endpointC + '/recuperarPassword';
         this.endpoint_reservaTurnoP = this.endpointC + '/reservaTurnoPaciente';
         this.endpoint_reservaTurnoPEstudio = this.endpointC + '/reservaTurnoPacienteEstudio';
         this.endpoint_turnosFuturos = this.endpointC + '/pacienteTurnosFuturos';
@@ -1330,6 +1337,19 @@ var ServiceService = /** @class */ (function () {
         }
     };
     /******************/
+    ServiceService.prototype.recuperarPassword = function (recuperarPass) {
+        if (this.useMockups) {
+            console.log("call P recuperarPassword: " + recuperarPass.usuario);
+            return Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["getWsFromMock"])(_mocks_mocks__WEBPACK_IMPORTED_MODULE_5__["emptyMock"]);
+        }
+        else {
+            return this.http.post(this.endpoint_recuperarPassword, recuperarPass)
+                .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
+                Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["throwMsjToUser"])(res, 'Se ha envíado la información a su email');
+                return res;
+            }));
+        }
+    };
     ServiceService.prototype.getInfoUsuario = function (credencialUsuario) {
         if (this.useMockups) {
             console.log("call P infoUsuario: " + credencialUsuario);
@@ -1455,7 +1475,7 @@ var setHorariosDisponibles = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["cr
 /*!********************************************************!*\
   !*** ./src/app/core/store/actions/contexto.actions.ts ***!
   \********************************************************/
-/*! exports provided: CLEAN_STORE, CLEAN_STORE_PARCIAL, CLEAN_STORE_PARCIAL_MIN, GET_TOKEN, SET_TOKEN, GET_CREDENCIALUSUARIO, SET_CREDENCIALUSUARIO, GET_USUARIO, SET_USUARIO, GET_PACIENTESELECTED, SET_PACIENTESELECTED, GET_TURNOSPACIENTE, SET_TURNOSPACIENTE, SET_TURNOLIBERAR, GET_TURNOSPACIENTERELOAD, cleanStore, cleanStoreParcialMin, cleanStoreParcial, getToken, setToken, getCredencialUsuario, setCredencialUsuario, getUsuario, setUsuario, getPacienteSelected, setPacienteSelected, getTurnosPacienteReload, getTurnosPaciente, setTurnosPaciente, setTurnoLiberar */
+/*! exports provided: CLEAN_STORE, CLEAN_STORE_PARCIAL, CLEAN_STORE_PARCIAL_MIN, GET_TOKEN, SET_TOKEN, GET_PASSWORDUSUARIO, SET_PASSWORDUSUARIO, GET_CREDENCIALUSUARIO, SET_CREDENCIALUSUARIO, GET_USUARIO, SET_USUARIO, GET_PACIENTESELECTED, SET_PACIENTESELECTED, GET_TURNOSPACIENTE, SET_TURNOSPACIENTE, SET_TURNOLIBERAR, GET_TURNOSPACIENTERELOAD, cleanStore, cleanStoreParcialMin, cleanStoreParcial, getToken, setToken, getCredencialUsuario, setCredencialUsuario, getUsuario, setUsuario, getPasswordUsuario, setPasswordUsuario, getPacienteSelected, setPacienteSelected, getTurnosPacienteReload, getTurnosPaciente, setTurnosPaciente, setTurnoLiberar */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1465,6 +1485,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAN_STORE_PARCIAL_MIN", function() { return CLEAN_STORE_PARCIAL_MIN; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_TOKEN", function() { return GET_TOKEN; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_TOKEN", function() { return SET_TOKEN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_PASSWORDUSUARIO", function() { return GET_PASSWORDUSUARIO; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PASSWORDUSUARIO", function() { return SET_PASSWORDUSUARIO; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_CREDENCIALUSUARIO", function() { return GET_CREDENCIALUSUARIO; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_CREDENCIALUSUARIO", function() { return SET_CREDENCIALUSUARIO; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_USUARIO", function() { return GET_USUARIO; });
@@ -1484,6 +1506,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setCredencialUsuario", function() { return setCredencialUsuario; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUsuario", function() { return getUsuario; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setUsuario", function() { return setUsuario; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPasswordUsuario", function() { return getPasswordUsuario; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setPasswordUsuario", function() { return setPasswordUsuario; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPacienteSelected", function() { return getPacienteSelected; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setPacienteSelected", function() { return setPacienteSelected; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTurnosPacienteReload", function() { return getTurnosPacienteReload; });
@@ -1497,6 +1521,8 @@ var CLEAN_STORE_PARCIAL = '[Contexto] - cleanStoreParcial';
 var CLEAN_STORE_PARCIAL_MIN = '[Contexto] - cleanStoreParcialMin';
 var GET_TOKEN = '[Contexto] - getToken';
 var SET_TOKEN = '[Contexto] - setToken';
+var GET_PASSWORDUSUARIO = '[Contexto] - getPasswordUsuario';
+var SET_PASSWORDUSUARIO = '[Contexto] - setPasswordUsuario';
 var GET_CREDENCIALUSUARIO = '[Contexto] - getCredencialUsuario';
 var SET_CREDENCIALUSUARIO = '[Contexto] - setCredencialUsuario';
 var GET_USUARIO = '[Contexto] - getUsuario';
@@ -1516,6 +1542,8 @@ var getCredencialUsuario = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["crea
 var setCredencialUsuario = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(SET_CREDENCIALUSUARIO, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
 var getUsuario = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(GET_USUARIO, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
 var setUsuario = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(SET_USUARIO, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
+var getPasswordUsuario = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(GET_PASSWORDUSUARIO, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
+var setPasswordUsuario = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(SET_PASSWORDUSUARIO, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
 var getPacienteSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(GET_PACIENTESELECTED);
 var setPacienteSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(SET_PACIENTESELECTED, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["props"])());
 var getTurnosPacienteReload = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createAction"])(GET_TURNOSPACIENTERELOAD);
@@ -1828,6 +1856,11 @@ var ContextEffects = /** @class */ (function () {
         });
         this.getUsuario$ = Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["createEffect"])(function () {
             return _this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_6__["GET_USUARIO"]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["mergeMap"])(function (payload) { return _this.service.getInfoUsuario(payload.credencialUsuario).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (infoUsuario) { return ({ type: _actions_contexto_actions__WEBPACK_IMPORTED_MODULE_6__["SET_USUARIO"], infoUsuario: infoUsuario }); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (error) {
+                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])({ type: _actions_error_actions__WEBPACK_IMPORTED_MODULE_7__["SHOW_ERROR"], error: error.message });
+            })); }));
+        });
+        this.recuperarPass$ = Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["createEffect"])(function () {
+            return _this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_6__["GET_PASSWORDUSUARIO"]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["mergeMap"])(function (payload) { return _this.service.recuperarPassword(payload.usuario).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (rta) { return ({ type: _actions_contexto_actions__WEBPACK_IMPORTED_MODULE_6__["SET_PASSWORDUSUARIO"], undefined: undefined }); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (error) {
                 return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])({ type: _actions_error_actions__WEBPACK_IMPORTED_MODULE_7__["SHOW_ERROR"], error: error.message });
             })); }));
         });
@@ -2708,7 +2741,6 @@ var selectAllProfesionales = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["cr
 var selectAllEspecialidades = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.especialidades; });
 var selectAllCentrosDeAtencion = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.centrosDeAtencion; });
 var selectCentroAtencionSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) {
-    console.log(formulario.centroDeAtencionSelected);
     return formulario.centroDeAtencionSelected;
 });
 var selectObraSocialSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.obraSocialSelected; });
@@ -2953,12 +2985,13 @@ var ErrorUtils = /** @class */ (function () {
 /*!*********************************************!*\
   !*** ./src/app/core/utils/service.utils.ts ***!
   \*********************************************/
-/*! exports provided: getWsFromMock, throwErrorToUser, throwErrorIfBadCode */
+/*! exports provided: getWsFromMock, throwMsjToUser, throwErrorToUser, throwErrorIfBadCode */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getWsFromMock", function() { return getWsFromMock; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "throwMsjToUser", function() { return throwMsjToUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "throwErrorToUser", function() { return throwErrorToUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "throwErrorIfBadCode", function() { return throwErrorIfBadCode; });
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
@@ -2970,6 +3003,14 @@ var DEFAULT_DELAY = 1000;
 function getWsFromMock(mockup, delayMs) {
     delayMs = delayMs ? delayMs : DEFAULT_DELAY;
     return Object(rxjs__WEBPACK_IMPORTED_MODULE_0__["of"])(mockup).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_1__["delay"])(delayMs));
+}
+function throwMsjToUser(res, msjOK) {
+    if (res.respuesta.codigo !== 200) {
+        throw new Error(res.respuesta.codigo + " - " + res.respuesta.mensaje);
+    }
+    else {
+        throw new Error("" + msjOK);
+    }
 }
 function throwErrorToUser(msj) {
     throw new Error("" + msj);
@@ -3168,6 +3209,92 @@ var ConfirmationReservaComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/modules/home/components/recuperar-pass-dialog/recuperar-pass-dialog.component.css":
+/*!***************************************************************************************************!*\
+  !*** ./src/app/modules/home/components/recuperar-pass-dialog/recuperar-pass-dialog.component.css ***!
+  \***************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvaG9tZS9jb21wb25lbnRzL3JlY3VwZXJhci1wYXNzLWRpYWxvZy9yZWN1cGVyYXItcGFzcy1kaWFsb2cuY29tcG9uZW50LmNzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/modules/home/components/recuperar-pass-dialog/recuperar-pass-dialog.component.html":
+/*!****************************************************************************************************!*\
+  !*** ./src/app/modules/home/components/recuperar-pass-dialog/recuperar-pass-dialog.component.html ***!
+  \****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<h1 mat-dialog-title>Recuperar contraseña</h1>\r\n\r\n<mat-dialog-content class=\"mat-typography\">\r\n  <p>\r\n    Indique el usuario brindado en el centro médico (email)\r\n  </p>\r\n  <mat-form-field style=\"width: 100%;\">\r\n    <mat-label>Usuario</mat-label>\r\n    <input matInput [formControl]=\"username\" name=\"usernameField\" placeholder=\"Ingrese su email\" >\r\n  </mat-form-field>  \r\n</mat-dialog-content>\r\n\r\n<div mat-dialog-actions align=\"center\">\r\n  <button mat-flat-button class=\"button-default\" (click)=\"onNoClick()\">Cancelar</button>  \r\n  <button mat-flat-button class=\"button\" (click)=\"recuperarPass()\">Aceptar</button>\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/modules/home/components/recuperar-pass-dialog/recuperar-pass-dialog.component.ts":
+/*!**************************************************************************************************!*\
+  !*** ./src/app/modules/home/components/recuperar-pass-dialog/recuperar-pass-dialog.component.ts ***!
+  \**************************************************************************************************/
+/*! exports provided: RecuperarPassDialogComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RecuperarPassDialogComponent", function() { return RecuperarPassDialogComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
+/* harmony import */ var _shared_models_request_models__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../shared/models/request.models */ "./src/app/shared/models/request.models.ts");
+/* harmony import */ var _core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../core/store/actions/contexto.actions */ "./src/app/core/store/actions/contexto.actions.ts");
+
+
+
+
+
+
+
+var RecuperarPassDialogComponent = /** @class */ (function () {
+    function RecuperarPassDialogComponent(dialogRef, store, data) {
+        this.dialogRef = dialogRef;
+        this.store = store;
+        this.data = data;
+        this.username = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]);
+    }
+    RecuperarPassDialogComponent.prototype.ngOnInit = function () {
+    };
+    RecuperarPassDialogComponent.prototype.onCancelarClick = function () {
+        this.dialogRef.close();
+    };
+    RecuperarPassDialogComponent.prototype.recuperarPass = function () {
+        if (this.username.valid) {
+            var usuario = new _shared_models_request_models__WEBPACK_IMPORTED_MODULE_5__["RecuperarPassRequest"]();
+            usuario.usuario = this.username.value;
+            this.store.dispatch(_core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_6__["getPasswordUsuario"]({ usuario: usuario }));
+            this.dialogRef.close();
+        }
+    };
+    RecuperarPassDialogComponent.prototype.onNoClick = function () {
+        this.dialogRef.close();
+    };
+    RecuperarPassDialogComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-recuperarpass-dialog',
+            template: __webpack_require__(/*! ./recuperar-pass-dialog.component.html */ "./src/app/modules/home/components/recuperar-pass-dialog/recuperar-pass-dialog.component.html"),
+            styles: [__webpack_require__(/*! ./recuperar-pass-dialog.component.css */ "./src/app/modules/home/components/recuperar-pass-dialog/recuperar-pass-dialog.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](2, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_angular_material__WEBPACK_IMPORTED_MODULE_3__["MAT_DIALOG_DATA"])),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialogRef"],
+            _ngrx_store__WEBPACK_IMPORTED_MODULE_4__["Store"], Object])
+    ], RecuperarPassDialogComponent);
+    return RecuperarPassDialogComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/modules/home/material.module.ts":
 /*!*************************************************!*\
   !*** ./src/app/modules/home/material.module.ts ***!
@@ -3245,7 +3372,7 @@ var MaterialModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".mat-option {\r\n    margin: 1rem 0;\r\n    overflow: visible;\r\n    line-height: initial;\r\n    word-wrap: break-word;\r\n    white-space: pre-wrap;\r\n    height: unset;\r\n  }\r\n\r\n  section {\r\n    display: table;\r\n    margin: 8px;\r\n  }\r\n\r\n  table {\r\n    width: 100%;\r\n}\r\n\r\n  /* Structure */\r\n\r\n  .example-container {\r\n    position: relative;\r\n}\r\n\r\n  .example-table-container {\r\n    position: relative;\r\n    max-height: 400px;\r\n    overflow: auto;\r\n}\r\n\r\n  table {\r\n    width: 100%;\r\n}\r\n\r\n  .example-loading-shade {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    bottom: 56px;\r\n    right: 0;\r\n    background: rgba(0, 0, 0, 0.15);\r\n    z-index: 1;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n}\r\n\r\n  .example-rate-limit-reached {\r\n    color: #980000;\r\n    max-width: 360px;\r\n    text-align: center;\r\n}\r\n\r\n  /* Column Widths */\r\n\r\n  .mat-column-number, .mat-column-state {\r\n    max-width: 64px;\r\n}\r\n\r\n  .mat-column-created {\r\n    max-width: 124px;\r\n}\r\n\r\n  .material-icons{\r\n    color: #1061a7 !important;\r\n}\r\n\r\n  .texto {\r\n    line-height:26px;\r\n}\r\n\r\n  .mat-cell.ng-star-inserted:hover {\r\n    background-color: #e2e2e2 !important;\r\n}\r\n\r\n  .mat-radio-button {\r\n    margin-left: 10px;\r\n}\r\n\r\n  ::ng-deep .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {\r\n    opacity: 0.0 !important;     /*click effect color change*/\r\n    background-color: #1061a7 !important;\r\n}\r\n\r\n  ::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {\r\n    background-color: #1061a7 !important;   /*inner circle color change*/\r\n}\r\n\r\n  ::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {\r\n    border-color: #1061a7 !important; /*outer ring color change*/\r\n}\r\n\r\n  td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type {\r\n    padding-left: 5px;\r\n}\r\n\r\n  td.mat-cell, td.mat-footer-cell, th.mat-header-cell {\r\n    padding-left: 5px;\r\n}\r\n\r\n  .mat-icon-button {\r\n    width: 25px;\r\n}\r\n\r\n  @media(max-width: 800px) {\r\n    .two-button {\r\n        width: 42%;\r\n        margin-right: 8px;\r\n        margin-left: 8px;\r\n    }\r\n}\r\n\r\n  @media(min-width: 799px) {\r\n    .two-button {\r\n        width: 40%;\r\n        margin-right: 4%;\r\n        margin-left: 4%;\r\n    }\r\n}\r\n\r\n  @media(max-width: 800px) {\r\n    .one-button {\r\n        width: 45%;\r\n        margin-right: 2%;\r\n        margin-left: 2%;\r\n    }\r\n}\r\n\r\n  @media(min-width: 799px) {\r\n    .one-button {\r\n        width: 35%;\r\n        margin-right: 2%;\r\n        margin-left: 2%;\r\n    }\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kdWxlcy9ob21lL3BhZ2VzL2xvZ2luLXBhZ2UvbG9naW4tcGFnZS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksZUFBZTtJQUNmLGtCQUFrQjtJQUNsQixxQkFBcUI7SUFDckIsc0JBQXNCO0lBQ3RCLHNCQUFzQjtJQUN0QixjQUFjO0dBQ2Y7O0VBRUQ7SUFDRSxlQUFlO0lBQ2YsWUFBWTtHQUNiOztFQUVIO0lBQ0ksWUFBWTtDQUNmOztFQUVELGVBQWU7O0VBRWY7SUFDSSxtQkFBbUI7Q0FDdEI7O0VBRUQ7SUFDSSxtQkFBbUI7SUFDbkIsa0JBQWtCO0lBQ2xCLGVBQWU7Q0FDbEI7O0VBRUQ7SUFDSSxZQUFZO0NBQ2Y7O0VBRUQ7SUFDSSxtQkFBbUI7SUFDbkIsT0FBTztJQUNQLFFBQVE7SUFDUixhQUFhO0lBQ2IsU0FBUztJQUNULGdDQUFnQztJQUNoQyxXQUFXO0lBQ1gsY0FBYztJQUNkLG9CQUFvQjtJQUNwQix3QkFBd0I7Q0FDM0I7O0VBRUQ7SUFDSSxlQUFlO0lBQ2YsaUJBQWlCO0lBQ2pCLG1CQUFtQjtDQUN0Qjs7RUFFRCxtQkFBbUI7O0VBRW5CO0lBQ0ksZ0JBQWdCO0NBQ25COztFQUVEO0lBQ0ksaUJBQWlCO0NBQ3BCOztFQUVEO0lBQ0ksMEJBQTBCO0NBQzdCOztFQUVEO0lBQ0ksaUJBQWlCO0NBQ3BCOztFQUVEO0lBQ0kscUNBQXFDO0NBQ3hDOztFQUVEO0lBQ0ksa0JBQWtCO0NBQ3JCOztFQUVEO0lBQ0ksd0JBQXdCLEtBQUssNkJBQTZCO0lBQzFELHFDQUFxQztDQUN4Qzs7RUFFRDtJQUNJLHFDQUFxQyxHQUFHLDZCQUE2QjtDQUN4RTs7RUFFRDtJQUNJLGlDQUFpQyxDQUFDLDJCQUEyQjtDQUNoRTs7RUFFRDtJQUNJLGtCQUFrQjtDQUNyQjs7RUFFRDtJQUNJLGtCQUFrQjtDQUNyQjs7RUFFRDtJQUNJLFlBQVk7Q0FDZjs7RUFFRDtJQUNJO1FBQ0ksV0FBVztRQUNYLGtCQUFrQjtRQUNsQixpQkFBaUI7S0FDcEI7Q0FDSjs7RUFFRDtJQUNJO1FBQ0ksV0FBVztRQUNYLGlCQUFpQjtRQUNqQixnQkFBZ0I7S0FDbkI7Q0FDSjs7RUFFRDtJQUNJO1FBQ0ksV0FBVztRQUNYLGlCQUFpQjtRQUNqQixnQkFBZ0I7S0FDbkI7Q0FDSjs7RUFFRDtJQUNJO1FBQ0ksV0FBVztRQUNYLGlCQUFpQjtRQUNqQixnQkFBZ0I7S0FDbkI7Q0FDSiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvaG9tZS9wYWdlcy9sb2dpbi1wYWdlL2xvZ2luLXBhZ2UuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5tYXQtb3B0aW9uIHtcclxuICAgIG1hcmdpbjogMXJlbSAwO1xyXG4gICAgb3ZlcmZsb3c6IHZpc2libGU7XHJcbiAgICBsaW5lLWhlaWdodDogaW5pdGlhbDtcclxuICAgIHdvcmQtd3JhcDogYnJlYWstd29yZDtcclxuICAgIHdoaXRlLXNwYWNlOiBwcmUtd3JhcDtcclxuICAgIGhlaWdodDogdW5zZXQ7XHJcbiAgfVxyXG5cclxuICBzZWN0aW9uIHtcclxuICAgIGRpc3BsYXk6IHRhYmxlO1xyXG4gICAgbWFyZ2luOiA4cHg7XHJcbiAgfVxyXG5cclxudGFibGUge1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbn1cclxuXHJcbi8qIFN0cnVjdHVyZSAqL1xyXG5cclxuLmV4YW1wbGUtY29udGFpbmVyIHtcclxuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcclxufVxyXG5cclxuLmV4YW1wbGUtdGFibGUtY29udGFpbmVyIHtcclxuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcclxuICAgIG1heC1oZWlnaHQ6IDQwMHB4O1xyXG4gICAgb3ZlcmZsb3c6IGF1dG87XHJcbn1cclxuXHJcbnRhYmxlIHtcclxuICAgIHdpZHRoOiAxMDAlO1xyXG59XHJcblxyXG4uZXhhbXBsZS1sb2FkaW5nLXNoYWRlIHtcclxuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICAgIHRvcDogMDtcclxuICAgIGxlZnQ6IDA7XHJcbiAgICBib3R0b206IDU2cHg7XHJcbiAgICByaWdodDogMDtcclxuICAgIGJhY2tncm91bmQ6IHJnYmEoMCwgMCwgMCwgMC4xNSk7XHJcbiAgICB6LWluZGV4OiAxO1xyXG4gICAgZGlzcGxheTogZmxleDtcclxuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XHJcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcclxufVxyXG5cclxuLmV4YW1wbGUtcmF0ZS1saW1pdC1yZWFjaGVkIHtcclxuICAgIGNvbG9yOiAjOTgwMDAwO1xyXG4gICAgbWF4LXdpZHRoOiAzNjBweDtcclxuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxufVxyXG5cclxuLyogQ29sdW1uIFdpZHRocyAqL1xyXG5cclxuLm1hdC1jb2x1bW4tbnVtYmVyLCAubWF0LWNvbHVtbi1zdGF0ZSB7XHJcbiAgICBtYXgtd2lkdGg6IDY0cHg7XHJcbn1cclxuXHJcbi5tYXQtY29sdW1uLWNyZWF0ZWQge1xyXG4gICAgbWF4LXdpZHRoOiAxMjRweDtcclxufVxyXG5cclxuLm1hdGVyaWFsLWljb25ze1xyXG4gICAgY29sb3I6ICMxMDYxYTcgIWltcG9ydGFudDtcclxufVxyXG5cclxuLnRleHRvIHtcclxuICAgIGxpbmUtaGVpZ2h0OjI2cHg7XHJcbn1cclxuXHJcbi5tYXQtY2VsbC5uZy1zdGFyLWluc2VydGVkOmhvdmVyIHtcclxuICAgIGJhY2tncm91bmQtY29sb3I6ICNlMmUyZTIgIWltcG9ydGFudDtcclxufVxyXG5cclxuLm1hdC1yYWRpby1idXR0b24ge1xyXG4gICAgbWFyZ2luLWxlZnQ6IDEwcHg7XHJcbn1cclxuXHJcbjo6bmctZGVlcCAubWF0LXJhZGlvLWJ1dHRvbi5tYXQtYWNjZW50IC5tYXQtcmFkaW8tcmlwcGxlIC5tYXQtcmlwcGxlLWVsZW1lbnQge1xyXG4gICAgb3BhY2l0eTogMC4wICFpbXBvcnRhbnQ7ICAgICAvKmNsaWNrIGVmZmVjdCBjb2xvciBjaGFuZ2UqL1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzEwNjFhNyAhaW1wb3J0YW50O1xyXG59XHJcblxyXG46Om5nLWRlZXAgLm1hdC1yYWRpby1idXR0b24ubWF0LWFjY2VudCAubWF0LXJhZGlvLWlubmVyLWNpcmNsZSB7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMTA2MWE3ICFpbXBvcnRhbnQ7ICAgLyppbm5lciBjaXJjbGUgY29sb3IgY2hhbmdlKi9cclxufVxyXG5cclxuOjpuZy1kZWVwLm1hdC1yYWRpby1idXR0b24ubWF0LWFjY2VudC5tYXQtcmFkaW8tY2hlY2tlZCAubWF0LXJhZGlvLW91dGVyLWNpcmNsZSB7XHJcbiAgICBib3JkZXItY29sb3I6ICMxMDYxYTcgIWltcG9ydGFudDsgLypvdXRlciByaW5nIGNvbG9yIGNoYW5nZSovXHJcbn1cclxuXHJcbnRkLm1hdC1jZWxsOmZpcnN0LW9mLXR5cGUsIHRkLm1hdC1mb290ZXItY2VsbDpmaXJzdC1vZi10eXBlLCB0aC5tYXQtaGVhZGVyLWNlbGw6Zmlyc3Qtb2YtdHlwZSB7XHJcbiAgICBwYWRkaW5nLWxlZnQ6IDVweDtcclxufVxyXG5cclxudGQubWF0LWNlbGwsIHRkLm1hdC1mb290ZXItY2VsbCwgdGgubWF0LWhlYWRlci1jZWxsIHtcclxuICAgIHBhZGRpbmctbGVmdDogNXB4O1xyXG59XHJcblxyXG4ubWF0LWljb24tYnV0dG9uIHtcclxuICAgIHdpZHRoOiAyNXB4O1xyXG59XHJcblxyXG5AbWVkaWEobWF4LXdpZHRoOiA4MDBweCkge1xyXG4gICAgLnR3by1idXR0b24ge1xyXG4gICAgICAgIHdpZHRoOiA0MiU7XHJcbiAgICAgICAgbWFyZ2luLXJpZ2h0OiA4cHg7XHJcbiAgICAgICAgbWFyZ2luLWxlZnQ6IDhweDtcclxuICAgIH1cclxufVxyXG5cclxuQG1lZGlhKG1pbi13aWR0aDogNzk5cHgpIHtcclxuICAgIC50d28tYnV0dG9uIHtcclxuICAgICAgICB3aWR0aDogNDAlO1xyXG4gICAgICAgIG1hcmdpbi1yaWdodDogNCU7XHJcbiAgICAgICAgbWFyZ2luLWxlZnQ6IDQlO1xyXG4gICAgfVxyXG59XHJcblxyXG5AbWVkaWEobWF4LXdpZHRoOiA4MDBweCkge1xyXG4gICAgLm9uZS1idXR0b24ge1xyXG4gICAgICAgIHdpZHRoOiA0NSU7XHJcbiAgICAgICAgbWFyZ2luLXJpZ2h0OiAyJTtcclxuICAgICAgICBtYXJnaW4tbGVmdDogMiU7XHJcbiAgICB9XHJcbn1cclxuXHJcbkBtZWRpYShtaW4td2lkdGg6IDc5OXB4KSB7XHJcbiAgICAub25lLWJ1dHRvbiB7XHJcbiAgICAgICAgd2lkdGg6IDM1JTtcclxuICAgICAgICBtYXJnaW4tcmlnaHQ6IDIlO1xyXG4gICAgICAgIG1hcmdpbi1sZWZ0OiAyJTtcclxuICAgIH1cclxufSJdfQ== */"
+module.exports = ".mat-option {\r\n    margin: 1rem 0;\r\n    overflow: visible;\r\n    line-height: initial;\r\n    word-wrap: break-word;\r\n    white-space: pre-wrap;\r\n    height: unset;\r\n  }\r\n\r\n  section {\r\n    display: table;\r\n    margin: 8px;\r\n  }\r\n\r\n  table {\r\n    width: 100%;\r\n}\r\n\r\n  /* Structure */\r\n\r\n  .example-container {\r\n    position: relative;\r\n}\r\n\r\n  .example-table-container {\r\n    position: relative;\r\n    max-height: 400px;\r\n    overflow: auto;\r\n}\r\n\r\n  table {\r\n    width: 100%;\r\n}\r\n\r\n  .example-loading-shade {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    bottom: 56px;\r\n    right: 0;\r\n    background: rgba(0, 0, 0, 0.15);\r\n    z-index: 1;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n}\r\n\r\n  .example-rate-limit-reached {\r\n    color: #980000;\r\n    max-width: 360px;\r\n    text-align: center;\r\n}\r\n\r\n  /* Column Widths */\r\n\r\n  .mat-column-number, .mat-column-state {\r\n    max-width: 64px;\r\n}\r\n\r\n  .mat-column-created {\r\n    max-width: 124px;\r\n}\r\n\r\n  .material-icons{\r\n    color: #1061a7 !important;\r\n}\r\n\r\n  .texto {\r\n    line-height:26px;\r\n}\r\n\r\n  .mat-cell.ng-star-inserted:hover {\r\n    background-color: #e2e2e2 !important;\r\n}\r\n\r\n  .mat-radio-button {\r\n    margin-left: 10px;\r\n}\r\n\r\n  ::ng-deep .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {\r\n    opacity: 0.0 !important;     /*click effect color change*/\r\n    background-color: #1061a7 !important;\r\n}\r\n\r\n  ::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {\r\n    background-color: #1061a7 !important;   /*inner circle color change*/\r\n}\r\n\r\n  ::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {\r\n    border-color: #1061a7 !important; /*outer ring color change*/\r\n}\r\n\r\n  td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type {\r\n    padding-left: 5px;\r\n}\r\n\r\n  td.mat-cell, td.mat-footer-cell, th.mat-header-cell {\r\n    padding-left: 5px;\r\n}\r\n\r\n  .mat-icon-button {\r\n    width: 25px;\r\n}\r\n\r\n  .button-a {\r\n    background-color: #ffffff;\r\n    color: var(--font);\r\n}\r\n\r\n  .button-a:hover {\r\n    background-color: #ffffff;\r\n    color: var(--azul);\r\n}\r\n\r\n  @media(max-width: 800px) {\r\n    .unique-button {\r\n        width: 86%;\r\n        margin-right: 8px;\r\n        margin-left: 8px;\r\n    }\r\n}\r\n\r\n  @media(min-width: 799px) {\r\n    .unique-button {\r\n        width: 88%;\r\n        margin-right: 4%;\r\n        margin-left: 4%;\r\n    }\r\n}\r\n\r\n  @media(max-width: 800px) {\r\n    .two-button {\r\n        width: 42%;\r\n        margin-right: 8px;\r\n        margin-left: 8px;\r\n    }\r\n}\r\n\r\n  @media(min-width: 799px) {\r\n    .two-button {\r\n        width: 40%;\r\n        margin-right: 4%;\r\n        margin-left: 4%;\r\n    }\r\n}\r\n\r\n  @media(max-width: 800px) {\r\n    .one-button {\r\n        width: 45%;\r\n        margin-right: 2%;\r\n        margin-left: 2%;\r\n    }\r\n}\r\n\r\n  @media(min-width: 799px) {\r\n    .one-button {\r\n        width: 35%;\r\n        margin-right: 2%;\r\n        margin-left: 2%;\r\n    }\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kdWxlcy9ob21lL3BhZ2VzL2xvZ2luLXBhZ2UvbG9naW4tcGFnZS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksZUFBZTtJQUNmLGtCQUFrQjtJQUNsQixxQkFBcUI7SUFDckIsc0JBQXNCO0lBQ3RCLHNCQUFzQjtJQUN0QixjQUFjO0dBQ2Y7O0VBRUQ7SUFDRSxlQUFlO0lBQ2YsWUFBWTtHQUNiOztFQUVIO0lBQ0ksWUFBWTtDQUNmOztFQUVELGVBQWU7O0VBRWY7SUFDSSxtQkFBbUI7Q0FDdEI7O0VBRUQ7SUFDSSxtQkFBbUI7SUFDbkIsa0JBQWtCO0lBQ2xCLGVBQWU7Q0FDbEI7O0VBRUQ7SUFDSSxZQUFZO0NBQ2Y7O0VBRUQ7SUFDSSxtQkFBbUI7SUFDbkIsT0FBTztJQUNQLFFBQVE7SUFDUixhQUFhO0lBQ2IsU0FBUztJQUNULGdDQUFnQztJQUNoQyxXQUFXO0lBQ1gsY0FBYztJQUNkLG9CQUFvQjtJQUNwQix3QkFBd0I7Q0FDM0I7O0VBRUQ7SUFDSSxlQUFlO0lBQ2YsaUJBQWlCO0lBQ2pCLG1CQUFtQjtDQUN0Qjs7RUFFRCxtQkFBbUI7O0VBRW5CO0lBQ0ksZ0JBQWdCO0NBQ25COztFQUVEO0lBQ0ksaUJBQWlCO0NBQ3BCOztFQUVEO0lBQ0ksMEJBQTBCO0NBQzdCOztFQUVEO0lBQ0ksaUJBQWlCO0NBQ3BCOztFQUVEO0lBQ0kscUNBQXFDO0NBQ3hDOztFQUVEO0lBQ0ksa0JBQWtCO0NBQ3JCOztFQUVEO0lBQ0ksd0JBQXdCLEtBQUssNkJBQTZCO0lBQzFELHFDQUFxQztDQUN4Qzs7RUFFRDtJQUNJLHFDQUFxQyxHQUFHLDZCQUE2QjtDQUN4RTs7RUFFRDtJQUNJLGlDQUFpQyxDQUFDLDJCQUEyQjtDQUNoRTs7RUFFRDtJQUNJLGtCQUFrQjtDQUNyQjs7RUFFRDtJQUNJLGtCQUFrQjtDQUNyQjs7RUFFRDtJQUNJLFlBQVk7Q0FDZjs7RUFFRDtJQUNJLDBCQUEwQjtJQUMxQixtQkFBbUI7Q0FDdEI7O0VBRUQ7SUFDSSwwQkFBMEI7SUFDMUIsbUJBQW1CO0NBQ3RCOztFQUVEO0lBQ0k7UUFDSSxXQUFXO1FBQ1gsa0JBQWtCO1FBQ2xCLGlCQUFpQjtLQUNwQjtDQUNKOztFQUVEO0lBQ0k7UUFDSSxXQUFXO1FBQ1gsaUJBQWlCO1FBQ2pCLGdCQUFnQjtLQUNuQjtDQUNKOztFQUVEO0lBQ0k7UUFDSSxXQUFXO1FBQ1gsa0JBQWtCO1FBQ2xCLGlCQUFpQjtLQUNwQjtDQUNKOztFQUVEO0lBQ0k7UUFDSSxXQUFXO1FBQ1gsaUJBQWlCO1FBQ2pCLGdCQUFnQjtLQUNuQjtDQUNKOztFQUVEO0lBQ0k7UUFDSSxXQUFXO1FBQ1gsaUJBQWlCO1FBQ2pCLGdCQUFnQjtLQUNuQjtDQUNKOztFQUVEO0lBQ0k7UUFDSSxXQUFXO1FBQ1gsaUJBQWlCO1FBQ2pCLGdCQUFnQjtLQUNuQjtDQUNKIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlcy9ob21lL3BhZ2VzL2xvZ2luLXBhZ2UvbG9naW4tcGFnZS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLm1hdC1vcHRpb24ge1xyXG4gICAgbWFyZ2luOiAxcmVtIDA7XHJcbiAgICBvdmVyZmxvdzogdmlzaWJsZTtcclxuICAgIGxpbmUtaGVpZ2h0OiBpbml0aWFsO1xyXG4gICAgd29yZC13cmFwOiBicmVhay13b3JkO1xyXG4gICAgd2hpdGUtc3BhY2U6IHByZS13cmFwO1xyXG4gICAgaGVpZ2h0OiB1bnNldDtcclxuICB9XHJcblxyXG4gIHNlY3Rpb24ge1xyXG4gICAgZGlzcGxheTogdGFibGU7XHJcbiAgICBtYXJnaW46IDhweDtcclxuICB9XHJcblxyXG50YWJsZSB7XHJcbiAgICB3aWR0aDogMTAwJTtcclxufVxyXG5cclxuLyogU3RydWN0dXJlICovXHJcblxyXG4uZXhhbXBsZS1jb250YWluZXIge1xyXG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG59XHJcblxyXG4uZXhhbXBsZS10YWJsZS1jb250YWluZXIge1xyXG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG4gICAgbWF4LWhlaWdodDogNDAwcHg7XHJcbiAgICBvdmVyZmxvdzogYXV0bztcclxufVxyXG5cclxudGFibGUge1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbn1cclxuXHJcbi5leGFtcGxlLWxvYWRpbmctc2hhZGUge1xyXG4gICAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gICAgdG9wOiAwO1xyXG4gICAgbGVmdDogMDtcclxuICAgIGJvdHRvbTogNTZweDtcclxuICAgIHJpZ2h0OiAwO1xyXG4gICAgYmFja2dyb3VuZDogcmdiYSgwLCAwLCAwLCAwLjE1KTtcclxuICAgIHotaW5kZXg6IDE7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xyXG59XHJcblxyXG4uZXhhbXBsZS1yYXRlLWxpbWl0LXJlYWNoZWQge1xyXG4gICAgY29sb3I6ICM5ODAwMDA7XHJcbiAgICBtYXgtd2lkdGg6IDM2MHB4O1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG59XHJcblxyXG4vKiBDb2x1bW4gV2lkdGhzICovXHJcblxyXG4ubWF0LWNvbHVtbi1udW1iZXIsIC5tYXQtY29sdW1uLXN0YXRlIHtcclxuICAgIG1heC13aWR0aDogNjRweDtcclxufVxyXG5cclxuLm1hdC1jb2x1bW4tY3JlYXRlZCB7XHJcbiAgICBtYXgtd2lkdGg6IDEyNHB4O1xyXG59XHJcblxyXG4ubWF0ZXJpYWwtaWNvbnN7XHJcbiAgICBjb2xvcjogIzEwNjFhNyAhaW1wb3J0YW50O1xyXG59XHJcblxyXG4udGV4dG8ge1xyXG4gICAgbGluZS1oZWlnaHQ6MjZweDtcclxufVxyXG5cclxuLm1hdC1jZWxsLm5nLXN0YXItaW5zZXJ0ZWQ6aG92ZXIge1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2UyZTJlMiAhaW1wb3J0YW50O1xyXG59XHJcblxyXG4ubWF0LXJhZGlvLWJ1dHRvbiB7XHJcbiAgICBtYXJnaW4tbGVmdDogMTBweDtcclxufVxyXG5cclxuOjpuZy1kZWVwIC5tYXQtcmFkaW8tYnV0dG9uLm1hdC1hY2NlbnQgLm1hdC1yYWRpby1yaXBwbGUgLm1hdC1yaXBwbGUtZWxlbWVudCB7XHJcbiAgICBvcGFjaXR5OiAwLjAgIWltcG9ydGFudDsgICAgIC8qY2xpY2sgZWZmZWN0IGNvbG9yIGNoYW5nZSovXHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMTA2MWE3ICFpbXBvcnRhbnQ7XHJcbn1cclxuXHJcbjo6bmctZGVlcCAubWF0LXJhZGlvLWJ1dHRvbi5tYXQtYWNjZW50IC5tYXQtcmFkaW8taW5uZXItY2lyY2xlIHtcclxuICAgIGJhY2tncm91bmQtY29sb3I6ICMxMDYxYTcgIWltcG9ydGFudDsgICAvKmlubmVyIGNpcmNsZSBjb2xvciBjaGFuZ2UqL1xyXG59XHJcblxyXG46Om5nLWRlZXAubWF0LXJhZGlvLWJ1dHRvbi5tYXQtYWNjZW50Lm1hdC1yYWRpby1jaGVja2VkIC5tYXQtcmFkaW8tb3V0ZXItY2lyY2xlIHtcclxuICAgIGJvcmRlci1jb2xvcjogIzEwNjFhNyAhaW1wb3J0YW50OyAvKm91dGVyIHJpbmcgY29sb3IgY2hhbmdlKi9cclxufVxyXG5cclxudGQubWF0LWNlbGw6Zmlyc3Qtb2YtdHlwZSwgdGQubWF0LWZvb3Rlci1jZWxsOmZpcnN0LW9mLXR5cGUsIHRoLm1hdC1oZWFkZXItY2VsbDpmaXJzdC1vZi10eXBlIHtcclxuICAgIHBhZGRpbmctbGVmdDogNXB4O1xyXG59XHJcblxyXG50ZC5tYXQtY2VsbCwgdGQubWF0LWZvb3Rlci1jZWxsLCB0aC5tYXQtaGVhZGVyLWNlbGwge1xyXG4gICAgcGFkZGluZy1sZWZ0OiA1cHg7XHJcbn1cclxuXHJcbi5tYXQtaWNvbi1idXR0b24ge1xyXG4gICAgd2lkdGg6IDI1cHg7XHJcbn1cclxuXHJcbi5idXR0b24tYSB7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjZmZmZmZmO1xyXG4gICAgY29sb3I6IHZhcigtLWZvbnQpO1xyXG59XHJcblxyXG4uYnV0dG9uLWE6aG92ZXIge1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2ZmZmZmZjtcclxuICAgIGNvbG9yOiB2YXIoLS1henVsKTtcclxufVxyXG5cclxuQG1lZGlhKG1heC13aWR0aDogODAwcHgpIHtcclxuICAgIC51bmlxdWUtYnV0dG9uIHtcclxuICAgICAgICB3aWR0aDogODYlO1xyXG4gICAgICAgIG1hcmdpbi1yaWdodDogOHB4O1xyXG4gICAgICAgIG1hcmdpbi1sZWZ0OiA4cHg7XHJcbiAgICB9XHJcbn1cclxuXHJcbkBtZWRpYShtaW4td2lkdGg6IDc5OXB4KSB7XHJcbiAgICAudW5pcXVlLWJ1dHRvbiB7XHJcbiAgICAgICAgd2lkdGg6IDg4JTtcclxuICAgICAgICBtYXJnaW4tcmlnaHQ6IDQlO1xyXG4gICAgICAgIG1hcmdpbi1sZWZ0OiA0JTtcclxuICAgIH1cclxufVxyXG5cclxuQG1lZGlhKG1heC13aWR0aDogODAwcHgpIHtcclxuICAgIC50d28tYnV0dG9uIHtcclxuICAgICAgICB3aWR0aDogNDIlO1xyXG4gICAgICAgIG1hcmdpbi1yaWdodDogOHB4O1xyXG4gICAgICAgIG1hcmdpbi1sZWZ0OiA4cHg7XHJcbiAgICB9XHJcbn1cclxuXHJcbkBtZWRpYShtaW4td2lkdGg6IDc5OXB4KSB7XHJcbiAgICAudHdvLWJ1dHRvbiB7XHJcbiAgICAgICAgd2lkdGg6IDQwJTtcclxuICAgICAgICBtYXJnaW4tcmlnaHQ6IDQlO1xyXG4gICAgICAgIG1hcmdpbi1sZWZ0OiA0JTtcclxuICAgIH1cclxufVxyXG5cclxuQG1lZGlhKG1heC13aWR0aDogODAwcHgpIHtcclxuICAgIC5vbmUtYnV0dG9uIHtcclxuICAgICAgICB3aWR0aDogNDUlO1xyXG4gICAgICAgIG1hcmdpbi1yaWdodDogMiU7XHJcbiAgICAgICAgbWFyZ2luLWxlZnQ6IDIlO1xyXG4gICAgfVxyXG59XHJcblxyXG5AbWVkaWEobWluLXdpZHRoOiA3OTlweCkge1xyXG4gICAgLm9uZS1idXR0b24ge1xyXG4gICAgICAgIHdpZHRoOiAzNSU7XHJcbiAgICAgICAgbWFyZ2luLXJpZ2h0OiAyJTtcclxuICAgICAgICBtYXJnaW4tbGVmdDogMiU7XHJcbiAgICB9XHJcbn0iXX0= */"
 
 /***/ }),
 
@@ -3256,7 +3383,7 @@ module.exports = ".mat-option {\r\n    margin: 1rem 0;\r\n    overflow: visible;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row clearfix\"  *ngIf=\"(esAnonimo$ | async)\" >\r\n    <div class=\"my-col-30\"></div>\r\n    <div class=\"my-col-40\">\r\n        <div class=\"cuadro-formulario\">\r\n\r\n            <div class=\"row clearfix\">\r\n                <span>\r\n                    Ingrese el usuario y contraseña que le hayan brindado en el centro médico.\r\n                </span>\r\n            </div>\r\n\r\n            <div class=\"row clearfix\">\r\n                <mat-form-field style=\"width: 100%;\">\r\n                    <mat-label>Usuario</mat-label>\r\n                    <input matInput [formControl]=\"username\" name=\"usernameField\"\r\n                        placeholder=\"Ingrese su email\" >\r\n                    <mat-error *ngIf=\"username.invalid\">\r\n                        Usuario inválido\r\n                    </mat-error>\r\n                </mat-form-field>\r\n            </div>\r\n\r\n            <div class=\"row clearfix\">\r\n                <mat-form-field style=\"width: 100%;\">\r\n                    <mat-label>Contraseña</mat-label>\r\n                    <input matInput [formControl]=\"password\" name=\"passwordField\"\r\n                        placeholder=\"Ingrese su password\" type=\"password\">\r\n                    <mat-error *ngIf=\"password.invalid\">\r\n                        Contraseña inválida\r\n                    </mat-error>\r\n                </mat-form-field>\r\n            </div>\r\n\r\n            <div class=\"content\" *ngIf=\"(esAnonimo$ | async)\" >\r\n                <div class=\"row clearfix\">\r\n                    <button class=\"button two-button\" mat-flat-button (click)=\"onCancelar()\">\r\n                        Cancelar\r\n                    </button>                    \r\n                    <button class=\"button two-button\" mat-flat-button (click)=\"onSubmit()\">\r\n                        Ingresar\r\n                    </button>\r\n                </div>\r\n                <div class=\"my-col-60\"><span> </span></div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<div class=\"content\"  *ngIf=\"!(esAnonimo$ | async)\" >\r\n    <div class=\"my-col-40\">\r\n        <button class=\"button one-button\" mat-flat-button (click)=\"logoutAndRedirect()\">\r\n        Cerrar Sesión\r\n        </button>\r\n    </div>\r\n    <div class=\"my-col-60\"><span> </span></div>\r\n</div>\r\n\r\n<div class=\"content\" *ngIf=\"!(esAnonimo$ | async)\">\r\n    <div class=\"my-col-40\">\r\n        <div class=\"cuadro-formulario\">\r\n            <div class=\"row clearfix\">\r\n                <p>\r\n                    PACIENTES \r\n                </p>\r\n                <table mat-table [dataSource]=\"pacientes$ | async\">\r\n\r\n                    <ng-container matColumnDef=\"acciones\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 20%;\">\r\n                        </th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                          <span>\r\n                            <button mat-icon-button matSuffi (click)=\"seleccionar(row)\" #tooltip=\"matTooltip\" matTooltip=\"Ver\">\r\n                                <mat-icon>perm_contact_calendar</mat-icon>\r\n                            </button>                              \r\n                        </span>\r\n                            <span>                            \r\n                            <button mat-icon-button matSuffix (click)=\"redirectToTurnos(row)\" #tooltip=\"matTooltip\" matTooltip=\"Reservar turno\">\r\n                                <mat-icon>event_available</mat-icon>\r\n                            </button>                              \r\n                          </span>\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <ng-container matColumnDef=\"nombre\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 35%;\">Nombre</th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                            {{row.nombreApellido}}\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <ng-container matColumnDef=\"documento\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 20%;\">Documento</th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                            {{row.dni}}\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <ng-container matColumnDef=\"fecha\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 20%;\">F. Nacimiento</th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                            {{row.fechaNacimiento | date: 'dd/MM/yyyy'}}\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n                    <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\" ></tr>\r\n                </table>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"my-col-60\">\r\n        <div class=\"cuadro-formulario\">\r\n            <div class=\"row clearfix\" *ngIf=\"!((pacienteSelected$ | async) == undefined ||\r\n                    (pacienteSelected$ | async).nombreApellido == undefined)\">\r\n                <p>\r\n                    PRÓXIMOS TURNOS DEL PACIENTE {{ (pacienteSelected$ | async).nombreApellido }}\r\n                </p>\r\n                <table mat-table [dataSource]=\"turnosFuturos$ | async\">\r\n\r\n                    <ng-container matColumnDef=\"acciones\" >\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 5%;\">\r\n                        </th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                          <span>\r\n                            <button mat-icon-button matSuffix (click)=\"cancelarTurno(row)\" #tooltip=\"matTooltip\" matTooltip=\"Cancelar turno\">\r\n                                <mat-icon>close</mat-icon>\r\n                            </button>                              \r\n                          </span>\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <ng-container matColumnDef=\"fecha\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 10%;\">Fecha</th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                            {{row.fecha | date: 'dd/MM/yyyy'}}\r\n                            {{row.hora}}\r\n                        </td>\r\n                    </ng-container>\r\n                    \r\n                    <ng-container matColumnDef=\"especialidad\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 60%;\">Especialidad</th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                            {{row.profesionalEspecialidad.nombreApellido}} - \r\n                            {{row.profesionalEspecialidad.especialidad?.nombre}}\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <ng-container matColumnDef=\"profesional\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 30%;\">Profesional</th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                            {{row.profesionalEspecialidad.nombreApellido}}\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <ng-container matColumnDef=\"lugar\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 25%;\">Centro de atención</th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                            {{row.centroAtencion.nombre}}\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <tr mat-header-row *matHeaderRowDef=\"displayedColumnsT\"></tr>\r\n                    <tr mat-row *matRowDef=\"let row; columns: displayedColumnsT;\" ></tr>\r\n                </table>                \r\n            </div>\r\n        </div>\r\n    </div>    \r\n</div>\r\n\r\n\r\n\r\n<span  style=\"border: 2px solid transparent;\" #footer autofocus></span>"
+module.exports = "<div class=\"row clearfix\"  *ngIf=\"(esAnonimo$ | async)\" >\r\n    <div class=\"my-col-30\"></div>\r\n    <div class=\"my-col-40\">\r\n        <div class=\"cuadro-formulario\">\r\n\r\n            <div class=\"row clearfix\">\r\n                <span>\r\n                    Ingrese el usuario y contraseña que le hayan brindado en el centro médico.\r\n                </span>\r\n            </div>\r\n\r\n            <div class=\"row clearfix\">\r\n                <mat-form-field style=\"width: 100%;\">\r\n                    <mat-label>Usuario</mat-label>\r\n                    <input matInput [formControl]=\"username\" name=\"usernameField\"\r\n                        placeholder=\"Ingrese su email\" >\r\n                    <mat-error *ngIf=\"username.invalid\">\r\n                        Usuario inválido\r\n                    </mat-error>\r\n                </mat-form-field>\r\n            </div>\r\n\r\n            <div class=\"row clearfix\">\r\n                <mat-form-field style=\"width: 100%;\">\r\n                    <mat-label>Contraseña</mat-label>\r\n                    <input matInput [formControl]=\"password\" name=\"passwordField\"\r\n                        placeholder=\"Ingrese su password\" type=\"password\">\r\n                    <mat-error *ngIf=\"password.invalid\">\r\n                        Contraseña inválida\r\n                    </mat-error>\r\n                </mat-form-field>\r\n            </div>\r\n\r\n            <div class=\"content\" *ngIf=\"(esAnonimo$ | async)\" >\r\n                <div class=\"row clearfix\">\r\n                    <button class=\"button two-button\" mat-flat-button (click)=\"onCancelar()\">\r\n                        Cancelar\r\n                    </button>                    \r\n                    <button class=\"button two-button\" mat-flat-button (click)=\"onSubmit()\">\r\n                        Ingresar\r\n                    </button>\r\n                </div>\r\n                <div class=\"row clearfix\">\r\n                    <a class=\"button-a unique-button\" mat-flat-button (click)=\"onPopupPassword()\">\r\n                        Olvidé mi contraseña\r\n                    </a>                    \r\n                </div>\r\n                <div class=\"my-col-60\"><span> </span></div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<div class=\"content\"  *ngIf=\"!(esAnonimo$ | async)\" >\r\n    <div class=\"my-col-40\">\r\n        <button class=\"button one-button\" mat-flat-button (click)=\"logoutAndRedirect()\">\r\n        Cerrar Sesión\r\n        </button>\r\n    </div>\r\n    <div class=\"my-col-60\"><span> </span></div>\r\n</div>\r\n\r\n<div class=\"content\" *ngIf=\"!(esAnonimo$ | async)\">\r\n    <div class=\"my-col-40\">\r\n        <div class=\"cuadro-formulario\">\r\n            <div class=\"row clearfix\">\r\n                <p>\r\n                    PACIENTES \r\n                </p>\r\n                <table mat-table [dataSource]=\"pacientes$ | async\">\r\n\r\n                    <ng-container matColumnDef=\"acciones\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 20%;\">\r\n                        </th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                          <span>\r\n                            <button mat-icon-button matSuffi (click)=\"seleccionar(row)\" #tooltip=\"matTooltip\" matTooltip=\"Ver\">\r\n                                <mat-icon>perm_contact_calendar</mat-icon>\r\n                            </button>                              \r\n                        </span>\r\n                            <span>                            \r\n                            <button mat-icon-button matSuffix (click)=\"redirectToTurnos(row)\" #tooltip=\"matTooltip\" matTooltip=\"Reservar turno\">\r\n                                <mat-icon>event_available</mat-icon>\r\n                            </button>                              \r\n                          </span>\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <ng-container matColumnDef=\"nombre\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 35%;\">Nombre</th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                            {{row.nombreApellido}}\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <ng-container matColumnDef=\"documento\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 20%;\">Documento</th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                            {{row.dni}}\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <ng-container matColumnDef=\"fecha\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 20%;\">F. Nacimiento</th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                            {{row.fechaNacimiento | date: 'dd/MM/yyyy'}}\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n                    <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\" ></tr>\r\n                </table>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"my-col-60\">\r\n        <div class=\"cuadro-formulario\">\r\n            <div class=\"row clearfix\" *ngIf=\"!((pacienteSelected$ | async) == undefined ||\r\n                    (pacienteSelected$ | async).nombreApellido == undefined)\">\r\n                <p>\r\n                    PRÓXIMOS TURNOS DEL PACIENTE {{ (pacienteSelected$ | async).nombreApellido }}\r\n                </p>\r\n                <table mat-table [dataSource]=\"turnosFuturos$ | async\">\r\n\r\n                    <ng-container matColumnDef=\"acciones\" >\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 5%;\">\r\n                        </th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                          <span>\r\n                            <button mat-icon-button matSuffix (click)=\"cancelarTurno(row)\" #tooltip=\"matTooltip\" matTooltip=\"Cancelar turno\">\r\n                                <mat-icon>close</mat-icon>\r\n                            </button>                              \r\n                          </span>\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <ng-container matColumnDef=\"fecha\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 10%;\">Fecha</th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                            {{row.fecha | date: 'dd/MM/yyyy'}}\r\n                            {{row.hora}}\r\n                        </td>\r\n                    </ng-container>\r\n                    \r\n                    <ng-container matColumnDef=\"especialidad\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 60%;\">Especialidad</th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                            {{row.profesionalEspecialidad.nombreApellido}} - \r\n                            {{row.profesionalEspecialidad.especialidad?.nombre}}\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <ng-container matColumnDef=\"profesional\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 30%;\">Profesional</th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                            {{row.profesionalEspecialidad.nombreApellido}}\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <ng-container matColumnDef=\"lugar\">\r\n                        <th mat-header-cell *matHeaderCellDef style=\"width: 25%;\">Centro de atención</th>\r\n                        <td mat-cell *matCellDef=\"let row\">\r\n                            {{row.centroAtencion.nombre}}\r\n                        </td>\r\n                    </ng-container>\r\n\r\n                    <tr mat-header-row *matHeaderRowDef=\"displayedColumnsT\"></tr>\r\n                    <tr mat-row *matRowDef=\"let row; columns: displayedColumnsT;\" ></tr>\r\n                </table>                \r\n            </div>\r\n        </div>\r\n    </div>    \r\n</div>\r\n\r\n\r\n\r\n<span  style=\"border: 2px solid transparent;\" #footer autofocus></span>"
 
 /***/ }),
 
@@ -3287,6 +3414,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../../../environments/environment */ "./src/environments/environment.ts");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _components_cancelar_dialog_cancelar_dialog_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../components/cancelar-dialog/cancelar-dialog.component */ "./src/app/modules/home/components/cancelar-dialog/cancelar-dialog.component.ts");
+/* harmony import */ var _components_recuperar_pass_dialog_recuperar_pass_dialog_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../components/recuperar-pass-dialog/recuperar-pass-dialog.component */ "./src/app/modules/home/components/recuperar-pass-dialog/recuperar-pass-dialog.component.ts");
+
 
 
 
@@ -3357,12 +3486,22 @@ var LoginPageComponent = /** @class */ (function () {
         this.seleccionar(paciente);
         this.router.navigate(['/home/dashboard']);
     };
+    LoginPageComponent.prototype.onPopupPassword = function () {
+        this.dialog.open(_components_recuperar_pass_dialog_recuperar_pass_dialog_component__WEBPACK_IMPORTED_MODULE_17__["RecuperarPassDialogComponent"], { data: { undefined: undefined } })
+            .afterClosed().subscribe(function (result) {
+            if (result) {
+                // msj
+            }
+            else {
+            }
+        });
+    };
     LoginPageComponent.prototype.onSubmit = function () {
         var credencialUsuario = new _shared_models_datos_models__WEBPACK_IMPORTED_MODULE_12__["Credencial"]();
         credencialUsuario.idUsuario = this.username.value;
         credencialUsuario.passUsurio = this.password.value;
         this.store.dispatch(_core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_7__["setCredencialUsuario"]({ credencialUsuario: credencialUsuario }));
-        this.store.dispatch(_core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_7__["getUsuario"]({ credencialUsuario: credencialUsuario })); // TODO:
+        this.store.dispatch(_core_store_actions_contexto_actions__WEBPACK_IMPORTED_MODULE_7__["getUsuario"]({ credencialUsuario: credencialUsuario }));
     };
     LoginPageComponent.prototype.seleccionar = function (paciente) {
         var _this = this;
@@ -3916,7 +4055,7 @@ var LiberarTFRespuesta = /** @class */ (function (_super) {
 /*!*************************************************!*\
   !*** ./src/app/shared/models/request.models.ts ***!
   \*************************************************/
-/*! exports provided: DatosFormulario, BusquedaRequest, BusquedaProfesionalesRequest, BusquedaDiasDisponiblesRequest, BusquedaHorariosRequest, BusquedaTFRequest, ReservaTurnoEstudioRequest, ReservaTurnoRequest, ConfirmacionTurnoRequest, LiberarTFRequest */
+/*! exports provided: DatosFormulario, BusquedaRequest, BusquedaProfesionalesRequest, BusquedaDiasDisponiblesRequest, BusquedaHorariosRequest, RecuperarPassRequest, BusquedaTFRequest, ReservaTurnoEstudioRequest, ReservaTurnoRequest, ConfirmacionTurnoRequest, LiberarTFRequest */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3926,6 +4065,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BusquedaProfesionalesRequest", function() { return BusquedaProfesionalesRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BusquedaDiasDisponiblesRequest", function() { return BusquedaDiasDisponiblesRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BusquedaHorariosRequest", function() { return BusquedaHorariosRequest; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RecuperarPassRequest", function() { return RecuperarPassRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BusquedaTFRequest", function() { return BusquedaTFRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReservaTurnoEstudioRequest", function() { return ReservaTurnoEstudioRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReservaTurnoRequest", function() { return ReservaTurnoRequest; });
@@ -3966,6 +4106,12 @@ var BusquedaHorariosRequest = /** @class */ (function (_super) {
     }
     return BusquedaHorariosRequest;
 }(BusquedaDiasDisponiblesRequest));
+
+var RecuperarPassRequest = /** @class */ (function () {
+    function RecuperarPassRequest() {
+    }
+    return RecuperarPassRequest;
+}());
 
 var BusquedaTFRequest = /** @class */ (function () {
     function BusquedaTFRequest() {
