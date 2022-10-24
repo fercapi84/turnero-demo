@@ -25265,7 +25265,7 @@ var FormularioComponent = /** @class */ (function () {
         this.estudios$ = store.select(_core_store_selectors_form_selectors__WEBPACK_IMPORTED_MODULE_11__["selectEstudios"]);
         this.especialidades$ = store.select(_core_store_selectors_form_selectors__WEBPACK_IMPORTED_MODULE_11__["selectAllEspecialidades"]);
         this.profesionales$ = store.select(_core_store_selectors_form_selectors__WEBPACK_IMPORTED_MODULE_11__["selectAllProfesionales"]);
-        this.centrosDeAtencion$ = store.select(_core_store_selectors_form_selectors__WEBPACK_IMPORTED_MODULE_11__["selectAllCentrosDeAtencion"]);
+        this.centrosDeAtencion$ = store.select(_core_store_selectors_form_selectors__WEBPACK_IMPORTED_MODULE_11__["selectCentrosDeAtencion"]);
         this.maxDate = new Date();
         this.startDate = new Date(1980, 0, 1);
     }
@@ -25401,6 +25401,7 @@ var FormularioComponent = /** @class */ (function () {
         // this.cleanResultadoDisponibilidad();
         this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_8__["setServicioSelected"]({ servicioSelected: value }));
         this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_8__["setEstudioSelected"]({ estudioSelected: undefined }));
+        this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_8__["setCentroDeAtencionSelected"]({ centroDeAtencionSelected: undefined }));
         this.estudio.setValue(undefined);
         setTimeout(function () {
             if (_this.servicio.value != undefined &&
@@ -25551,17 +25552,17 @@ var FormularioComponent = /** @class */ (function () {
     };
     FormularioComponent.prototype.cambiarFiltroTipoTurno = function (event) {
         if (event != undefined) {
-            if (event.value != _shared_models_constants__WEBPACK_IMPORTED_MODULE_14__["tipoTurnoConsulta"]) {
-                this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_8__["setServicioSelected"]({ servicioSelected: undefined }));
-                this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_8__["setEstudioSelected"]({ estudioSelected: undefined }));
-                this.estudio.setValue('');
-            }
-            if (event.value != _shared_models_constants__WEBPACK_IMPORTED_MODULE_14__["tipoTurnoEstudio"]) {
-                this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_8__["setProfesionalSelected"]({ profesionalSelected: undefined }));
-                this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_8__["setEspecialidadSelected"]({ especialidadSelected: undefined }));
-                this.profesional.setValue('');
-                this.especialidad.setValue('');
-            }
+            this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_8__["setServicioSelected"]({ servicioSelected: undefined }));
+            this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_8__["setEstudioSelected"]({ estudioSelected: undefined }));
+            this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_8__["setCentroDeAtencionSelected"]({ centroDeAtencionSelected: undefined }));
+            this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_8__["setProfesionalSelected"]({ profesionalSelected: undefined }));
+            this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_8__["setEspecialidadSelected"]({ especialidadSelected: undefined }));
+            this.store.dispatch(_core_store_actions_form_actions__WEBPACK_IMPORTED_MODULE_8__["setCentroDeAtencionSelected"]({ centroDeAtencionSelected: undefined }));
+            this.centroAtencion.setValue('');
+            this.servicio.setValue('');
+            this.estudio.setValue('');
+            this.profesional.setValue('');
+            this.especialidad.setValue('');
         }
     };
     FormularioComponent.prototype.redirectReserva = function (estudio) {

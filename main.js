@@ -731,6 +731,9 @@ var servicio = {
     nombre: 'RESONANCIA',
     tipoEstudio: [
         estudioMock, estudioMock2
+    ],
+    centroAtencion: [
+        centroAtencionMock
     ]
 };
 var servicios = [servicio];
@@ -1150,6 +1153,13 @@ var ServiceService = /** @class */ (function () {
             return this.http.get(this.endpoint_estudios)
                 .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
                 Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["throwErrorIfBadCode"])(res);
+                res.servicio.forEach(function (element) {
+                    element.centroAtencion.forEach(function (ss) {
+                        if (ss.nombre.trim.length == 0) {
+                            ss.nombre = "codigo " + ss.codigo + " sin nombre";
+                        }
+                    });
+                });
                 return res.servicio.sort(function (a, b) {
                     if (a.nombre > b.nombre)
                         return 1;
@@ -2712,7 +2722,7 @@ var getCountError = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelec
 /*!********************************************************!*\
   !*** ./src/app/core/store/selectors/form.selectors.ts ***!
   \********************************************************/
-/*! exports provided: selectFormulario, selectContexto, selectAllObrasSociales, selectAllServicios, selectAllProfesionales, selectAllEspecialidades, selectAllCentrosDeAtencion, selectCentroAtencionSelected, selectObraSocialSelected, selectServicioSelected, selectCodigoObraSocialPaciente, selectCodigoPlanPaciente, selectObraSocialPaciente, selectPlanes, selectEstudios, selectEstudioSelected, selectPlanPaciente, selectPlanSelected, selectProfComboSelected, selectEspecialidadComboSelected, selectFechaNacimiento, selectBusqueda, selectBusquedaProfesionales, selectDatosFormulario */
+/*! exports provided: selectFormulario, selectContexto, selectAllObrasSociales, selectAllServicios, selectAllProfesionales, selectAllEspecialidades, selectAllCentrosDeAtencion, selectCentroAtencionSelected, selectObraSocialSelected, selectServicioSelected, selectCentrosDeAtencion, selectCodigoObraSocialPaciente, selectCodigoPlanPaciente, selectObraSocialPaciente, selectPlanes, selectEstudios, selectEstudioSelected, selectPlanPaciente, selectPlanSelected, selectProfComboSelected, selectEspecialidadComboSelected, selectFechaNacimiento, selectBusqueda, selectBusquedaProfesionales, selectDatosFormulario */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2727,6 +2737,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectCentroAtencionSelected", function() { return selectCentroAtencionSelected; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectObraSocialSelected", function() { return selectObraSocialSelected; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectServicioSelected", function() { return selectServicioSelected; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectCentrosDeAtencion", function() { return selectCentrosDeAtencion; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectCodigoObraSocialPaciente", function() { return selectCodigoObraSocialPaciente; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectCodigoPlanPaciente", function() { return selectCodigoPlanPaciente; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectObraSocialPaciente", function() { return selectObraSocialPaciente; });
@@ -2767,6 +2778,12 @@ var selectCentroAtencionSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0
 var selectObraSocialSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) { return formulario.obraSocialSelected; });
 var selectServicioSelected = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFormulario, function (formulario) {
     return formulario.servicioSelected;
+});
+var selectCentrosDeAtencion = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])([selectServicioSelected, selectFormulario], function (servicio, formulario) {
+    if (servicio) {
+        return servicio.centroAtencion;
+    }
+    return formulario.centrosDeAtencion;
 });
 var selectCodigoObraSocialPaciente = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectContexto, function (contexto) {
     if (contexto.pacienteSelected != undefined) {
