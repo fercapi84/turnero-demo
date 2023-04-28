@@ -26283,7 +26283,7 @@ module.exports = ".material-icons{\r\n    display: inline-flex;\r\n    vertical-
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"cuadro-formulario\" *ngIf=\"(turnoSelected$ | async)\">\r\n    <div class=\"overlay\" *ngIf=\"loading\">\r\n        <div class=\"center\" style=\"top: 40%\">\r\n            <mat-spinner ></mat-spinner>\r\n        </div>\r\n    </div>\r\n    <div class=\"row clearfix\">\r\n        <p>\r\n          Turno seleccionado:\r\n        </p>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <div class=\"col-md-6 texto\">\r\n            <span class=\"material-icons icon-image-preview\">calendar_today</span>\r\n            Fecha y hora: {{turnoSelected?.fecha | date: 'dd/MM/yyyy'}} {{turnoSelected?.hora}}\r\n        </div>\r\n        <div class=\"col-md-6 texto\">\r\n            <span class=\"material-icons icon-image-preview\">local_hospital</span>\r\n            Centro Médico: {{ turnoSelected?.centroAtencion.nombre }} \r\n        </div>\r\n        <div class=\"col-md-6 texto\">\r\n            <span class=\"material-icons icon-image-preview\">person</span>\r\n            Profesional: {{ turnoSelected?.profesional?.nombreApellido }}\r\n        </div>\r\n        <div class=\"col-md-6 texto\">\r\n            <span class=\"material-icons icon-image-preview\">work</span>\r\n            Especialidad: {{ turnoSelected?.profesional?.especialidad?.nombre }} \r\n        </div>\r\n        <div class=\"col-md-6 texto\" *ngIf=\"turnoSelected?.observaciones == ''\">\r\n            <span class=\"material-icons icon-image-preview\">security</span>\r\n            Obra Social: {{ obraSocialSelected?.nombre }} {{ planSelected?.nombre }} \r\n        </div>\r\n        <div class=\"col-md-6 texto\" *ngIf=\"turnoSelected?.observaciones\">\r\n            <span class=\"material-icons icon-image-preview\">security</span>\r\n            Obra Social: PARTICULARES\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\" *ngIf=\"turnoSelected?.observaciones\">        \r\n        <div class=\"col-md-12 texto\" *ngIf=\"turnoSelected?.observaciones\">\r\n            <span class=\"material-icons icon-image-preview\">warning</span>\r\n            Observaciones: \r\n                <span *ngIf=\"turnoSelected?.observaciones1\">\r\n                    {{ turnoSelected?.observaciones1 }} - \r\n                </span>\r\n                {{ turnoSelected?.observaciones3 }}\r\n\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\"></div>\r\n    <div class=\"row clearfix\">\r\n        <p>\r\n            Ingrese los siguientes datos para finalizar la reserva del turno\r\n        </p>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <mat-form-field style=\"width: 55%; padding-right: 10%;\">\r\n            <mat-label>DNI</mat-label>\r\n            <input matInput [formControl]=\"dni\" \r\n                   placeholder=\"Ingrese su DNI\" (keyup.enter)=\"onEnterE($event, 'sexoSel')\"\r\n                   (keyup)=\"onEnterE2($event, 'sexoSel')\">\r\n            <mat-error *ngIf=\"dni.invalid\">\r\n                Ingrese su DNI\r\n            </mat-error>\r\n        </mat-form-field>\r\n        <mat-form-field style=\"width: 45%;\">\r\n            <mat-label>Sexo</mat-label>\r\n            <mat-select [formControl]=\"sexo\" name=\"sexoSel\" (selectionChange)=\"onEnterE($event, 'nombreapellidoField')\">\r\n                <mat-option *ngFor=\"let sexo of sexo$\" [value]=\"sexo\">\r\n                    {{sexo}}\r\n                </mat-option>\r\n            </mat-select>\r\n            <mat-error *ngIf=\"sexo.invalid\">Ingrese su sexo</mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <mat-form-field style=\"width: 100%;\">\r\n            <mat-label>Nombre y Apellido</mat-label>\r\n            <input matInput [formControl]=\"nombreapellido\" name=\"nombreapellidoField\"\r\n                   placeholder=\"Ingrese su nombre y apellido\" (keyup.enter)=\"onEnterE($event, 'areaCodeField')\"\r\n                   (keyup)=\"onEnterE2($event, 'nombreapellidoField')\">\r\n            <mat-error *ngIf=\"nombreapellido.invalid\">\r\n                Ingrese su nombre y apellido\r\n            </mat-error>\r\n        </mat-form-field>         \r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <mat-form-field style=\"width: 35%; padding-right: 10%;\">\r\n            <mat-label>Nro Área</mat-label>\r\n            <span matPrefix>0 &nbsp;</span>\r\n            <input matInput [formControl]=\"telefonoArea\" name=\"areaCodeField\" (keyup.enter)=\"onEnterE($event, 'nroTelField')\" \r\n                (keyup)=\"onEnterE2($event, 'nroTelField')\" placeholder=\"Ingrese Nro de Área sin el 0\">\r\n            <mat-error *ngIf=\"telefonoArea.invalid\">\r\n                Ingrese Nro de Área sin el 0\r\n            </mat-error>\r\n        </mat-form-field>\r\n        <mat-form-field style=\"width: 65%;\">\r\n            <mat-label>Nro de Teléfono</mat-label>\r\n            <span matPrefix>15 &nbsp;</span>\r\n            <input matInput [formControl]=\"telefonoNumero\" name=\"nroTelField\" (keyup.enter)=\"onEnterE($event, 'mailField')\" \r\n                (keyup)=\"onEnterE2($event, 'mailField')\" placeholder=\"Ingrese su Teléfono sin el 15\">\r\n            <mat-error *ngIf=\"telefonoNumero.invalid\">\r\n                Ingrese su Teléfono sin el 15\r\n            </mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n    <div class=\"row clearfix\">\r\n        <mat-form-field style=\"width: 100%;\">\r\n            <mat-label>Mail</mat-label>\r\n            <input matInput [formControl]=\"mail\" \r\n                   placeholder=\"Ingrese su mail\" name=\"mailField\">\r\n            <mat-error *ngIf=\"mail.invalid\">\r\n                Ingrese un mail válido\r\n            </mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <button style=\"width: 50%;\" class=\"button-default\" mat-flat-button (click)=\"volverASeleccionDeTurno()\">\r\n            VOLVER\r\n        </button>\r\n        <button style=\"width: 50%;\" class=\"button\" mat-flat-button [disabled]=\"!isValid()\" (click)=\"reservar()\">\r\n            RESERVAR\r\n        </button>\r\n    </div>\r\n    <app-reserva-email></app-reserva-email>\r\n</div>\r\n"
+module.exports = "<div class=\"cuadro-formulario\" *ngIf=\"(turnoSelected$ | async)\">\r\n    <div class=\"overlay\" *ngIf=\"loading\">\r\n        <div class=\"center\" style=\"top: 40%\">\r\n            <mat-spinner ></mat-spinner>\r\n        </div>\r\n    </div>\r\n    <div class=\"row clearfix\">\r\n        <p>\r\n          Turno seleccionado:\r\n        </p>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <div class=\"col-md-6 texto\">\r\n            <span class=\"material-icons icon-image-preview\">calendar_today</span>\r\n            Fecha y hora: {{turnoSelected?.fecha | date: 'dd/MM/yyyy'}} {{turnoSelected?.hora}}\r\n        </div>\r\n        <div class=\"col-md-6 texto\">\r\n            <span class=\"material-icons icon-image-preview\">local_hospital</span>\r\n            Centro Médico: {{ turnoSelected?.centroAtencion.nombre }} \r\n        </div>\r\n        <div class=\"col-md-6 texto\">\r\n            <span class=\"material-icons icon-image-preview\">person</span>\r\n            Profesional: {{ turnoSelected?.profesional?.nombreApellido }}\r\n        </div>\r\n        <div class=\"col-md-6 texto\">\r\n            <span class=\"material-icons icon-image-preview\">work</span>\r\n            Especialidad: {{ turnoSelected?.profesional?.especialidad?.nombre }} \r\n        </div>\r\n        <div class=\"col-md-6 texto\" *ngIf=\"turnoSelected?.observaciones == ''\">\r\n            <span class=\"material-icons icon-image-preview\">security</span>\r\n            Obra Social: {{ obraSocialSelected?.nombre }} {{ planSelected?.nombre }} \r\n        </div>\r\n        <div class=\"col-md-6 texto\" *ngIf=\"turnoSelected?.observaciones\">\r\n            <span class=\"material-icons icon-image-preview\">security</span>\r\n            Obra Social: PARTICULARES\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\" *ngIf=\"turnoSelected?.observaciones\">        \r\n        <div class=\"col-md-12 texto\" *ngIf=\"turnoSelected?.observaciones\">\r\n            <span class=\"material-icons icon-image-preview\">warning</span>\r\n            Observaciones: \r\n                <span *ngIf=\"turnoSelected?.observaciones1\">\r\n                    {{ turnoSelected?.observaciones1 }} - \r\n                </span>\r\n                {{ turnoSelected?.observaciones3 }}\r\n\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\"></div>\r\n    <div class=\"row clearfix\">\r\n        <p>\r\n            Ingrese los siguientes datos para finalizar la reserva del turno\r\n        </p>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <mat-form-field style=\"width: 55%; padding-right: 10%;\">\r\n            <mat-label>DNI</mat-label>\r\n            <input matInput [formControl]=\"dni\" \r\n                   placeholder=\"Ingrese su DNI\" (keyup.enter)=\"onEnterE($event, 'sexoSel')\"\r\n                   (keyup)=\"onEnterE2($event, 'sexoSel')\">\r\n            <mat-error *ngIf=\"dni.invalid\">\r\n                Ingrese su DNI\r\n            </mat-error>\r\n        </mat-form-field>\r\n        <mat-form-field style=\"width: 45%;\">\r\n            <mat-label>Sexo</mat-label>\r\n            <mat-select [formControl]=\"sexo\" name=\"sexoSel\" (selectionChange)=\"onEnterE($event, 'nombreapellidoField')\">\r\n                <mat-option *ngFor=\"let sexo of sexo$\" [value]=\"sexo\">\r\n                    {{sexo}}\r\n                </mat-option>\r\n            </mat-select>\r\n            <mat-error *ngIf=\"sexo.invalid\">Ingrese su sexo</mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n\r\n<!--\r\n    <div class=\"row clearfix\">\r\n        <mat-form-field style=\"width: 100%;\">\r\n            <mat-label>Nombre y Apellido</mat-label>\r\n            <input matInput [formControl]=\"nombreapellido\" name=\"nombreapellidoField\"\r\n                   placeholder=\"Ingrese su nombre y apellido\" (keyup.enter)=\"onEnterE($event, 'areaCodeField')\"\r\n                   (keyup)=\"onEnterE2($event, 'nombreapellidoField')\">\r\n            <mat-error *ngIf=\"nombreapellido.invalid\">\r\n                Ingrese su nombre y apellido\r\n            </mat-error>\r\n        </mat-form-field>         \r\n    </div>\r\n -->\r\n\r\n    <div class=\"row clearfix\">\r\n        <mat-form-field style=\"width: 55%; padding-right: 10%;\">\r\n            <mat-label>Apellido</mat-label>\r\n            <input matInput [formControl]=\"apellido\" name=\"apellidoField\"\r\n                placeholder=\"Ingrese su apellido\" (keyup.enter)=\"onEnterE($event, 'nombreField')\"\r\n                (keyup)=\"onEnterE2($event, 'nombreField')\">\r\n            <mat-error *ngIf=\"apellido.invalid\">\r\n                Ingrese su apellido\r\n            </mat-error>\r\n        </mat-form-field>         \r\n        <mat-form-field style=\"width: 45%;\">\r\n            <mat-label>Nombre</mat-label>\r\n            <input matInput [formControl]=\"nombre\" name=\"nombreField\"\r\n                placeholder=\"Ingrese su nombre\" (keyup.enter)=\"onEnterE($event, 'areaCodeField')\"\r\n                (keyup)=\"onEnterE2($event, 'areaCodeField')\">\r\n            <mat-error *ngIf=\"nombre.invalid\">\r\n                Ingrese su nombre\r\n            </mat-error>\r\n        </mat-form-field>       \r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <mat-form-field style=\"width: 35%; padding-right: 10%;\">\r\n            <mat-label>Nro Área</mat-label>\r\n            <span matPrefix>0 &nbsp;</span>\r\n            <input matInput [formControl]=\"telefonoArea\" name=\"areaCodeField\" (keyup.enter)=\"onEnterE($event, 'nroTelField')\" \r\n                (keyup)=\"onEnterE2($event, 'nroTelField')\" placeholder=\"Ingrese Nro de Área sin el 0\">\r\n            <mat-error *ngIf=\"telefonoArea.invalid\">\r\n                Ingrese Nro de Área sin el 0\r\n            </mat-error>\r\n        </mat-form-field>\r\n        <mat-form-field style=\"width: 65%;\">\r\n            <mat-label>Nro de Teléfono</mat-label>\r\n            <span matPrefix>15 &nbsp;</span>\r\n            <input matInput [formControl]=\"telefonoNumero\" name=\"nroTelField\" (keyup.enter)=\"onEnterE($event, 'mailField')\" \r\n                (keyup)=\"onEnterE2($event, 'mailField')\" placeholder=\"Ingrese su Teléfono sin el 15\">\r\n            <mat-error *ngIf=\"telefonoNumero.invalid\">\r\n                Ingrese su Teléfono sin el 15\r\n            </mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n    <div class=\"row clearfix\">\r\n        <mat-form-field style=\"width: 100%;\">\r\n            <mat-label>Mail</mat-label>\r\n            <input matInput [formControl]=\"mail\" \r\n                   placeholder=\"Ingrese su mail\" name=\"mailField\">\r\n            <mat-error *ngIf=\"mail.invalid\">\r\n                Ingrese un mail válido\r\n            </mat-error>\r\n        </mat-form-field>\r\n    </div>\r\n\r\n    <div class=\"row clearfix\">\r\n        <button style=\"width: 50%;\" class=\"button-default\" mat-flat-button (click)=\"volverASeleccionDeTurno()\">\r\n            VOLVER\r\n        </button>\r\n        <button style=\"width: 50%;\" class=\"button\" mat-flat-button [disabled]=\"!isValid()\" (click)=\"reservar()\">\r\n            RESERVAR\r\n        </button>\r\n    </div>\r\n    <app-reserva-email></app-reserva-email>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -26341,7 +26341,9 @@ var ReservaComponent = /** @class */ (function () {
             _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].maxLength(10),
             _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].pattern(/^\d+$/)]);
         this.sexo = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]);
-        this.nombreapellido = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]);
+        //nombreapellido = new FormControl('', [Validators.required]);
+        this.nombre = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]);
+        this.apellido = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]);
         this.telefonoArea = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required,
             _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(2),
             _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].maxLength(5),
@@ -26352,7 +26354,7 @@ var ReservaComponent = /** @class */ (function () {
             _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].pattern(/^\d+$/)]);
         this.mail = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required,
             _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')]);
-        this.sexo$ = [_shared_models_constants__WEBPACK_IMPORTED_MODULE_15__["sexoFemenino"], _shared_models_constants__WEBPACK_IMPORTED_MODULE_15__["sexoMasculino"]];
+        this.sexo$ = [_shared_models_constants__WEBPACK_IMPORTED_MODULE_15__["sexoFemenino"], _shared_models_constants__WEBPACK_IMPORTED_MODULE_15__["sexoMasculino"], _shared_models_constants__WEBPACK_IMPORTED_MODULE_15__["sexoOtro"]];
         this.loading = false;
         this.anonimo = true;
         this.turnoSelected$ = store.select(_core_store_selectors_reserva_selectors__WEBPACK_IMPORTED_MODULE_13__["getTurnoSelected"]);
@@ -26391,8 +26393,10 @@ var ReservaComponent = /** @class */ (function () {
                 _this.store.dispatch(_core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_8__["setCodigoPaciente"]({ codigoPaciente: pac.codigo }));
                 _this.store.dispatch(_core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_8__["setCodigoPaciente"]({ codigoPaciente: pac.codigo }));
                 _this.dni.setValue(pac.dni);
-                _this.sexo.setValue(pac.sexo == _shared_models_constants__WEBPACK_IMPORTED_MODULE_15__["sexoF"] ? _shared_models_constants__WEBPACK_IMPORTED_MODULE_15__["sexoFemenino"] : _shared_models_constants__WEBPACK_IMPORTED_MODULE_15__["sexoMasculino"]);
-                _this.nombreapellido.setValue(pac.nombreApellido);
+                _this.sexo.setValue(pac.sexo == _shared_models_constants__WEBPACK_IMPORTED_MODULE_15__["sexoF"] ? _shared_models_constants__WEBPACK_IMPORTED_MODULE_15__["sexoFemenino"] : (pac.sexo == _shared_models_constants__WEBPACK_IMPORTED_MODULE_15__["sexoM"] ? _shared_models_constants__WEBPACK_IMPORTED_MODULE_15__["sexoMasculino"] : _shared_models_constants__WEBPACK_IMPORTED_MODULE_15__["sexoOtro"]));
+                //this.nombreapellido.setValue(pac.nombreApellido);
+                _this.nombre.setValue(pac.nombre);
+                _this.apellido.setValue(pac.apellido);
                 if (pac.telefono != undefined) {
                     _this.telefonoArea.setValue(pac.telefono.area);
                     _this.telefonoNumero.setValue(pac.telefono.numero);
@@ -26400,7 +26404,8 @@ var ReservaComponent = /** @class */ (function () {
                 _this.mail.setValue(pac.email);
                 _this.dni.disable();
                 _this.sexo.disable();
-                _this.nombreapellido.disable();
+                _this.nombre.disable();
+                _this.apellido.disable();
                 //this.telefonoArea.disable();
                 //this.telefonoNumero.disable();
                 _this.mail.disable();
@@ -26409,7 +26414,8 @@ var ReservaComponent = /** @class */ (function () {
                 _this.store.dispatch(_core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_8__["setCodigoPaciente"]({ codigoPaciente: undefined }));
                 _this.dni.enable();
                 _this.sexo.enable();
-                _this.nombreapellido.enable();
+                _this.nombre.enable();
+                _this.apellido.enable();
                 _this.telefonoArea.enable();
                 _this.telefonoNumero.enable();
                 _this.mail.enable();
@@ -26424,8 +26430,9 @@ var ReservaComponent = /** @class */ (function () {
         this.fechaNacimientoSelected$.subscribe(function (fechaNacimiento) { return _this.fechaNacimientoSelected = fechaNacimiento; });
         var paciente = new _shared_models_datos_models__WEBPACK_IMPORTED_MODULE_16__["Paciente"]();
         paciente.dni = this.dni.value;
-        paciente.sexo = this.sexo.value === _shared_models_constants__WEBPACK_IMPORTED_MODULE_15__["sexoFemenino"] ? _shared_models_constants__WEBPACK_IMPORTED_MODULE_15__["sexoF"] : _shared_models_constants__WEBPACK_IMPORTED_MODULE_15__["sexoM"];
-        paciente.nombreApellido = this.nombreapellido.value.trim();
+        paciente.sexo = this.sexo.value === _shared_models_constants__WEBPACK_IMPORTED_MODULE_15__["sexoFemenino"] ? _shared_models_constants__WEBPACK_IMPORTED_MODULE_15__["sexoF"] : (this.sexo.value === _shared_models_constants__WEBPACK_IMPORTED_MODULE_15__["sexoMasculino"] ? _shared_models_constants__WEBPACK_IMPORTED_MODULE_15__["sexoM"] : _shared_models_constants__WEBPACK_IMPORTED_MODULE_15__["sexoO"]);
+        //paciente.nombreApellido = this.nombreapellido.value.trim();
+        paciente.nombreApellido = this.apellido.value.trim() + ' ' + this.nombre.value.trim();
         var telefono = new _shared_models_datos_models__WEBPACK_IMPORTED_MODULE_16__["Telefono"]();
         telefono.area = this.telefonoArea.value;
         telefono.numero = this.telefonoNumero.value;
@@ -26478,7 +26485,7 @@ var ReservaComponent = /** @class */ (function () {
             return true;
         }
         var result = false;
-        if (this.dni.valid && this.sexo.valid && this.nombreapellido.valid &&
+        if (this.dni.valid && this.sexo.valid && this.nombre.valid && this.apellido.valid &&
             this.telefonoArea.valid && this.telefonoNumero.valid && this.mail.valid) {
             result = true;
         }
@@ -26615,7 +26622,7 @@ var ReservaEstudioComponent = /** @class */ (function () {
         this.credencial = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required);
         this.anexo = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required);
         this.pedidoMedico = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required);
-        this.sexo$ = [_shared_models_constants__WEBPACK_IMPORTED_MODULE_12__["sexoFemenino"], _shared_models_constants__WEBPACK_IMPORTED_MODULE_12__["sexoMasculino"]];
+        this.sexo$ = [_shared_models_constants__WEBPACK_IMPORTED_MODULE_12__["sexoFemenino"], _shared_models_constants__WEBPACK_IMPORTED_MODULE_12__["sexoMasculino"], _shared_models_constants__WEBPACK_IMPORTED_MODULE_12__["sexoOtro"]];
         this.anexos$ = [];
         this.varios = [];
         this.loading = false;
@@ -26661,7 +26668,7 @@ var ReservaEstudioComponent = /** @class */ (function () {
                 _this.store.dispatch(_core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_6__["setCodigoPaciente"]({ codigoPaciente: pac.codigo }));
                 _this.store.dispatch(_core_store_actions_reserva_actions__WEBPACK_IMPORTED_MODULE_6__["setCodigoPaciente"]({ codigoPaciente: pac.codigo }));
                 _this.dni.setValue(pac.dni);
-                _this.sexo.setValue(pac.sexo == _shared_models_constants__WEBPACK_IMPORTED_MODULE_12__["sexoF"] ? _shared_models_constants__WEBPACK_IMPORTED_MODULE_12__["sexoFemenino"] : _shared_models_constants__WEBPACK_IMPORTED_MODULE_12__["sexoMasculino"]);
+                _this.sexo.setValue(pac.sexo == _shared_models_constants__WEBPACK_IMPORTED_MODULE_12__["sexoF"] ? _shared_models_constants__WEBPACK_IMPORTED_MODULE_12__["sexoFemenino"] : (pac.sexo == _shared_models_constants__WEBPACK_IMPORTED_MODULE_12__["sexoO"] ? _shared_models_constants__WEBPACK_IMPORTED_MODULE_12__["sexoMasculino"] : _shared_models_constants__WEBPACK_IMPORTED_MODULE_12__["sexoOtro"]));
                 _this.nombreapellido.setValue(pac.nombreApellido);
                 if (pac.telefono != undefined) {
                     _this.telefonoArea.setValue(pac.telefono.area);
@@ -26694,7 +26701,7 @@ var ReservaEstudioComponent = /** @class */ (function () {
         this.fechaNacimientoSelected$.subscribe(function (fechaNacimiento) { return _this.fechaNacimientoSelected = fechaNacimiento; });
         var paciente = new _shared_models_datos_models__WEBPACK_IMPORTED_MODULE_13__["Paciente"]();
         paciente.dni = this.dni.value;
-        paciente.sexo = this.sexo.value === _shared_models_constants__WEBPACK_IMPORTED_MODULE_12__["sexoFemenino"] ? _shared_models_constants__WEBPACK_IMPORTED_MODULE_12__["sexoF"] : _shared_models_constants__WEBPACK_IMPORTED_MODULE_12__["sexoM"];
+        paciente.sexo = this.sexo.value === _shared_models_constants__WEBPACK_IMPORTED_MODULE_12__["sexoFemenino"] ? _shared_models_constants__WEBPACK_IMPORTED_MODULE_12__["sexoF"] : (this.sexo.value === _shared_models_constants__WEBPACK_IMPORTED_MODULE_12__["sexoMasculino"] ? _shared_models_constants__WEBPACK_IMPORTED_MODULE_12__["sexoM"] : _shared_models_constants__WEBPACK_IMPORTED_MODULE_12__["sexoO"]);
         paciente.nombreApellido = this.nombreapellido.value.trim();
         var telefono = new _shared_models_datos_models__WEBPACK_IMPORTED_MODULE_13__["Telefono"]();
         telefono.area = this.telefonoArea.value;
@@ -27628,7 +27635,7 @@ var ReservaPageComponent = /** @class */ (function () {
 /*!********************************************!*\
   !*** ./src/app/shared/models/constants.ts ***!
   \********************************************/
-/*! exports provided: tipoTurnoConsulta, tipoTurnoEstudio, sexoF, sexoM, sexoFemenino, sexoMasculino */
+/*! exports provided: tipoTurnoConsulta, tipoTurnoEstudio, sexoF, sexoM, sexoO, sexoFemenino, sexoMasculino, sexoOtro */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -27637,14 +27644,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tipoTurnoEstudio", function() { return tipoTurnoEstudio; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sexoF", function() { return sexoF; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sexoM", function() { return sexoM; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sexoO", function() { return sexoO; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sexoFemenino", function() { return sexoFemenino; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sexoMasculino", function() { return sexoMasculino; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sexoOtro", function() { return sexoOtro; });
 var tipoTurnoConsulta = 'C';
 var tipoTurnoEstudio = 'E';
 var sexoF = 'F';
 var sexoM = 'M';
+var sexoO = 'O';
 var sexoFemenino = 'Femenino';
 var sexoMasculino = 'Masculino';
+var sexoOtro = 'Otro';
 
 
 /***/ })
