@@ -1187,13 +1187,14 @@ var ServiceService = /** @class */ (function () {
             return this.http.get(this.endpoint_centroAtencion)
                 .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
                 Object(_utils_service_utils__WEBPACK_IMPORTED_MODULE_6__["throwErrorIfBadCode"])(res);
-                return res.centroAtencion.sort(function (a, b) {
-                    if (a.nombre > b.nombre)
-                        return 1;
-                    if (a.nombre < b.nombre)
-                        return -1;
-                    return 0;
+                /*
+                return res.centroAtencion.sort((a, b) => {
+                  if (a.nombre > b.nombre) return 1;
+                  if (a.nombre < b.nombre) return -1;
+                  return 0;
                 });
+                */
+                return res.centroAtencion;
             }));
         }
     };
